@@ -5,6 +5,7 @@
 
 #include "Material.h"
 #include "Shader.h"
+#include "FrameBuffer.h"
 
 #include <string>
 #include <vector>
@@ -59,6 +60,15 @@ namespace Entropy
 		public:
 			__declspec(dllexport) SkyboxMesh(Texture texture);
 			void __declspec(dllexport) Draw(Shader& shader, Math::Mat4& view, Math::Mat4& projection);
+		};
+
+		class QuadMesh
+		{
+		private:
+			unsigned int VAO, VBO, EBO;
+		public:
+			__declspec(dllexport) QuadMesh();
+			void __declspec(dllexport) Draw(Shader shader, FrameBuffer frameBuffer);
 		};
 	}
 }
