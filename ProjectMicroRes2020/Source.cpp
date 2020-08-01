@@ -6,7 +6,13 @@
 #include <iostream>
 #include <exception>
 
+#include "StateCredits.h"
+#include "StateGame.h"
+#include "StateGameOver.h"
+#include "StateHighScores.h"
 #include "StateMenu.h"
+#include "StateNewHighScore.h"
+#include "StatePause.h"
 
 using namespace Entropy;
 
@@ -32,7 +38,36 @@ int WinMain()
 		Graphics::Shader quadShader("Assets/Shaders/vFBShader.glsl", "Assets/Shaders/fFBShader.glsl");
 
 		// Load Game States
-		StateMenu menu;
+		StateCredits credits = StateCredits();
+		StateGame game = StateGame();
+		StateGameOver gameOver = StateGameOver();
+		StateHighScores highScores = StateHighScores();
+		StateMenu menu = StateMenu();
+		StateNewHighScore newHighScore = StateNewHighScore();
+		StatePause pause = StatePause();
+
+		// Connect Game States
+		credits.addConnection(&menu);
+		game.addConnection(&pause);
+		game.addConnection(&gameOver);
+		gameOver.addConnection(&newHighScore);
+		gameOver.addConnection(&menu);
+		highScores.addConnection(&menu);
+		menu.addConnection(&credits);
+		menu.addConnection(&highScores);
+		menu.addConnection(&game);
+		newHighScore.addConnection(&highScores);
+		pause.addConnection(&game);
+		pause.addConnection(&menu);
+
+		// Initialise States & State Engine
+		credits.init();
+		game;
+		gameOver;
+		highScores;
+		menu;
+		newHighScore;
+		pause;
 
 		GameState * gameState = &menu;
 

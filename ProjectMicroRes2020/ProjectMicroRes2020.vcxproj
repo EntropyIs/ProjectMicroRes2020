@@ -148,14 +148,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="StateCredits.cpp" />
+    <ClCompile Include="StateGame.cpp" />
+    <ClCompile Include="StateGameOver.cpp" />
+    <ClCompile Include="StateHighScores.cpp" />
     <ClCompile Include="StateMenu.cpp" />
+    <ClCompile Include="StateNewHighScore.cpp" />
+    <ClCompile Include="StatePause.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\fFBShader.glsl" />
     <None Include="Assets\Shaders\vFBShader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="StateCredits.h" />
+    <ClInclude Include="StateGame.h" />
+    <ClInclude Include="StateGameOver.h" />
+    <ClInclude Include="StateHighScores.h" />
     <ClInclude Include="StateMenu.h" />
+    <ClInclude Include="StateNewHighScore.h" />
+    <ClInclude Include="StatePause.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

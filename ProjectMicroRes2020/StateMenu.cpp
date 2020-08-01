@@ -20,5 +20,5 @@ void StateMenu::render()
 
 Entropy::GameState* StateMenu::update(GameState* gameState)
 {
-    return this;
+    return gameState;
 }
