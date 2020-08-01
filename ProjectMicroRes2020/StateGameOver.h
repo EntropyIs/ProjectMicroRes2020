@@ -6,7 +6,7 @@
 class StateGameOver : public Entropy::GameState
 {
 public:
-	StateGameOver() : GameState("Game Over") {};
+	StateGameOver() : GameState("Game Over", 2) {};
 
 	// Inherited via GameState
 	virtual bool init() override;

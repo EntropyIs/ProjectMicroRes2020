@@ -47,27 +47,27 @@ int WinMain()
 		StatePause pause = StatePause();
 
 		// Connect Game States
-		credits.addConnection(&menu);
-		game.addConnection(&pause);
-		game.addConnection(&gameOver);
-		gameOver.addConnection(&newHighScore);
-		gameOver.addConnection(&menu);
-		highScores.addConnection(&menu);
-		menu.addConnection(&credits);
-		menu.addConnection(&highScores);
-		menu.addConnection(&game);
-		newHighScore.addConnection(&highScores);
-		pause.addConnection(&game);
-		pause.addConnection(&menu);
+		credits.addConnection(0, &menu);
+		game.addConnection(0, &pause);
+		game.addConnection(1, &gameOver);
+		gameOver.addConnection(0, &newHighScore);
+		gameOver.addConnection(1, &menu);
+		highScores.addConnection(0, &menu);
+		menu.addConnection(0, &credits);
+		menu.addConnection(1, &highScores);
+		menu.addConnection(2, &game);
+		newHighScore.addConnection(0, &highScores);
+		pause.addConnection(0, &game);
+		pause.addConnection(1, &menu);
 
 		// Initialise States & State Engine
 		credits.init();
-		game;
-		gameOver;
-		highScores;
-		menu;
-		newHighScore;
-		pause;
+		game.init();
+		gameOver.init();
+		highScores.init();
+		menu.init();
+		newHighScore.init();
+		pause.init();
 
 		GameState * gameState = &menu;
 
