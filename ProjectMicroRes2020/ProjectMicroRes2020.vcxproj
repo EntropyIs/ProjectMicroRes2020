@@ -159,6 +159,8 @@
   <ItemGroup>
     <None Include="Assets\Shaders\fFBShader.glsl" />
     <None Include="Assets\Shaders\vFBShader.glsl" />
+    <None Include="fBaseShader.glsl" />
+    <None Include="vBaseShader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StateCredits.h" />

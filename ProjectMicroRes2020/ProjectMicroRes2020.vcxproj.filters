@@ -56,6 +56,12 @@
     <None Include="Assets\Shaders\fFBShader.glsl">
       <Filter>Shader Files</Filter>
     </None>
+    <None Include="vBaseShader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="fBaseShader.glsl">
+      <Filter>Shader Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StateMenu.h">

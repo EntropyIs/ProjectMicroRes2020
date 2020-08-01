@@ -2,11 +2,15 @@
 
 #include <Entropy/GameState.h>
 #include <Entropy/Graphics/Window.h>
+#include <Entropy/Math/Transform3D.h>
 
 class StateGame : public Entropy::GameState
 {
+private:
+	Entropy::Math::Mat4 Projection;
+
 public:
-	StateGame() : GameState("Game", 2) {};
+	StateGame();
 
 	// Inherited via GameState
 	virtual bool init() override;
