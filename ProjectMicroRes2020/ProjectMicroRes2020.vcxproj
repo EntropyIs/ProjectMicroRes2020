@@ -148,10 +148,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="StateMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\fFBShader.glsl" />
     <None Include="Assets\Shaders\vFBShader.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="StateMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

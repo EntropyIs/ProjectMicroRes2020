@@ -6,6 +6,8 @@
 #include <iostream>
 #include <exception>
 
+#include "StateMenu.h"
+
 using namespace Entropy;
 
 #ifdef _DEBUG
@@ -29,17 +31,26 @@ int WinMain()
 		// Load Shaders
 		Graphics::Shader quadShader("Assets/Shaders/vFBShader.glsl", "Assets/Shaders/fFBShader.glsl");
 
+		// Load Game States
+		StateMenu menu;
+
+		GameState * gameState = &menu;
+
 		// GameLoop
 		while (!window.getShouldClose())
 		{
 			// Input
+			gameState->input(window);
 
 			// Update
+			gameState = gameState->update(gameState);
 
 			// Render
 			// Render Game Into Framebuffer (for scaling)
 			frameBuffer.bind();
 			frameBuffer.clear();
+
+			gameState->render();
 
 			// Render to Screen
 			window.bind();

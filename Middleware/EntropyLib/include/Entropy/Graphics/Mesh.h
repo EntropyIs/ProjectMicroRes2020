@@ -47,7 +47,7 @@ namespace Entropy
 			void __declspec(dllexport) setupInstancedMatrix();
 		private:
 			unsigned int VAO, VBO, EBO;
-			
+
 			void setupMesh();
 		};
 
@@ -68,7 +68,7 @@ namespace Entropy
 			unsigned int VAO, VBO, EBO;
 		public:
 			__declspec(dllexport) QuadMesh();
-			void __declspec(dllexport) Draw(Shader shader, FrameBuffer frameBuffer);
+			void __declspec(dllexport) Draw(Shader& shader, FrameBuffer& frameBuffer);
 		};
 	}
 }
