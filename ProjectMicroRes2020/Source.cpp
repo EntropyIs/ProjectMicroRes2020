@@ -25,7 +25,7 @@ int WinMain()
 	try
 	{
 		// Setup and Initalize Window
-		Graphics::Window window("Project MicroRes 2020", 600, 600);
+		Graphics::Window window("Project MicroRes 2020", 600, 600, 1);
 		window.setResolution(64, 64);
 		window.setClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 

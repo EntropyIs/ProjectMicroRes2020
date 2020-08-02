@@ -48,6 +48,9 @@
     <ClCompile Include="StatePause.cpp">
       <Filter>Source Files\GameStates</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\vFBShader.glsl">
@@ -56,10 +59,10 @@
     <None Include="Assets\Shaders\fFBShader.glsl">
       <Filter>Shader Files</Filter>
     </None>
-    <None Include="vBaseShader.glsl">
+    <None Include="Assets\Shaders\fBaseShader.glsl">
       <Filter>Shader Files</Filter>
     </None>
-    <None Include="fBaseShader.glsl">
+    <None Include="Assets\Shaders\vBaseShader.glsl">
       <Filter>Shader Files</Filter>
     </None>
   </ItemGroup>
@@ -84,6 +87,9 @@
     </ClInclude>
     <ClInclude Include="StateNewHighScore.h">
       <Filter>Header Files\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
