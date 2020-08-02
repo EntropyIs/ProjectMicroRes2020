@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="StateCredits.cpp" />
@@ -164,6 +165,7 @@
     <None Include="Assets\Shaders\vFBShader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="StateCredits.h" />
     <ClInclude Include="StateGame.h" />

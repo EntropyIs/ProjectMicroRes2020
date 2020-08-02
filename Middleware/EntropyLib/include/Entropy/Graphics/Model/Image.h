@@ -20,6 +20,7 @@ namespace Entropy
 			std::string Type;
 
 			Texture(unsigned int id, std::string type) : ID(id), Type(type) {};
+			Texture() : ID(0), Type() {};
 		};
 
 		class LoadTexture

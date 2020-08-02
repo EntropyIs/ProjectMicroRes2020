@@ -14,6 +14,8 @@
 #include "StateNewHighScore.h"
 #include "StatePause.h"
 
+#include "ResourceManager.h"
+
 using namespace Entropy;
 
 #ifdef _DEBUG
@@ -35,7 +37,10 @@ int WinMain()
 		Graphics::QuadMesh quad;
 
 		// Load Shaders
-		Graphics::Shader quadShader("Assets/Shaders/vFBShader.glsl", "Assets/Shaders/fFBShader.glsl");
+		ResourceManager::loadShader("Assets/Shaders/vFBShader.glsl", "Assets/Shaders/fFBShader.glsl", NULL, "quadShader");
+		ResourceManager::loadShader("Assets/Shaders/vBaseShader.glsl", "Assets/Shaders/fBaseShader.glsl", NULL, "spriteShader");
+
+		// Load Textures
 
 		// Load Game States
 		StateCredits credits = StateCredits();
@@ -91,7 +96,7 @@ int WinMain()
 			window.bind();
 			window.clear();
 			// Render Quad
-			quad.Draw(quadShader, frameBuffer);
+			quad.Draw(ResourceManager::getShader("quadShader"), frameBuffer);
 
 			// Finish Frame
 			window.processEvents();

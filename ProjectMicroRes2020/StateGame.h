@@ -13,7 +13,6 @@
 class StateGame : public Entropy::GameState
 {
 private:
-	Entropy::Graphics::Shader spriteShader;
 	Entropy::Math::Mat4 Projection;
 
 	std::vector<Entropy::Graphics::Texture> spriteSheets;
