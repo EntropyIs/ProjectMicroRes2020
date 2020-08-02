@@ -9,6 +9,8 @@ uniform vec2 spriteSheetSize; // Num of elements in sprite sheet
 
 void main()
 {
-	vec2 correctedCoords = (TexCoords/spriteSheetSize) * spriteOffset; 
+	float xOffset = (1.0 / spriteSheetSize.x) * spriteOffset.x;
+	vec2 offsetSize = vec2(1.0, 1.0) / spriteSheetSize;
+	vec2 correctedCoords = (TexCoords / spriteSheetSize) + (offsetSize * spriteOffset); 
 	FragColor = vec4(spriteColor, 1.0) * texture(spriteSheet, correctedCoords);
 }

@@ -39,5 +39,8 @@ void StateGame::render()
 
 GameState* StateGame::update(GameState* gameState)
 {
+    spriteIndex.X += 1;
+    if (spriteIndex.X > 1)
+        spriteIndex.X = 0;
     return gameState;
 }

@@ -25,7 +25,7 @@ void SpriteRenderer::Draw(Graphics::Shader& shader, Math::Vec2 position, Graphic
 
     shader.use();
     shader.setMat4("model", model);
-    shader.setVec2("spriteOffset", spriteIndex + Math::Vec2(1.0f));
+    shader.setVec2("spriteOffset", spriteIndex);
     shader.setVec2("spriteSheetSize", spriteSheetSize);
     shader.setVec3("spriteColor", color);
 
