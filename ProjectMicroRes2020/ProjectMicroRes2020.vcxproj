@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="StateCredits.cpp" />
     <ClCompile Include="StateGame.cpp" />
     <ClCompile Include="StateGameOver.cpp" />
@@ -157,10 +158,13 @@
     <ClCompile Include="StatePause.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shaders\fBaseShader.glsl" />
     <None Include="Assets\Shaders\fFBShader.glsl" />
+    <None Include="Assets\Shaders\vBaseShader.glsl" />
     <None Include="Assets\Shaders\vFBShader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="StateCredits.h" />
     <ClInclude Include="StateGame.h" />
     <ClInclude Include="StateGameOver.h" />
