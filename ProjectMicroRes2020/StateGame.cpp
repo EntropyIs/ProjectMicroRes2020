@@ -37,47 +37,33 @@ void StateGame::input(Graphics::Window& window)
     if (window.getKeyPressed(GLKeys::KEY_ESCAPE))
         pause = true;
 
-    // Move Character
+    // Character Movement
     if (window.getKeyPressed(GLKeys::KEY_W) || window.getKeyPressed(GLKeys::KEY_UP))
     {
-        if (spriteVeclocity.Y < maxVel)
-            spriteVeclocity.Y += accel * ResourceManager::getTimeElapsed();
+        spriteVeclocity.X = 0;
+        spriteVeclocity.Y = maxVel;
+    }
+    else if (window.getKeyPressed(GLKeys::KEY_S) || window.getKeyPressed(GLKeys::KEY_DOWN))
+    {
+        spriteVeclocity.X = 0;
+        spriteVeclocity.Y = -maxVel;
+    }
+    else if (window.getKeyPressed(GLKeys::KEY_A) || window.getKeyPressed(GLKeys::KEY_LEFT))
+    {
+        spriteVeclocity.X = -maxVel;
+        spriteVeclocity.Y = 0;
+    }
+    else if (window.getKeyPressed(GLKeys::KEY_D) || window.getKeyPressed(GLKeys::KEY_RIGHT))
+    {
+        spriteVeclocity.X = maxVel;
+        spriteVeclocity.Y = 0;
     }
     else
     {
-        if (spriteVeclocity.Y > 0)
-            spriteVeclocity.Y -= accel * ResourceManager::getTimeElapsed();
+        spriteVeclocity.X = 0;
+        spriteVeclocity.Y = 0;
     }
-    if (window.getKeyPressed(GLKeys::KEY_S) || window.getKeyPressed(GLKeys::KEY_DOWN))
-    {
-        if (spriteVeclocity.Y > -maxVel)
-            spriteVeclocity.Y -= accel * ResourceManager::getTimeElapsed();
-    }
-    else
-    {
-        if (spriteVeclocity.Y < 0)
-            spriteVeclocity.Y += accel * ResourceManager::getTimeElapsed();
-    }
-    if (window.getKeyPressed(GLKeys::KEY_A) || window.getKeyPressed(GLKeys::KEY_LEFT))
-    {
-        if (spriteVeclocity.X > -maxVel)
-            spriteVeclocity.X -= accel * ResourceManager::getTimeElapsed();
-    }
-    else
-    {
-        if (spriteVeclocity.X < 0)
-            spriteVeclocity.X += accel * ResourceManager::getTimeElapsed();
-    }
-    if (window.getKeyPressed(GLKeys::KEY_D) || window.getKeyPressed(GLKeys::KEY_RIGHT))
-    {
-        if (spriteVeclocity.X < maxVel)
-            spriteVeclocity.X += accel * ResourceManager::getTimeElapsed();
-    }
-    else
-    {
-        if (spriteVeclocity.X > 0)
-            spriteVeclocity.X -= accel * ResourceManager::getTimeElapsed();
-    }
+        
 
     spritePos += spriteVeclocity * ResourceManager::getTimeElapsed();
 }
@@ -89,9 +75,16 @@ void StateGame::render()
 
 GameState* StateGame::update(GameState* gameState)
 {
-    spriteIndex.X += 1;
-    if (spriteIndex.X > 9)
+    if (spriteVeclocity.Y > 0.0f) // Up
+        spriteIndex.X = 2;
+    else if (spriteVeclocity.Y < 0.0f) // Down
+        spriteIndex.X = 6;
+    else if (spriteVeclocity.X > 0.0f) // Right
         spriteIndex.X = 0;
+    else if (spriteVeclocity.X < 0.0f) // Left
+        spriteIndex.X = 4;
+    else
+        spriteIndex.X = 8;
 
     if (pause) // Pause Menu Called
     {
