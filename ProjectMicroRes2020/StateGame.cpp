@@ -8,7 +8,7 @@
 using namespace Entropy;
 using Entropy::Graphics::GLKeys;
 
-StateGame::StateGame() : GameState("Game", 2)
+StateGame::StateGame() : GameState("Game", 2), level("Assets/level_0.csv")
 {
     Projection = Math::Ortho(0.0f, 64.0f, 64.0f, 0.0f, -1.0f, 1.0f);
     pause = false;
@@ -71,6 +71,7 @@ void StateGame::input(Graphics::Window& window)
 void StateGame::render()
 {
     renderer.Draw(spritePos, ResourceManager::getTexture("testSprite"), spriteIndex, ResourceManager::getSpriteSizeData("testSprite"), 16, 16);
+    level.Draw();
 }
 
 GameState* StateGame::update(GameState* gameState)
