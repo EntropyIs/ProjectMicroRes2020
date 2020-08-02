@@ -2,6 +2,7 @@
 
 #include <Entropy/Graphics/Mesh.h>
 #include <Entropy/Graphics/Model/Image.h>
+#include <Entropy/Timing/Clock.h>
 
 #include <map>
 #include <string>
@@ -12,6 +13,8 @@ public:
 	static std::map<std::string, Entropy::Graphics::Shader> Shaders;
 	static std::map<std::string, Entropy::Graphics::Texture> Textures;
 	static std::map<std::string, Entropy::Math::Vec2> SpriteSizeData;
+	
+	static Entropy::Timing::Clock MainClock;
 
 	static Entropy::Graphics::Shader& loadShader(const char* vertexShaderPath, const char* fragmentShaderPath, const char* geometaryShaderPath, std::string name);
 	static Entropy::Graphics::Shader& getShader(std::string name);
@@ -21,4 +24,8 @@ public:
 
 	static Entropy::Math::Vec2& setSpriteSizeData(Entropy::Math::Vec2 data, std::string name);
 	static Entropy::Math::Vec2& getSpriteSizeData(std::string name);
+
+	static bool initClock();
+	static void pollClock();
+	static float getTimeElapsed();
 };

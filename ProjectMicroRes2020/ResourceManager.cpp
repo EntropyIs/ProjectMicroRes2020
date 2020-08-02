@@ -6,6 +6,8 @@ std::map<std::string, Graphics::Shader> ResourceManager::Shaders;
 std::map<std::string, Graphics::Texture> ResourceManager::Textures;
 std::map<std::string, Math::Vec2> ResourceManager::SpriteSizeData;
 
+Entropy::Timing::Clock ResourceManager::MainClock;
+
 Graphics::Shader& ResourceManager::loadShader(const char* vertexShaderPath, const char* fragmentShaderPath, const char* geometaryShaderPath, std::string name)
 {
     Shaders[name] = Graphics::Shader(vertexShaderPath, fragmentShaderPath, geometaryShaderPath);
@@ -37,4 +39,19 @@ Entropy::Math::Vec2& ResourceManager::setSpriteSizeData(Entropy::Math::Vec2 data
 Entropy::Math::Vec2& ResourceManager::getSpriteSizeData(std::string name)
 {
     return SpriteSizeData[name];
+}
+
+bool ResourceManager::initClock()
+{
+    return MainClock.initialize();
+}
+
+void ResourceManager::pollClock()
+{
+    MainClock.poll();
+}
+
+float ResourceManager::getTimeElapsed()
+{
+    return MainClock.timeElapsed();
 }

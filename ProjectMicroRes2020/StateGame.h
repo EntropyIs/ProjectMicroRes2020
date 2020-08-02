@@ -17,8 +17,14 @@ private:
 
 	Entropy::Math::Vec2 spriteIndex;
 	Entropy::Math::Vec2 spritePos;
+	Entropy::Math::Vec2 spriteVeclocity;
+
+	float accel = 60.0f;
+	float maxVel = 30.0f;
 
 	SpriteRenderer renderer;
+
+	bool pause;
 
 public:
 	StateGame();

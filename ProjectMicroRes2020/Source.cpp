@@ -36,13 +36,14 @@ int WinMain()
 		frameBuffer.setClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 		Graphics::QuadMesh quad;
 
-		// Load Shaders
+		// Load Resources
 		ResourceManager::loadShader("Assets/Shaders/vFBShader.glsl", "Assets/Shaders/fFBShader.glsl", NULL, "quadShader");
 		ResourceManager::loadShader("Assets/Shaders/vBaseShader.glsl", "Assets/Shaders/fBaseShader.glsl", NULL, "spriteShader");
 
-		// Load Textures
 		ResourceManager::loadTexture("Assets/TestSprite.jpg", "sprite_sheet", false, "testSprite");
 		ResourceManager::setSpriteSizeData(Math::Vec2(10, 16), "testSprite");
+
+		ResourceManager::initClock();
 
 		// Load Game States
 		StateCredits credits = StateCredits();
@@ -102,6 +103,7 @@ int WinMain()
 
 			// Finish Frame
 			window.processEvents();
+			ResourceManager::pollClock();
 		}
 		return 0;
 	}
