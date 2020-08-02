@@ -22,6 +22,7 @@ private:
 
 	float accel = 60.0f;
 	float maxVel = 30.0f;
+	float maxAngle = 21.21f;
 
 	SpriteRenderer renderer;
 

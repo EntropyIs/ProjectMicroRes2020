@@ -40,9 +40,9 @@ int WinMain()
 		ResourceManager::loadShader("Assets/Shaders/vFBShader.glsl", "Assets/Shaders/fFBShader.glsl", NULL, "quadShader");
 		ResourceManager::loadShader("Assets/Shaders/vBaseShader.glsl", "Assets/Shaders/fBaseShader.glsl", NULL, "spriteShader");
 
-		ResourceManager::loadTexture("Assets/TestSprite.jpg", "sprite_sheet", false, "testSprite");
+		ResourceManager::loadTexture("Assets/test_sprites.jpg", "sprite_sheet", false, "test_sprite");
 		ResourceManager::loadTexture("Assets/test_tiles.jpg", "sprite_sheet", false, "grass_world");
-		ResourceManager::setSpriteSizeData(Math::Vec2(10, 16), "testSprite");
+		ResourceManager::setSpriteSizeData(Math::Vec2(1, 8), "test_sprite");
 		ResourceManager::setSpriteSizeData(Math::Vec2(8, 8), "grass_world");
 
 		ResourceManager::initClock();

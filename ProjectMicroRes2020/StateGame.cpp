@@ -17,7 +17,7 @@ StateGame::StateGame() : GameState("Game", 2), level("Assets/level_0.csv")
 bool StateGame::init()
 {
     // Configure Entities
-    spriteIndex = Math::Vec2(8.0f, 0.0f);
+    spriteIndex = Math::Vec2(0.0f, 3.0f);
     spritePos = Math::Vec2(32.0f, 32.0f);
     spriteVeclocity = Math::Vec2(0.0f, 0.0f);
 
@@ -38,25 +38,50 @@ void StateGame::input(Graphics::Window& window)
         pause = true;
 
     // Character Movement
-    if (window.getKeyPressed(GLKeys::KEY_W) || window.getKeyPressed(GLKeys::KEY_UP))
+    
+    if ((window.getKeyPressed(GLKeys::KEY_W) && window.getKeyPressed(GLKeys::KEY_A)) || 
+        (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_LEFT)))
     {
-        spriteVeclocity.X = 0;
-        spriteVeclocity.Y = maxVel;
+        spriteVeclocity.X = -maxAngle;
+        spriteVeclocity.Y = maxAngle;
     }
-    else if (window.getKeyPressed(GLKeys::KEY_S) || window.getKeyPressed(GLKeys::KEY_DOWN))
+    else if ((window.getKeyPressed(GLKeys::KEY_A) && window.getKeyPressed(GLKeys::KEY_S)) ||
+        (window.getKeyPressed(GLKeys::KEY_LEFT) && window.getKeyPressed(GLKeys::KEY_DOWN)))
     {
-        spriteVeclocity.X = 0;
-        spriteVeclocity.Y = -maxVel;
+        spriteVeclocity.X = -maxAngle;
+        spriteVeclocity.Y = -maxAngle;
+    }
+    else if ((window.getKeyPressed(GLKeys::KEY_S) && window.getKeyPressed(GLKeys::KEY_D)) ||
+        (window.getKeyPressed(GLKeys::KEY_DOWN) && window.getKeyPressed(GLKeys::KEY_RIGHT)))
+    {
+        spriteVeclocity.X = maxAngle;
+        spriteVeclocity.Y = -maxAngle;
+    }
+    else if ((window.getKeyPressed(GLKeys::KEY_W) && window.getKeyPressed(GLKeys::KEY_D)) ||
+        (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_RIGHT)))
+    {
+        spriteVeclocity.X = maxAngle;
+        spriteVeclocity.Y = maxAngle;
     }
     else if (window.getKeyPressed(GLKeys::KEY_A) || window.getKeyPressed(GLKeys::KEY_LEFT))
     {
         spriteVeclocity.X = -maxVel;
         spriteVeclocity.Y = 0;
     }
+    else if (window.getKeyPressed(GLKeys::KEY_S) || window.getKeyPressed(GLKeys::KEY_DOWN))
+    {
+        spriteVeclocity.X = 0;
+        spriteVeclocity.Y = -maxVel;
+    }
     else if (window.getKeyPressed(GLKeys::KEY_D) || window.getKeyPressed(GLKeys::KEY_RIGHT))
     {
         spriteVeclocity.X = maxVel;
         spriteVeclocity.Y = 0;
+    }
+    else if (window.getKeyPressed(GLKeys::KEY_W) || window.getKeyPressed(GLKeys::KEY_UP))
+    {
+        spriteVeclocity.X = 0;
+        spriteVeclocity.Y = maxVel;
     }
     else
     {
@@ -70,22 +95,28 @@ void StateGame::input(Graphics::Window& window)
 
 void StateGame::render()
 {
-    renderer.Draw(spritePos, ResourceManager::getTexture("testSprite"), spriteIndex, ResourceManager::getSpriteSizeData("testSprite"), 16, 16);
+    renderer.Draw(spritePos, ResourceManager::getTexture("test_sprite"), spriteIndex, ResourceManager::getSpriteSizeData("test_sprite"), 8, 12);
     level.Draw();
 }
 
 GameState* StateGame::update(GameState* gameState)
 {
-    if (spriteVeclocity.Y > 0.0f) // Up
-        spriteIndex.X = 2;
+    if (spriteVeclocity.Y > 0.0f && spriteVeclocity.X < 0.0f) // Up & Left
+        spriteIndex.Y = 6;
+    else if (spriteVeclocity.Y > 0.0f && spriteVeclocity.X > 0.0f) // Up & Right
+        spriteIndex.Y = 0;
+    else if (spriteVeclocity.Y < 0.0f && spriteVeclocity.X < 0.0f) // Down & Left
+        spriteIndex.Y = 4;
+    else if (spriteVeclocity.Y < 0.0f && spriteVeclocity.X > 0.0f) // Down & Right
+        spriteIndex.Y = 2;
+    else if (spriteVeclocity.Y > 0.0f) // Up
+        spriteIndex.Y = 7;
     else if (spriteVeclocity.Y < 0.0f) // Down
-        spriteIndex.X = 6;
+        spriteIndex.Y = 3;
     else if (spriteVeclocity.X > 0.0f) // Right
-        spriteIndex.X = 0;
+        spriteIndex.Y = 1;
     else if (spriteVeclocity.X < 0.0f) // Left
-        spriteIndex.X = 4;
-    else
-        spriteIndex.X = 8;
+        spriteIndex.Y = 5;
 
     if (pause) // Pause Menu Called
     {
