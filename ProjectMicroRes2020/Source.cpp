@@ -41,6 +41,8 @@ int WinMain()
 		ResourceManager::loadShader("Assets/Shaders/vBaseShader.glsl", "Assets/Shaders/fBaseShader.glsl", NULL, "spriteShader");
 
 		// Load Textures
+		ResourceManager::loadTexture("Assets/TestSprite.jpg", "sprite_sheet", false, "testSprite");
+		ResourceManager::setSpriteSizeData(Math::Vec2(10, 16), "testSprite");
 
 		// Load Game States
 		StateCredits credits = StateCredits();

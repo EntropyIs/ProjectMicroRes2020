@@ -15,9 +15,6 @@ class StateGame : public Entropy::GameState
 private:
 	Entropy::Math::Mat4 Projection;
 
-	std::vector<Entropy::Graphics::Texture> spriteSheets;
-	std::vector<Entropy::Math::Vec2> spriteSheetData;
-
 	Entropy::Math::Vec2 spriteIndex;
 	Entropy::Math::Vec2 spritePos;
 
