@@ -40,10 +40,14 @@ int WinMain()
 		ResourceManager::loadShader("Assets/Shaders/vFBShader.glsl", "Assets/Shaders/fFBShader.glsl", NULL, "quadShader");
 		ResourceManager::loadShader("Assets/Shaders/vBaseShader.glsl", "Assets/Shaders/fBaseShader.glsl", NULL, "spriteShader");
 
-		ResourceManager::loadTexture("Assets/test_sprites.png", "sprite_sheet", false, "test_sprite");
-		ResourceManager::loadTexture("Assets/test_tiles.jpg", "sprite_sheet", false, "grass_world");
-		ResourceManager::setSpriteSizeData(Math::Vec2(1, 8), "test_sprite");
-		ResourceManager::setSpriteSizeData(Math::Vec2(8, 8), "grass_world");
+		ResourceManager::loadTexture("Assets/test_sprites.png", "sprite_sheet", "test_sprite");
+		ResourceManager::loadTexture("Assets/test_tiles.jpg", "sprite_sheet", "grass_world");
+		ResourceManager::loadTexture("Assets/charset_black.png", "sprite_sheet", "charset_black");
+		ResourceManager::loadTexture("Assets/charset_white.png", "sprite_sheet", "charset_white");
+		ResourceManager::setSpriteSizeData(SpriteData(1, 8, 8, 12), "test_sprite");
+		ResourceManager::setSpriteSizeData(SpriteData(8, 8, 8, 8), "grass_world");
+		ResourceManager::setSpriteSizeData(SpriteData(16, 6, 5, 7), "charset_black");
+		ResourceManager::setSpriteSizeData(SpriteData(16, 6, 5, 7), "charset_white");
 
 		ResourceManager::initClock();
 

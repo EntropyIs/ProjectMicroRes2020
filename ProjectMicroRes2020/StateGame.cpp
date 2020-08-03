@@ -95,7 +95,7 @@ void StateGame::input(Graphics::Window& window)
 
 void StateGame::render()
 {
-    renderer.Draw(spritePos, ResourceManager::getTexture("test_sprite"), spriteIndex, ResourceManager::getSpriteSizeData("test_sprite"), 8, 12);
+    renderer.Draw(spritePos, ResourceManager::getTexture("test_sprite"), spriteIndex, ResourceManager::getSpriteSizeData("test_sprite"));
     level.Draw();
 }
 

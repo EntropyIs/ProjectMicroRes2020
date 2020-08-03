@@ -4,7 +4,7 @@ using namespace Entropy;
 
 std::map<std::string, Graphics::Shader> ResourceManager::Shaders;
 std::map<std::string, Graphics::Texture> ResourceManager::Textures;
-std::map<std::string, Math::Vec2> ResourceManager::SpriteSizeData;
+std::map<std::string, SpriteData> ResourceManager::SpriteSizeData;
 
 Entropy::Timing::Clock ResourceManager::MainClock;
 
@@ -19,7 +19,7 @@ Entropy::Graphics::Shader& ResourceManager::getShader(std::string name)
     return Shaders[name];
 }
 
-Entropy::Graphics::Texture& ResourceManager::loadTexture(const char* path, const char* type, bool alpha, std::string name)
+Entropy::Graphics::Texture& ResourceManager::loadTexture(const char* path, const char* type, std::string name)
 {
     Textures[name] = Graphics::LoadTexture::LoadFromImageFile(path, type, false);
     return Textures[name];
@@ -30,13 +30,13 @@ Entropy::Graphics::Texture& ResourceManager::getTexture(std::string name)
     return Textures[name];
 }
 
-Entropy::Math::Vec2& ResourceManager::setSpriteSizeData(Entropy::Math::Vec2 data, std::string name)
+SpriteData& ResourceManager::setSpriteSizeData(SpriteData data, std::string name)
 {
     SpriteSizeData[name] = data;
     return SpriteSizeData[name];
 }
 
-Entropy::Math::Vec2& ResourceManager::getSpriteSizeData(std::string name)
+SpriteData& ResourceManager::getSpriteSizeData(std::string name)
 {
     return SpriteSizeData[name];
 }

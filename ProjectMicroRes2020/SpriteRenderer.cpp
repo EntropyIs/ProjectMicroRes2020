@@ -20,15 +20,15 @@ SpriteRenderer::~SpriteRenderer()
     glDeleteVertexArrays(1, &VAO);
 }
 
-void SpriteRenderer::Draw(Math::Vec2 position, Graphics::Texture& spriteSheet, Math::Vec2 spriteIndex, Math::Vec2 spriteSheetSize, unsigned int spriteWidth, unsigned int spriteHeight, float rotAngle, Math::Vec3 color)
+void SpriteRenderer::Draw(Entropy::Math::Vec2 position, Entropy::Graphics::Texture& spriteSheet, Entropy::Math::Vec2 spriteIndex, SpriteData& spriteData, float rotAngle, Entropy::Math::Vec3 color)
 {
     // Prepare Transformations
-    Math::Mat4 model = Math::Translate(Math::Vec3(position.X - (spriteWidth/2.0f), position.Y - (spriteHeight/2.0f), 0.0f)) * Math::RotateZ(Math::Radians(rotAngle)) * Math::Scale(spriteWidth, spriteHeight, 1.0f);
+    Math::Mat4 model = Math::Translate(Math::Vec3(position.X - ((float)spriteData.cel_width / 2.0f), position.Y - ((float)spriteData.cel_height / 2.0f), 0.0f)) * Math::RotateZ(Math::Radians(rotAngle)) * Math::Scale((float)spriteData.cel_width, (float)spriteData.cel_height, 1.0f);
 
     ResourceManager::getShader("spriteShader").use();
     ResourceManager::getShader("spriteShader").setMat4("model", model);
     ResourceManager::getShader("spriteShader").setVec2("spriteOffset", spriteIndex);
-    ResourceManager::getShader("spriteShader").setVec2("spriteSheetSize", spriteSheetSize);
+    ResourceManager::getShader("spriteShader").setVec2("spriteSheetSize", Math::Vec2((float)spriteData.num_rows, (float)spriteData.num_cols));
     ResourceManager::getShader("spriteShader").setVec3("spriteColor", color);
 
     // Render Sprite

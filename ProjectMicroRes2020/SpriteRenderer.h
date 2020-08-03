@@ -5,6 +5,8 @@
 #include <Entropy/Math/Vec2.h>
 #include <Entropy/Math/Vec3.h>
 
+#include "ResourceManager.h"
+
 class SpriteRenderer
 {
 public:
@@ -12,8 +14,7 @@ public:
 	~SpriteRenderer();
 
 	void Draw(Entropy::Math::Vec2 position, Entropy::Graphics::Texture& spriteSheet,
-		Entropy::Math::Vec2 spriteIndex = Entropy::Math::Vec2(0.0f), Entropy::Math::Vec2 spriteSheetSize = Entropy::Math::Vec2(1.0f, 1.0f),
-		unsigned int spriteWidth = 8, unsigned int spriteHeight = 8,
+		Entropy::Math::Vec2 spriteIndex, SpriteData& spriteData,
 		float rotAngle = 0, Entropy::Math::Vec3 color = Entropy::Math::Vec3(1.0f)
 	);
 
