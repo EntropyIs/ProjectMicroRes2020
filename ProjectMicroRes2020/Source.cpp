@@ -33,7 +33,7 @@ int WinMain()
 
 		// Setup framebuffer
 		Graphics::FrameBuffer frameBuffer(64, 64);
-		frameBuffer.setClearColor(0.1f, 0.1f, 0.1f, 1.0f); // Set to transparent clearing color
+		frameBuffer.setClearColor(0.1f, 0.1f, 0.1f, 0.1f); // Set to transparent clearing color
 		Graphics::QuadMesh quad;
 
 		// Load Resources
