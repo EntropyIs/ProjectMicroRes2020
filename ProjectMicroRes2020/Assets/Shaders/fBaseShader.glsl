@@ -12,5 +12,8 @@ void main()
 	float xOffset = (1.0 / spriteSheetSize.x) * spriteOffset.x;
 	vec2 offsetSize = vec2(1.0, 1.0) / spriteSheetSize;
 	vec2 correctedCoords = (TexCoords / spriteSheetSize) + (offsetSize * spriteOffset); 
-	FragColor = vec4(spriteColor, 1.0) * texture(spriteSheet, correctedCoords);
+	vec4 texColor = vec4(spriteColor, 1.0) * texture(spriteSheet, correctedCoords);
+	if(texColor.a < 0.1)
+		discard;
+	FragColor = texColor;
 }

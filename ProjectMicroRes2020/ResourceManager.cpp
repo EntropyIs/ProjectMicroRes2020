@@ -21,7 +21,7 @@ Entropy::Graphics::Shader& ResourceManager::getShader(std::string name)
 
 Entropy::Graphics::Texture& ResourceManager::loadTexture(const char* path, const char* type, bool alpha, std::string name)
 {
-    Textures[name] = Graphics::LoadTexture::LoadFromImageFile(path, type);
+    Textures[name] = Graphics::LoadTexture::LoadFromImageFile(path, type, false);
     return Textures[name];
 }
 

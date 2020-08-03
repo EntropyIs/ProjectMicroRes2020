@@ -33,7 +33,7 @@ namespace Entropy
 			static Image LoadPNG(std::string path);
 		public:
 			static __declspec(dllexport) Texture LoadFromFile(std::string path, std::string type);
-			static __declspec(dllexport) Texture LoadFromImageFile(std::string path, std::string type);
+			static __declspec(dllexport) Texture LoadFromImageFile(std::string path, std::string type, bool interpolate = true);
 
 			static __declspec(dllexport) Texture LoadCubeMap(std::vector<std::string> paths);
 		};
