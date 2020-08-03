@@ -8,8 +8,7 @@
 
 using namespace Entropy;
 
-Level::Level(const char* path, unsigned int tileWidth, unsigned int tileHeight) :
-	tileWidth(tileWidth), tileHeight(tileHeight)
+Level::Level(const char* path)
 {
 	// Read contents of file into lines vector
 	std::ifstream inFile;
@@ -53,8 +52,14 @@ Level::Level(const char* path, unsigned int tileWidth, unsigned int tileHeight) 
 void Level::Draw()
 {
 	Graphics::Texture texture = ResourceManager::getTexture(tiles[0].Tileset);
+	
 	for (unsigned int i = 0; i < tiles.size(); i++)
-		renderer.Draw(Math::Vec2((tiles[i].X * tileWidth) + tileWidth/2.0f, (tiles[i].Y * tileHeight) + tileWidth / 2.0f),
-			ResourceManager::getTexture(tiles[i].Tileset), Math::Vec2(tiles[i].TX, tiles[i].TY), 
-			ResourceManager::getSpriteSizeData(tiles[i].Tileset), tileWidth, tileHeight);
+	{
+		SpriteData spriteData = ResourceManager::getSpriteSizeData(tiles[i].Tileset);
+		renderer.Draw(Math::Vec2(
+			(tiles[i].X * spriteData.cel_width) + spriteData.cel_width / 2.0f,
+			(tiles[i].Y * spriteData.cel_height) + spriteData.cel_height / 2.0f),
+			ResourceManager::getTexture(tiles[i].Tileset), Math::Vec2(tiles[i].TX, tiles[i].TY), spriteData);
+	}
+		
 }

@@ -1,4 +1,4 @@
-x, y, texture_name, index_x, index_y, passable
+x, y, texture_name, column_index, row_index, passable
 
 0, 0, grass_world, 0, 0, 1
 1, 0, grass_world, 0, 0, 1

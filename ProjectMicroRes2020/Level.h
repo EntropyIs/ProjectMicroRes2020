@@ -21,10 +21,8 @@ private:
 
 	SpriteRenderer renderer;
 
-	unsigned int tileWidth, tileHeight;
-
 public:
-	Level(const char* path, unsigned int tileWidth = 8, unsigned int tileHeight = 8);
+	Level(const char* path);
 
 	void Draw();
 };
