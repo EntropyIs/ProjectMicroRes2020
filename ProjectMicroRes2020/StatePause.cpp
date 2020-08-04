@@ -35,7 +35,6 @@ void StatePause::input(Graphics::Window& window)
         execute_selection = true;
     else if (!window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !window.getKeyPressed(Graphics::GLKeys::KEY_S) && !window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !window.getKeyPressed(Graphics::GLKeys::KEY_W) && key_down)
         key_down = false;
-
 }
 
 void StatePause::render()
@@ -65,9 +64,7 @@ void StatePause::render()
         Math::Vec2(24.5, 28.5), //Q
         Math::Vec2(29.5, 28.5), //u
         Math::Vec2(34.5, 28.5), //i
-        Math::Vec2(39.5, 28.5), //e
-
-
+        Math::Vec2(39.5, 28.5), //t
     };
 
     Math::Vec2 textChar[] =
@@ -78,14 +75,14 @@ void StatePause::render()
         Math::Vec2(3, 5), //s
         Math::Vec2(5, 4), //t
 
-        Math::Vec2(3, 2), //C
+        Math::Vec2(3, 2),  //C
         Math::Vec2(15, 4), //o
         Math::Vec2(14, 4), //n
-        Math::Vec2(4, 5), //t
-        Math::Vec2(9, 4), //i
+        Math::Vec2(4, 5),  //t
+        Math::Vec2(9, 4),  //i
         Math::Vec2(14, 4), //n
-        Math::Vec2(5, 5), //u
-        Math::Vec2(5, 4), //e
+        Math::Vec2(5, 5),  //u
+        Math::Vec2(5, 4),  //e
                       
         Math::Vec2(1, 3), //Q
         Math::Vec2(5, 5), //u
