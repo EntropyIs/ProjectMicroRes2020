@@ -5,6 +5,7 @@
 #include <string>
 
 #include "SpriteRenderer.h"
+#include "Level.h"
 
 class GameObject
 {
@@ -25,10 +26,12 @@ public:
 	virtual void Draw(SpriteRenderer& renderer);
 
 	virtual void Update();
+	virtual void undoUpdate();
 
 	void setVelocity(Entropy::Math::Vec2 velocity);
 	void setVelocityX(float velocity);
 	void setVelocityY(float velocity);
 
 	bool detectCollions(GameObject& other);
+	bool detectCollions(Tile& other);
 };

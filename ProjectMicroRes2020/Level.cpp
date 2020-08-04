@@ -47,6 +47,16 @@ Level::Level(const char* path)
 		tiles.push_back(Tile(std::stoi(lineComp[0]), std::stoi(lineComp[1]), lineComp[2],
 			std::stoi(lineComp[3]), std::stoi(lineComp[4]), std::stoi(lineComp[5]) == 1));
 	}
+
+	// build colliders list
+	for (unsigned int i = 0; i < tiles.size(); i++)
+		if (!tiles[i].Passable) // TODO: Add other colidable conditions
+			colliders.push_back(tiles[i]);
+}
+
+std::vector<Tile> Level::getColliders()
+{
+	return colliders;
 }
 
 void Level::Draw()
@@ -62,4 +72,12 @@ void Level::Draw()
 			ResourceManager::getTexture(tiles[i].Tileset), Math::Vec2(tiles[i].TX, tiles[i].TY), spriteData);
 	}
 		
+}
+
+Tile::Tile(unsigned int x, unsigned int y, std::string tileset, unsigned int tX, unsigned int tY, bool passable) :
+	X(x), Y(y), Tileset(tileset), TX(tX), TY(tY), Passable(passable)
+{
+	SpriteData spriteData = ResourceManager::getSpriteSizeData(tileset);
+	box_size = Math::Vec2(spriteData.cel_width, spriteData.cel_width);
+	box_offset = Math::Vec2(spriteData.cel_width/2, spriteData.cel_width/2);
 }
