@@ -10,6 +10,7 @@
 
 #include "SpriteRenderer.h"
 #include "Level.h"
+#include "GameObject.h"
 
 class StateGame : public Entropy::GameState
 {
@@ -18,7 +19,8 @@ private:
 
 	Entropy::Math::Vec2 spriteIndex;
 	Entropy::Math::Vec2 spritePos;
-	Entropy::Math::Vec2 spriteVeclocity;
+	GameObject player;
+	Entropy::Math::Vec2 playerVelocity;
 
 	float accel = 60.0f;
 	float maxVel = 30.0f;
