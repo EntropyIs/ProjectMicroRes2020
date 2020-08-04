@@ -100,16 +100,16 @@ void StatePause::render()
     if (selection == 0)
     {
         for (unsigned int i = 5; i < 13; i++) // Continue
-            renderer.Draw(textPos[i], ResourceManager::getTexture("charset_grey"), textChar[i], ResourceManager::getSpriteSizeData("charset_grey"));
-        for (unsigned int i = 13; i < 17; i++) // Quit
             renderer.Draw(textPos[i], ResourceManager::getTexture("charset_black"), textChar[i], ResourceManager::getSpriteSizeData("charset_black"));
+        for (unsigned int i = 13; i < 17; i++) // Quit
+            renderer.Draw(textPos[i], ResourceManager::getTexture("charset_grey"), textChar[i], ResourceManager::getSpriteSizeData("charset_grey"));
     }
     else if (selection == 1)
     {
         for (unsigned int i = 5; i < 13; i++) // Continue
-            renderer.Draw(textPos[i], ResourceManager::getTexture("charset_black"), textChar[i], ResourceManager::getSpriteSizeData("charset_black"));
-        for (unsigned int i = 13; i < 17; i++) // Quit
             renderer.Draw(textPos[i], ResourceManager::getTexture("charset_grey"), textChar[i], ResourceManager::getSpriteSizeData("charset_grey"));
+        for (unsigned int i = 13; i < 17; i++) // Quit
+            renderer.Draw(textPos[i], ResourceManager::getTexture("charset_black"), textChar[i], ResourceManager::getSpriteSizeData("charset_black"));
     }
 
     // Draw Menu Background
