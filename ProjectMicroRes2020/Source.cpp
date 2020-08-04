@@ -42,11 +42,15 @@ int WinMain()
 
 		ResourceManager::loadTexture("Assets/test_sprites.png", "sprite_sheet", "test_sprite");
 		ResourceManager::loadTexture("Assets/test_tiles.png", "sprite_sheet", "test_tiles");
+		ResourceManager::loadTexture("Assets/random_assets.png", "sprite_sheet", "random_assets");
 		ResourceManager::loadTexture("Assets/charset_black.png", "sprite_sheet", "charset_black");
+		ResourceManager::loadTexture("Assets/charset_grey.png", "sprite_sheet", "charset_grey");
 		ResourceManager::loadTexture("Assets/charset_white.png", "sprite_sheet", "charset_white");
 		ResourceManager::setSpriteSizeData(SpriteData(1, 8, 8, 12), "test_sprite");
 		ResourceManager::setSpriteSizeData(SpriteData(8, 8, 8, 8), "test_tiles");
+		ResourceManager::setSpriteSizeData(SpriteData(8, 8, 8, 8), "random_assets");
 		ResourceManager::setSpriteSizeData(SpriteData(16, 6, 5, 7), "charset_black");
+		ResourceManager::setSpriteSizeData(SpriteData(16, 6, 5, 7), "charset_grey");
 		ResourceManager::setSpriteSizeData(SpriteData(16, 6, 5, 7), "charset_white");
 
 		ResourceManager::initClock();

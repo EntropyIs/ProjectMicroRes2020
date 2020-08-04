@@ -120,7 +120,8 @@ GameState* StateGame::update(GameState* gameState)
 
     if (pause) // Pause Menu Called
     {
-        pause = true;
+        pause = false;
+        connectedStates[0]->init();
         return connectedStates[0];
     }
 
