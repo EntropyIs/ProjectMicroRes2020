@@ -10,7 +10,7 @@
 using namespace Entropy;
 using Entropy::Graphics::GLKeys;
 
-StateGame::StateGame() : GameState("Game", 2)
+StateGame::StateGame() : GameState("Game", 2), level()
 {
     Projection = Math::Ortho(0.0f, 64.0f, 64.0f, 0.0f, -1.0f, 1.0f);
     pause = false;
@@ -29,7 +29,8 @@ bool StateGame::init()
     ResourceManager::getShader("spriteShader").setMat4("projection", Projection);
     ResourceManager::getShader("spriteShader").setInt("spriteSheet", 0);
 
-    level = Level("Assets/level_0.csv", "level_0");
+    // Load Levels
+    level = LevelManager("Assets/Levels/levels.csv");
 
     pause = false;
 
@@ -70,7 +71,7 @@ void StateGame::input(Graphics::Window& window)
 void StateGame::render()
 {
     player.Draw(renderer);
-    level.Draw(renderer);
+    level.getLevel().Draw(renderer);
 }
 
 GameState* StateGame::update(GameState* gameState)
@@ -94,20 +95,22 @@ GameState* StateGame::update(GameState* gameState)
 
     // Process Player Movement
     player.Update();
-    for (unsigned int i = 0; i < level.getColliders().size(); i++)
+    for (unsigned int i = 0; i < level.getLevel().getColliders().size(); i++)
     {
-        if (player.detectCollions(level.getColliders()[i]))
+        if (player.detectCollions(level.getLevel().getColliders()[i]))
         {
-            if (!level.getColliders()[i].Passable) // Wall
+            if (!level.getLevel().getColliders()[i].Passable) // Wall
             {
                 player.undoUpdate(); // Step Back
                 player.setVelocity(Math::Vec2(0, 0)); // TODO: cancel out colision direction components? (i.e, slide along wall)
             }
-            else if (level.getColliders()[i].Link) // Warp-point
+            else if (level.getLevel().getColliders()[i].Link) // Warp-point
             {
-                SpriteData spriteData = ResourceManager::getSpriteSizeData(level.getColliders()[i].Tileset);
-                player.position = Math::Vec2(level.getColliders()[i].DX * spriteData.cel_width + (spriteData.cel_width/2.0f), level.getColliders()[i].DY * spriteData.cel_height + (spriteData.cel_height / 2.0f));
-                std::cout << level.getColliders()[i].LinkedLevel << std::endl;
+                SpriteData spriteData = ResourceManager::getSpriteSizeData(level.getLevel().getColliders()[i].Tileset);
+                player.position = Math::Vec2(
+                    level.getLevel().getColliders()[i].DX * spriteData.cel_width + (spriteData.cel_width/2.0f), 
+                    level.getLevel().getColliders()[i].DY * spriteData.cel_height + (spriteData.cel_height / 2.0f));
+                level.setLevel(level.getLevel().getColliders()[i].LinkedLevel);
             }
         }
     }

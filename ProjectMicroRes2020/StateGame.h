@@ -9,7 +9,7 @@
 #include <vector>
 
 #include "SpriteRenderer.h"
-#include "Level.h"
+#include "LevelManager.h"
 #include "GameObject.h"
 
 class StateGame : public Entropy::GameState
@@ -30,7 +30,7 @@ private:
 
 	bool pause;
 
-	Level level;
+	LevelManager level;
 
 public:
 	StateGame();

@@ -84,7 +84,7 @@ void Level::Draw(SpriteRenderer& renderer)
 }
 
 Tile::Tile(unsigned int x, unsigned int y, std::string tileset, unsigned int tX, unsigned int tY, bool passable) :
-	X(x), Y(y), Tileset(tileset), TX(tX), TY(tY), Passable(passable), Link(false), LinkedLevel()
+	X(x), Y(y), Tileset(tileset), TX(tX), TY(tY), Passable(passable), Link(false), LinkedLevel(), DX(0), DY(0)
 {
 	SpriteData spriteData = ResourceManager::getSpriteSizeData(tileset);
 	box_size = Math::Vec2((float)spriteData.cel_width, (float)spriteData.cel_width);
