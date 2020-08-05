@@ -87,7 +87,7 @@ int WinMain()
 		newHighScore.init();
 		pause.init();
 
-		GameState * gameState = &game;
+		GameState * gameState = &menu;
 
 		// GameLoop
 		while (!window.getShouldClose())

@@ -13,7 +13,7 @@ bool StateMenu::init()
 void StateMenu::input(Graphics::Window& window)
 {
     // Close window on KEY_ESCAPE been pressed
-    if (window.getKeyPressed(Graphics::GLKeys::KEY_ESCAPE))
+    if (window.getKeyPressed(Graphics::GLKeys::KEY_ESCAPE) || !gameFlag)
         window.setShouldClose(true);
     else if ((window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_S) && !key_down))
     {
@@ -43,34 +43,34 @@ void StateMenu::render()
     // Render Menu Text
     Entropy::Math::Vec2 textPos[] =
     {
-        Math::Vec2(7.5, 35.5), //P
-        Math::Vec2(12.5, 35.5), //l
-        Math::Vec2(17.5, 35.5), //a
-        Math::Vec2(22.5, 35.5), //y
+        Math::Vec2(7.5, 33.5), //P
+        Math::Vec2(12.5, 33.5), //l
+        Math::Vec2(17.5, 33.5), //a
+        Math::Vec2(22.5, 33.5), //y
 
-        Math::Vec2(7.5, 28.5), //H
-        Math::Vec2(12.5, 28.5), //i
-        Math::Vec2(17.5, 28.5), //g
-        Math::Vec2(22.5, 28.5), //h
-        Math::Vec2(32.5, 28.5), //S
-        Math::Vec2(37.5, 28.5), //c
-        Math::Vec2(42.5, 28.5), //o
-        Math::Vec2(47.5, 28.5), //r
-        Math::Vec2(52.5, 28.5), //e
-        Math::Vec2(57.5, 28.5), //s
+        Math::Vec2(7.5, 25.5), //H
+        Math::Vec2(12.5, 25.5), //i
+        Math::Vec2(17.5, 25.5), //g
+        Math::Vec2(22.5, 25.5), //h
+        Math::Vec2(32.5, 25.5), //S
+        Math::Vec2(37.5, 25.5), //c
+        Math::Vec2(42.5, 25.5), //o
+        Math::Vec2(47.5, 25.5), //r
+        Math::Vec2(52.5, 25.5), //e
+        Math::Vec2(57.5, 25.5), //s
 
-        Math::Vec2(7.5, 21.5), //C
-        Math::Vec2(12.5, 21.5), //r
-        Math::Vec2(17.5, 21.5), //e
-        Math::Vec2(22.5, 21.5), //d
-        Math::Vec2(27.5, 21.5), //i
-        Math::Vec2(32.5, 21.5), //t
-        Math::Vec2(37.5, 21.5), //s
+        Math::Vec2(7.5, 17.5), //C
+        Math::Vec2(12.5, 17.5), //r
+        Math::Vec2(17.5, 17.5), //e
+        Math::Vec2(22.5, 17.5), //d
+        Math::Vec2(27.5, 17.5), //i
+        Math::Vec2(32.5, 17.5), //t
+        Math::Vec2(37.5, 17.5), //s
 
-        Math::Vec2(7.5, 14.5), //Q
-        Math::Vec2(12.5, 14.5), //u
-        Math::Vec2(17.5, 14.5), //i
-        Math::Vec2(22.5, 14.5), //t
+        Math::Vec2(7.5, 9.5), //Q
+        Math::Vec2(12.5, 9.5), //u
+        Math::Vec2(17.5, 9.5), //i
+        Math::Vec2(22.5, 9.5), //t
     };
 
     Entropy::Math::Vec2 textChar[] =
