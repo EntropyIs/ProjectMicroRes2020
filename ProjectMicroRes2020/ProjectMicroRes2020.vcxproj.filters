@@ -67,7 +67,7 @@
       <Filter>Source Files\Model</Filter>
     </ClCompile>
     <ClCompile Include="LevelManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,7 +119,7 @@
       <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="LevelManager.h">
-      <Filter>Source Files\Model</Filter>
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

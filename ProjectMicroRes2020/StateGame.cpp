@@ -2,6 +2,7 @@
 
 #include <Entropy/Graphics/Mesh.h>
 #include <Entropy/Graphics/Model/Image.h>
+#include <Entropy/Graphics/JoystickController.h>
 
 #include <iostream>
 
@@ -39,33 +40,86 @@ bool StateGame::init()
 
 void StateGame::input(Graphics::Window& window)
 {
-    // Pause
-    if (window.getKeyPressed(GLKeys::KEY_ESCAPE))
-        pause = true;
+    Graphics::JoystickController joystickController;
+    int axisCount;
+    int buttonCount;
+    const float* axisData = joystickController.getAxisData(GLFW_JOYSTICK_1, &axisCount);
+    const unsigned char* buttonData = joystickController.getButtonsData(GLFW_JOYSTICK_1, &buttonCount);
 
-    // Character Movement
-    if ((window.getKeyPressed(GLKeys::KEY_W) && window.getKeyPressed(GLKeys::KEY_A)) || 
-        (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_LEFT)))
-        player.setVelocity(Math::Vec2(-maxAngle, maxAngle));
-    else if ((window.getKeyPressed(GLKeys::KEY_A) && window.getKeyPressed(GLKeys::KEY_S)) ||
-        (window.getKeyPressed(GLKeys::KEY_LEFT) && window.getKeyPressed(GLKeys::KEY_DOWN)))
-        player.setVelocity(Math::Vec2(-maxAngle, -maxAngle));
-    else if ((window.getKeyPressed(GLKeys::KEY_S) && window.getKeyPressed(GLKeys::KEY_D)) ||
-        (window.getKeyPressed(GLKeys::KEY_DOWN) && window.getKeyPressed(GLKeys::KEY_RIGHT)))
-        player.setVelocity(Math::Vec2(maxAngle, -maxAngle));
-    else if ((window.getKeyPressed(GLKeys::KEY_W) && window.getKeyPressed(GLKeys::KEY_D)) ||
-        (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_RIGHT)))
-        player.setVelocity(Math::Vec2(maxAngle, maxAngle));
-    else if (window.getKeyPressed(GLKeys::KEY_A) || window.getKeyPressed(GLKeys::KEY_LEFT))
-        player.setVelocity(Math::Vec2(-maxVel, 0));
-    else if (window.getKeyPressed(GLKeys::KEY_S) || window.getKeyPressed(GLKeys::KEY_DOWN))
-        player.setVelocity(Math::Vec2(0, -maxVel));
-    else if (window.getKeyPressed(GLKeys::KEY_D) || window.getKeyPressed(GLKeys::KEY_RIGHT))
-        player.setVelocity(Math::Vec2(maxVel, 0));
-    else if (window.getKeyPressed(GLKeys::KEY_W) || window.getKeyPressed(GLKeys::KEY_UP))
-        player.setVelocity(Math::Vec2(0, maxVel));
+    if (axisCount >= 2) // Joystick has 2 or more axis
+    {
+        float threshold = 0.8f; // axis deadzone threshold
+
+        // Character Movement
+        if ((window.getKeyPressed(GLKeys::KEY_W) && window.getKeyPressed(GLKeys::KEY_A)) ||
+            (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_LEFT)) ||
+            axisData[0] < (0.0f - threshold) && axisData[1] < (0.0f - threshold)
+            )
+            player.setVelocity(Math::Vec2(-maxAngle, maxAngle));
+        else if ((window.getKeyPressed(GLKeys::KEY_A) && window.getKeyPressed(GLKeys::KEY_S)) ||
+            (window.getKeyPressed(GLKeys::KEY_LEFT) && window.getKeyPressed(GLKeys::KEY_DOWN)) ||
+            axisData[0] < (0.0f - threshold) && axisData[1] > (0.0f + threshold)
+            )
+            player.setVelocity(Math::Vec2(-maxAngle, -maxAngle));
+        else if ((window.getKeyPressed(GLKeys::KEY_S) && window.getKeyPressed(GLKeys::KEY_D)) ||
+            (window.getKeyPressed(GLKeys::KEY_DOWN) && window.getKeyPressed(GLKeys::KEY_RIGHT)) ||
+            axisData[0] > (0.0f + threshold) && axisData[1] > (0.0f + threshold)
+            )
+            player.setVelocity(Math::Vec2(maxAngle, -maxAngle));
+        else if ((window.getKeyPressed(GLKeys::KEY_W) && window.getKeyPressed(GLKeys::KEY_D)) ||
+            (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_RIGHT)) ||
+            axisData[0] > (0.0f + threshold) && axisData[1] < (0.0f - threshold)
+            )
+            player.setVelocity(Math::Vec2(maxAngle, maxAngle));
+        else if (window.getKeyPressed(GLKeys::KEY_A) || window.getKeyPressed(GLKeys::KEY_LEFT) || axisData[0] < (0.0f - threshold))
+            player.setVelocity(Math::Vec2(-maxVel, 0));
+        else if (window.getKeyPressed(GLKeys::KEY_S) || window.getKeyPressed(GLKeys::KEY_DOWN) || axisData[1] > (0.0f + threshold))
+            player.setVelocity(Math::Vec2(0, -maxVel));
+        else if (window.getKeyPressed(GLKeys::KEY_D) || window.getKeyPressed(GLKeys::KEY_RIGHT) || axisData[0] > (0.0f + threshold))
+            player.setVelocity(Math::Vec2(maxVel, 0));
+        else if (window.getKeyPressed(GLKeys::KEY_W) || window.getKeyPressed(GLKeys::KEY_UP) || axisData[1] < (0.0f - threshold))
+            player.setVelocity(Math::Vec2(0, maxVel));
+        else
+            player.setVelocity(Math::Vec2(0, 0));
+    }
+    else // Keyboard Only Movement
+    {
+        // Character Movement
+        if ((window.getKeyPressed(GLKeys::KEY_W) && window.getKeyPressed(GLKeys::KEY_A)) ||
+            (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_LEFT)))
+            player.setVelocity(Math::Vec2(-maxAngle, maxAngle));
+        else if ((window.getKeyPressed(GLKeys::KEY_A) && window.getKeyPressed(GLKeys::KEY_S)) ||
+            (window.getKeyPressed(GLKeys::KEY_LEFT) && window.getKeyPressed(GLKeys::KEY_DOWN)))
+            player.setVelocity(Math::Vec2(-maxAngle, -maxAngle));
+        else if ((window.getKeyPressed(GLKeys::KEY_S) && window.getKeyPressed(GLKeys::KEY_D)) ||
+            (window.getKeyPressed(GLKeys::KEY_DOWN) && window.getKeyPressed(GLKeys::KEY_RIGHT)))
+            player.setVelocity(Math::Vec2(maxAngle, -maxAngle));
+        else if ((window.getKeyPressed(GLKeys::KEY_W) && window.getKeyPressed(GLKeys::KEY_D)) ||
+            (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_RIGHT)))
+            player.setVelocity(Math::Vec2(maxAngle, maxAngle));
+        else if (window.getKeyPressed(GLKeys::KEY_A) || window.getKeyPressed(GLKeys::KEY_LEFT))
+            player.setVelocity(Math::Vec2(-maxVel, 0));
+        else if (window.getKeyPressed(GLKeys::KEY_S) || window.getKeyPressed(GLKeys::KEY_DOWN))
+            player.setVelocity(Math::Vec2(0, -maxVel));
+        else if (window.getKeyPressed(GLKeys::KEY_D) || window.getKeyPressed(GLKeys::KEY_RIGHT))
+            player.setVelocity(Math::Vec2(maxVel, 0));
+        else if (window.getKeyPressed(GLKeys::KEY_W) || window.getKeyPressed(GLKeys::KEY_UP))
+            player.setVelocity(Math::Vec2(0, maxVel));
+        else
+            player.setVelocity(Math::Vec2(0, 0));
+    }
+
+    // Pause
+    if (buttonCount > 0) // Controler has buttons
+    {
+        if (window.getKeyPressed(GLKeys::KEY_ESCAPE) || buttonData[9] == GLFW_PRESS)
+            pause = true;
+    }
     else
-        player.setVelocity(Math::Vec2(0, 0));
+    {
+        if (window.getKeyPressed(GLKeys::KEY_ESCAPE))
+            pause = true;
+    }
 }
 
 void StateGame::render()

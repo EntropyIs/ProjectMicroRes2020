@@ -1,5 +1,7 @@
 #include "StateMenu.h"
 
+#include <Entropy/Graphics/JoystickController.h>
+
 using namespace Entropy;
 
 bool StateMenu::init()
