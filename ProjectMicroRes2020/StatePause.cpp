@@ -10,9 +10,9 @@ using namespace Entropy;
 bool StatePause::init()
 {
     selection = 0;
-    key_down = false;
+    key_down = true;
     execute_selection = false;
-    return false;
+    return true;
 }
 
 void StatePause::input(Graphics::Window& window)
@@ -31,18 +31,14 @@ void StatePause::input(Graphics::Window& window)
         if (selection < 0)
             selection = 1;
     }
-    else if (window.getKeyPressed(Graphics::GLKeys::KEY_ENTER))
+    else if (window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down)
         execute_selection = true;
-    else if (!window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !window.getKeyPressed(Graphics::GLKeys::KEY_S) && !window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !window.getKeyPressed(Graphics::GLKeys::KEY_W) && key_down)
+    else if (!window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !window.getKeyPressed(Graphics::GLKeys::KEY_S) && !window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !window.getKeyPressed(Graphics::GLKeys::KEY_W) && !window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && key_down)
         key_down = false;
 }
 
 void StatePause::render()
 {
-    float vOffset = 7;
-    float hOffset = 5;
-    Math::Vec2 textPosC(10, 32);
-
     Math::Vec2 textPos[] =
     {
         Math::Vec2(22.5, 54.5), //P
@@ -141,9 +137,10 @@ GameState* StatePause::update(GameState* gameState)
     {
         switch (selection)
         {
-        case 0:
-            return connectedStates[0];
+        case 0: // Dont re-init gameplay when returning from pause menu
+            return connectedStates[0]; 
         case 1:
+            connectedStates[1]->init();
             return connectedStates[1];
         default:
             break;

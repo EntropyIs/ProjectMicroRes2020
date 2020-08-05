@@ -71,9 +71,9 @@ int WinMain()
 		gameOver.addConnection(0, &newHighScore);
 		gameOver.addConnection(1, &menu);
 		highScores.addConnection(0, &menu);
-		menu.addConnection(0, &credits);
+		menu.addConnection(0, &game);
 		menu.addConnection(1, &highScores);
-		menu.addConnection(2, &game);
+		menu.addConnection(2, &credits);
 		newHighScore.addConnection(0, &highScores);
 		pause.addConnection(0, &game);
 		pause.addConnection(1, &menu);

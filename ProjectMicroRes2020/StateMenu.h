@@ -2,11 +2,24 @@
 
 #include <Entropy/GameState.h>
 #include <Entropy/Graphics/Window.h>
+#include <Entropy/Math/Vec2.h>
+
+#include "SpriteRenderer.h"
 
 class StateMenu : public Entropy::GameState
 {
+private:
+	SpriteRenderer renderer;
+
+	int selection;
+
+	bool key_down;
+	bool execute_selection;
+
 public:
-	StateMenu() : GameState("Menu", 3) {};
+	StateMenu() : GameState("Menu", 3) {
+		init();
+	};
 
 	// Inherited via GameState
 	virtual bool init() override;
