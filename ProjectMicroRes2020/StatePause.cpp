@@ -2,6 +2,7 @@
 
 #include <Entropy/Graphics/Mesh.h>
 #include <Entropy/Graphics/Model/Image.h>
+#include <Entropy/Graphics/JoystickController.h>
 
 #include "ResourceManager.h"
 
@@ -17,24 +18,66 @@ bool StatePause::init()
 
 void StatePause::input(Graphics::Window& window)
 {
-    if ((window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_S) && !key_down))
+    Graphics::JoystickController joystickController;
+    int axisCount;
+    int buttonCount;
+    const float* axisData = joystickController.getAxisData(GLFW_JOYSTICK_1, &axisCount);
+    const unsigned char* buttonData = joystickController.getButtonsData(GLFW_JOYSTICK_1, &buttonCount);
+
+    if (axisCount >= 2 && buttonCount >= 10)
     {
-        key_down = true;
-        selection++;
-        if (selection > 1)
-            selection = 0;
+        float threshold = 0.8f; // axis deadzone threshold
+
+        if ((window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_S) && !key_down) ||
+           (axisData[1] > (0.0f + threshold) && !key_down)
+            )
+        {
+            key_down = true;
+            selection++;
+            if (selection > 1)
+                selection = 0;
+        }
+        else if ((window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_W) && !key_down) ||
+            (axisData[1] < (0.0f - threshold) && !key_down)
+            )
+        {
+            key_down = true;
+            selection--;
+            if (selection < 0)
+                selection = 1;
+        }
+        else if ((window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down) || (buttonData[9] == GLFW_PRESS && !key_down) || (buttonData[2] == GLFW_PRESS && !key_down))
+            execute_selection = true;
+        else if (!window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !window.getKeyPressed(Graphics::GLKeys::KEY_S) && 
+            !window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !window.getKeyPressed(Graphics::GLKeys::KEY_W) && 
+            !window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && buttonData[9] == GLFW_RELEASE && buttonData[2] == GLFW_RELEASE &&
+            (axisData[1] > (0.0f - threshold) && axisData[1] < (0.0f + threshold))
+            && key_down)
+            key_down = false;
     }
-    else if ((window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_W) && !key_down))
+    else
     {
-        key_down = true;
-        selection--;
-        if (selection < 0)
-            selection = 1;
+        if ((window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_S) && !key_down))
+        {
+            key_down = true;
+            selection++;
+            if (selection > 1)
+                selection = 0;
+        }
+        else if ((window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_W) && !key_down))
+        {
+            key_down = true;
+            selection--;
+            if (selection < 0)
+                selection = 1;
+        }
+        else if (window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down)
+            execute_selection = true;
+        else if (!window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !window.getKeyPressed(Graphics::GLKeys::KEY_S) && 
+            !window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !window.getKeyPressed(Graphics::GLKeys::KEY_W) && 
+            !window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && key_down)
+            key_down = false;
     }
-    else if (window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down)
-        execute_selection = true;
-    else if (!window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !window.getKeyPressed(Graphics::GLKeys::KEY_S) && !window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !window.getKeyPressed(Graphics::GLKeys::KEY_W) && !window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && key_down)
-        key_down = false;
 }
 
 void StatePause::render()
