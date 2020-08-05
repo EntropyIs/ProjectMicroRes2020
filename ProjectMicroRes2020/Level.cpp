@@ -47,7 +47,7 @@ Level::Level(const char* path, std::string name) : name(name)
 		if (lineComp.size() == 9) // Warp Zone
 			tiles.push_back(Tile(std::stoi(lineComp[0]), std::stoi(lineComp[1]), lineComp[2],
 				std::stoi(lineComp[3]), std::stoi(lineComp[4]), std::stoi(lineComp[5]) == 1, lineComp[6].c_str(), std::stoi(lineComp[7]), std::stoi(lineComp[8])));
-		else
+		else if (lineComp.size() == 6) // Standard Tile
 			tiles.push_back(Tile(std::stoi(lineComp[0]), std::stoi(lineComp[1]), lineComp[2],
 				std::stoi(lineComp[3]), std::stoi(lineComp[4]), std::stoi(lineComp[5]) == 1));
 	}

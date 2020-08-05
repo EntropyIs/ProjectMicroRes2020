@@ -42,7 +42,7 @@ LevelManager::LevelManager(const char* levelList)
 			if (!lineToken.empty())
 				lineComp.push_back(lineToken);
 
-		levels.push_back(Level((directory + "/" + lineComp[1]).c_str(), lineComp[0]));
+ 		levels.push_back(Level((directory + "/" + lineComp[1]).c_str(), lineComp[0]));
 	}
 }
 
