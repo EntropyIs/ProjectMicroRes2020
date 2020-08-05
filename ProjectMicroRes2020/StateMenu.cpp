@@ -14,27 +14,70 @@ bool StateMenu::init()
 
 void StateMenu::input(Graphics::Window& window)
 {
-    // Close window on KEY_ESCAPE been pressed
+    // Close window on KEY_ESCAPE been pressed or !gameFlag
     if (window.getKeyPressed(Graphics::GLKeys::KEY_ESCAPE) || !gameFlag)
         window.setShouldClose(true);
-    else if ((window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_S) && !key_down))
+
+    Graphics::JoystickController joystickController;
+    int axisCount;
+    int buttonCount;
+    const float* axisData = joystickController.getAxisData(GLFW_JOYSTICK_1, &axisCount);
+    const unsigned char* buttonData = joystickController.getButtonsData(GLFW_JOYSTICK_1, &buttonCount);
+
+    if (axisCount >= 2 && buttonCount >= 10)
     {
-        key_down = true;
-        selection++;
-        if (selection > 3)
-            selection = 0;
+        float threshold = 0.8f; // axis deadzone threshold
+
+        if ((window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_S) && !key_down) ||
+            (axisData[1] > (0.0f + threshold) && !key_down)
+            )
+        {
+            key_down = true;
+            selection++;
+            if (selection > 3)
+                selection = 0;
+        }
+        else if ((window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_W) && !key_down) ||
+            (axisData[1] < (0.0f - threshold) && !key_down)
+            )
+        {
+            key_down = true;
+            selection--;
+            if (selection < 0)
+                selection = 3;
+        }
+        else if ((window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down) || (buttonData[2] == GLFW_PRESS && !key_down))
+            execute_selection = true;
+        else if (!window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !window.getKeyPressed(Graphics::GLKeys::KEY_S) &&
+            !window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !window.getKeyPressed(Graphics::GLKeys::KEY_W) &&
+            !window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && buttonData[2] == GLFW_RELEASE &&
+            (axisData[1] > (0.0f - threshold) && axisData[1] < (0.0f + threshold))
+            && key_down)
+            key_down = false;
     }
-    else if ((window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_W) && !key_down))
+    else
     {
-        key_down = true;
-        selection--;
-        if (selection < 0)
-            selection = 3;
+        if ((window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_S) && !key_down))
+        {
+            key_down = true;
+            selection++;
+            if (selection > 3)
+                selection = 0;
+        }
+        else if ((window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_W) && !key_down))
+        {
+            key_down = true;
+            selection--;
+            if (selection < 0)
+                selection = 3;
+        }
+        else if (window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down)
+            execute_selection = true;
+        else if (!window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !window.getKeyPressed(Graphics::GLKeys::KEY_S) &&
+            !window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !window.getKeyPressed(Graphics::GLKeys::KEY_W) &&
+            !window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && key_down)
+            key_down = false;
     }
-    else if (window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down)
-        execute_selection = true;
-    else if (!window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !window.getKeyPressed(Graphics::GLKeys::KEY_S) && !window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !window.getKeyPressed(Graphics::GLKeys::KEY_W) && !window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && key_down)
-        key_down = false;
 }
 
 void StateMenu::render()

@@ -46,11 +46,11 @@ void StatePause::input(Graphics::Window& window)
             if (selection < 0)
                 selection = 1;
         }
-        else if ((window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down) || (buttonData[9] == GLFW_PRESS && !key_down) || (buttonData[2] == GLFW_PRESS && !key_down))
+        else if ((window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down) || (buttonData[2] == GLFW_PRESS && !key_down))
             execute_selection = true;
         else if (!window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !window.getKeyPressed(Graphics::GLKeys::KEY_S) && 
             !window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !window.getKeyPressed(Graphics::GLKeys::KEY_W) && 
-            !window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && buttonData[9] == GLFW_RELEASE && buttonData[2] == GLFW_RELEASE &&
+            !window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && buttonData[2] == GLFW_RELEASE &&
             (axisData[1] > (0.0f - threshold) && axisData[1] < (0.0f + threshold))
             && key_down)
             key_down = false;
