@@ -1,6 +1,7 @@
 #include "StateCredits.h"
 
 #include <Entropy/Math/Vec2.h>
+#include <Entropy/Graphics/JoystickController.h>
 
 using namespace Entropy;
 
@@ -13,10 +14,26 @@ bool StateCredits::init()
 
 void StateCredits::input(Graphics::Window& window)
 {
-    if (window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down)
-        execute_selection = true;
-    else if (!window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && key_down)
-        key_down = false;
+    Graphics::JoystickController joystickController;
+    int axisCount;
+    int buttonCount;
+    const float* axisData = joystickController.getAxisData(GLFW_JOYSTICK_1, &axisCount);
+    const unsigned char* buttonData = joystickController.getButtonsData(GLFW_JOYSTICK_1, &buttonCount);
+
+    if (axisCount >= 2 && buttonCount >= 10)
+    {
+        if ((window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down) || (buttonData[2] == GLFW_PRESS && !key_down))
+            execute_selection = true;
+        else if (!window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && buttonData[2] == GLFW_RELEASE && key_down)
+            key_down = false;
+    }
+    else
+    {
+        if (window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down)
+            execute_selection = true;
+        else if (!window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && key_down)
+            key_down = false;
+    }
 }
 
 void StateCredits::render()
