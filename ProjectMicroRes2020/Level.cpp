@@ -54,9 +54,15 @@ Level::Level(const char* path, std::string name) : name(name)
 				tiles.push_back(Tile(std::stoi(lineComp[1]), std::stoi(lineComp[2]), lineComp[3],
 					std::stoi(lineComp[4]), std::stoi(lineComp[5]), std::stoi(lineComp[6]) == 1));
 		}
-		else if (lineComp[0] == "enemy") // Pharse Enemys
+		else if (lineComp[0] == "entity") // Pharse Enemys
 		{
+			if (lineComp[1] == "enemy")
+			{
+				if (lineComp[2] == "slime") // Pharse slime enemy
+				{
 
+				}
+			}
 		}
 	}
 
@@ -78,9 +84,14 @@ std::string Level::getName()
 
 void Level::Draw(SpriteRenderer& renderer)
 {
+	for (unsigned int i = 0; i < entities.size(); i++)
+	{
+		entities[i].Draw(renderer);
+	}
+
 	Graphics::Texture texture = ResourceManager::getTexture(tiles[0].Tileset);
 	
-	for (unsigned int i = 0; i < tiles.size(); i++)
+	for (unsigned int i = 0; i < tiles.size(); i++) // Render background tiles
 	{
 		SpriteData spriteData = ResourceManager::getSpriteSizeData(tiles[i].Tileset);
 		renderer.Draw(Math::Vec2(

@@ -31,6 +31,15 @@
     <Filter Include="Header Files\Model\Renderer">
       <UniqueIdentifier>{ecd7a92e-0dec-4d67-82b9-dcee2e697f22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Model\Entity">
+      <UniqueIdentifier>{4547f999-90c8-4626-a33b-965872180f8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Entity">
+      <UniqueIdentifier>{9e86eb04-86ef-4584-a99b-f756bcee7270}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Renderer">
+      <UniqueIdentifier>{e455c432-26f8-4dcc-85f1-15af2b71c236}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -63,19 +72,22 @@
     <ClCompile Include="Level.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
     <ClCompile Include="LevelManager.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Source Files\Model\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="AnimationRenderer.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Model\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\Model\Entity</Filter>
     </ClCompile>
     <ClCompile Include="AnimatedGameObject.cpp">
+      <Filter>Source Files\Model\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Slime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -118,9 +130,6 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
@@ -133,8 +142,14 @@
     <ClInclude Include="AnimationRenderer.h">
       <Filter>Header Files\Model\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\Model\Entity</Filter>
+    </ClInclude>
     <ClInclude Include="AnimatedGameObject.h">
-      <Filter>Header Files\Model</Filter>
+      <Filter>Header Files\Model\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Slime.h">
+      <Filter>Header Files\Model\Entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
