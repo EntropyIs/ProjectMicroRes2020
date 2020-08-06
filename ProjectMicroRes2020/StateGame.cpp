@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "ResourceManager.h"
+#include "AnimationRenderer.h"
 
 using namespace Entropy;
 using Entropy::Graphics::GLKeys;
@@ -21,9 +22,11 @@ StateGame::StateGame() : GameState("Game", 2), level()
 bool StateGame::init()
 {
     // Configure Entities
-    player = GameObject("Player", "test_sprite", Math::Vec2(0.0f, 3.0f), Math::Vec2(32.0f, 32.0f),
-        Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(0.0f, 2.0f));
+    player = GameObject("Player", "test_sprite", Math::Vec2(0.0f, 3.0f), Math::Vec2(32.0f, 32.0f), Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(0.0f, 2.0f));
     playerVelocity = Math::Vec2(0.0f, 0.0f);
+
+    slime = AnimatedGameObject("Slime", "slime_sheet", 3, 0, 6, Math::Vec2(10.0f, 50.0f), Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(1.0f, 1.0f));
+    slimeVelocity = Math::Vec2(0.0f, 0.0f);
 
     // Configure shaders
     ResourceManager::getShader("spriteShader").use();
@@ -125,27 +128,29 @@ void StateGame::input(Graphics::Window& window)
 void StateGame::render()
 {
     player.Draw(renderer);
+    slime.Draw(renderer);
     level.getLevel().Draw(renderer);
 }
 
 GameState* StateGame::update(GameState* gameState)
 {
-    if (player.velocity.Y > 0.0f && player.velocity.X < 0.0f) // Up & Left
-        player.sprite_index.Y = 6;
-    else if (player.velocity.Y > 0.0f && player.velocity.X > 0.0f) // Up & Right
-        player.sprite_index.Y = 0;
-    else if (player.velocity.Y < 0.0f && player.velocity.X < 0.0f) // Down & Left
-        player.sprite_index.Y = 4;
-    else if (player.velocity.Y < 0.0f && player.velocity.X > 0.0f) // Down & Right
-        player.sprite_index.Y = 2;
-    else if (player.velocity.Y > 0.0f) // Up
-        player.sprite_index.Y = 7;
-    else if (player.velocity.Y < 0.0f) // Down
-        player.sprite_index.Y = 3;
-    else if (player.velocity.X > 0.0f) // Right
-        player.sprite_index.Y = 1;
-    else if (player.velocity.X < 0.0f) // Left
-        player.sprite_index.Y = 5;
+    // Update Player
+    if (player.getVelocity().Y > 0.0f && player.getVelocity().X < 0.0f) // Up & Left
+        player.setSpriteIndexY(6);
+    else if (player.getVelocity().Y > 0.0f && player.getVelocity().X > 0.0f) // Up & Right
+        player.setSpriteIndexY(0);
+    else if (player.getVelocity().Y < 0.0f && player.getVelocity().X < 0.0f) // Down & Left
+        player.setSpriteIndexY(4);
+    else if (player.getVelocity().Y < 0.0f && player.getVelocity().X > 0.0f) // Down & Right
+        player.setSpriteIndexY(2);
+    else if (player.getVelocity().Y > 0.0f) // Up
+        player.setSpriteIndexY(7);
+    else if (player.getVelocity().Y < 0.0f) // Down
+        player.setSpriteIndexY(3);
+    else if (player.getVelocity().X > 0.0f) // Right
+        player.setSpriteIndexY(1);
+    else if (player.getVelocity().X < 0.0f) // Left
+        player.setSpriteIndexY(5);
 
     // Process Player Movement
     player.Update();
@@ -161,13 +166,16 @@ GameState* StateGame::update(GameState* gameState)
             else if (level.getLevel().getColliders()[i].Link) // Warp-point
             {
                 SpriteData spriteData = ResourceManager::getSpriteSizeData(level.getLevel().getColliders()[i].Tileset);
-                player.position = Math::Vec2(
+                player.setPosition(Math::Vec2(
                     level.getLevel().getColliders()[i].DX * spriteData.cel_width + (spriteData.cel_width/2.0f), 
-                    level.getLevel().getColliders()[i].DY * spriteData.cel_height + (spriteData.cel_height / 2.0f));
+                    level.getLevel().getColliders()[i].DY * spriteData.cel_height + (spriteData.cel_height / 2.0f)));
                 level.setLevel(level.getLevel().getColliders()[i].LinkedLevel);
             }
         }
     }
+
+    // Update Slime
+    slime.Update();
 
     if (pause) // Pause Menu Called
     {
@@ -176,8 +184,8 @@ GameState* StateGame::update(GameState* gameState)
         return connectedStates[0];
     }
 
-    //TODO: GameOver
-    //if(reason)
+    // Game over if collide with slime
+    //if(player.detectCollions(slime))
         //return connectedStates[1];
 
     return gameState;

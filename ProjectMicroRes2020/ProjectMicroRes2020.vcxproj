@@ -147,6 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedGameObject.cpp" />
+    <ClCompile Include="AnimationRenderer.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelManager.cpp" />
@@ -168,6 +170,8 @@
     <None Include="Assets\Shaders\vFBShader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatedGameObject.h" />
+    <ClInclude Include="AnimationRenderer.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelManager.h" />

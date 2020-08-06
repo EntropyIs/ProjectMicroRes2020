@@ -34,6 +34,41 @@ void GameObject::setVelocityY(float velocity)
 	this->velocity.X = velocity;
 }
 
+Entropy::Math::Vec2 GameObject::getVelocity()
+{
+	return velocity;
+}
+
+float GameObject::getVelocityX()
+{
+	return velocity.X;
+}
+
+float GameObject::getVelocityY()
+{
+	return velocity.Y;
+}
+
+void GameObject::setPosition(Entropy::Math::Vec2 position)
+{
+	this->position = position;
+}
+
+void GameObject::setSpriteIndex(Entropy::Math::Vec2 spriteIndex)
+{
+	sprite_index = spriteIndex;
+}
+
+void GameObject::setSpriteIndexX(float x)
+{
+	sprite_index.X = x;
+}
+
+void GameObject::setSpriteIndexY(float y)
+{
+	sprite_index.Y = y;
+}
+
 bool GameObject::detectCollions(GameObject& other)
 {
 	Math::Vec2 otherlower = other.position - other.box_offset;

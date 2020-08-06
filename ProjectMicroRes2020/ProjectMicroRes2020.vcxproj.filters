@@ -28,6 +28,9 @@
     <Filter Include="Source Files\Model">
       <UniqueIdentifier>{0830132f-cc9c-4545-b2d2-b0fe53404b11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Model\Renderer">
+      <UniqueIdentifier>{ecd7a92e-0dec-4d67-82b9-dcee2e697f22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -68,6 +71,12 @@
     </ClCompile>
     <ClCompile Include="LevelManager.cpp">
       <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedGameObject.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,10 +124,16 @@
     <ClInclude Include="Level.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteRenderer.h">
+    <ClInclude Include="LevelManager.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="LevelManager.h">
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Header Files\Model\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationRenderer.h">
+      <Filter>Header Files\Model\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedGameObject.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
   </ItemGroup>

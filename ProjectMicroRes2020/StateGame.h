@@ -12,6 +12,8 @@
 #include "LevelManager.h"
 #include "GameObject.h"
 
+#include "AnimatedGameObject.h"
+
 class StateGame : public Entropy::GameState
 {
 private:
@@ -21,6 +23,12 @@ private:
 	Entropy::Math::Vec2 spritePos;
 	GameObject player;
 	Entropy::Math::Vec2 playerVelocity;
+
+	GameObject slime2;
+	Entropy::Math::Vec2 slime2Velocity;
+
+	AnimatedGameObject slime;
+	Entropy::Math::Vec2 slimeVelocity;
 
 	float accel = 60.0f;
 	float maxVel = 30.0f;
