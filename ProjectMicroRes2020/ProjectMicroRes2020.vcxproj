@@ -149,6 +149,8 @@
   <ItemGroup>
     <ClCompile Include="AnimatedGameObject.cpp" />
     <ClCompile Include="AnimationRenderer.cpp" />
+    <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelManager.cpp" />
@@ -173,6 +175,7 @@
   <ItemGroup>
     <ClInclude Include="AnimatedGameObject.h" />
     <ClInclude Include="AnimationRenderer.h" />
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelManager.h" />
