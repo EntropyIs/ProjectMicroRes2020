@@ -11,8 +11,6 @@ private:
 
 	unsigned int currentLevel;
 
-	
-
 public:
 	LevelManager() : currentLevel(0) {};
 	LevelManager(const char* levelList);

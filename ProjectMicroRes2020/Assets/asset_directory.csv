@@ -1,0 +1,9 @@
+shader, quadShader, Shaders/vFBShader.glsl, Shaders/fFBShader.glsl
+shader, spriteShader, Shaders/vBaseShader.glsl, Shaders/fBaseShader.glsl
+sprite, test_sprite, test_sprites.png, 4, 8, 8, 12
+sprite, slime_sheet, slime_sheet.png, 4, 8, 10, 10
+sprite, test_tiles, test_tiles.png, 8, 8, 8, 8
+sprite, random_assets, random_assets.png, 8, 8, 8, 8
+sprite, charset_black, charset_black.png, 16, 6, 5, 7
+sprite, charset_grey, charset_grey.png, 16, 6, 5, 7
+sprite, charset_white, charset_white.png, 16, 6, 5, 7

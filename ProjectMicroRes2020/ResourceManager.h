@@ -25,6 +25,8 @@ public:
 	
 	static Entropy::Timing::Clock MainClock;
 
+	static bool loadData(const char* path);
+
 	static Entropy::Graphics::Shader& loadShader(const char* vertexShaderPath, const char* fragmentShaderPath, const char* geometaryShaderPath, std::string name);
 	static Entropy::Graphics::Shader& getShader(std::string name);
 
