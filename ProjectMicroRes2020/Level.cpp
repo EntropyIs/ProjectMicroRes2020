@@ -44,12 +44,20 @@ Level::Level(const char* path, std::string name) : name(name)
 			if (!lineToken.empty())
 				lineComp.push_back(lineToken);
 
-		if (lineComp.size() == 9) // Warp Zone
-			tiles.push_back(Tile(std::stoi(lineComp[0]), std::stoi(lineComp[1]), lineComp[2],
-				std::stoi(lineComp[3]), std::stoi(lineComp[4]), std::stoi(lineComp[5]) == 1, lineComp[6].c_str(), std::stoi(lineComp[7]), std::stoi(lineComp[8])));
-		else if (lineComp.size() == 6) // Standard Tile
-			tiles.push_back(Tile(std::stoi(lineComp[0]), std::stoi(lineComp[1]), lineComp[2],
-				std::stoi(lineComp[3]), std::stoi(lineComp[4]), std::stoi(lineComp[5]) == 1));
+		if (lineComp[0] == "tile") // Pharse Tile
+		{
+			if (lineComp.size() == 10) // Warp Zone
+				tiles.push_back(Tile(std::stoi(lineComp[1]), std::stoi(lineComp[2]), lineComp[3],
+					std::stoi(lineComp[4]), std::stoi(lineComp[5]), std::stoi(lineComp[6]) == 1, 
+					lineComp[7].c_str(), std::stoi(lineComp[8]), std::stoi(lineComp[9])));
+			else if (lineComp.size() == 7) // Standard Tile
+				tiles.push_back(Tile(std::stoi(lineComp[1]), std::stoi(lineComp[2]), lineComp[3],
+					std::stoi(lineComp[4]), std::stoi(lineComp[5]), std::stoi(lineComp[6]) == 1));
+		}
+		else if (lineComp[0] == "enemy") // Pharse Enemys
+		{
+
+		}
 	}
 
 	// build colliders list
