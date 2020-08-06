@@ -156,7 +156,7 @@ GameState* StateGame::update(GameState* gameState)
     player.Update();
     for (unsigned int i = 0; i < level.getLevel().getColliders().size(); i++)
     {
-        if (player.detectCollions(level.getLevel().getColliders()[i]))
+        if (player.detectCollion(level.getLevel().getColliders()[i].collider))
         {
             if (!level.getLevel().getColliders()[i].Passable) // Wall
             {

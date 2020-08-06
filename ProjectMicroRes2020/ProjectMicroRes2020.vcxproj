@@ -149,7 +149,6 @@
   <ItemGroup>
     <ClCompile Include="AnimatedGameObject.cpp" />
     <ClCompile Include="AnimationRenderer.cpp" />
-    <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Level.cpp" />

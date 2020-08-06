@@ -1,24 +1,20 @@
 #include "Collider.h"
 
-const Entropy::Math::Vec2& Collider::getPosition()
+Entropy::Math::Vec2& BoxCollider::getPosition()
 {
-    return position;
+	return position;
 }
 
-void Collider::setPosition(Entropy::Math::Vec2 position)
+void BoxCollider::setPosition(Entropy::Math::Vec2 position)
 {
     this->position = position;
 }
 
-void Collider::setPosition(float x, float y)
+void BoxCollider::setPosition(float x, float y)
 {
     position = Entropy::Math::Vec2(x, y);
 }
 
-const bool BoxCollider::Detect(const Collider& other) const
-{
-    return other.Detect(*this);
-}
 const bool BoxCollider::Detect(const BoxCollider& other) const
 {
 	Entropy::Math::Vec2 otherlower = other.position - other.offset;

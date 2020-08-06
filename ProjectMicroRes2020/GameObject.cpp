@@ -12,11 +12,13 @@ void GameObject::Draw(SpriteRenderer& renderer)
 void GameObject::Update()
 {
 	position += velocity * ResourceManager::getTimeElapsed();
+	collider.setPosition(position);
 }
 
 void GameObject::undoUpdate()
 {
 	position -= velocity * ResourceManager::getTimeElapsed();
+	collider.setPosition(position);
 }
 
 void GameObject::setVelocity(Entropy::Math::Vec2 velocity)
@@ -69,24 +71,12 @@ void GameObject::setSpriteIndexY(float y)
 	sprite_index.Y = y;
 }
 
-bool GameObject::detectCollions(GameObject& other)
+bool GameObject::detectCollion(GameObject& other)
 {
-	Math::Vec2 otherlower = other.position - other.box_offset;
-	Math::Vec2 otherUpper = otherlower + other.box_size;
-	Math::Vec2 lower = position - box_offset;
-	Math::Vec2 upper = lower + box_size;
-
-	return (lower.X < otherUpper.X && upper.X > otherlower.X &&
-		lower.Y < otherUpper.Y&& upper.Y > otherlower.Y);
+	return collider.Detect(other.collider);
 }
 
-bool GameObject::detectCollions(Tile& other)
+bool GameObject::detectCollion(BoxCollider& other)
 {
-	Math::Vec2 otherlower = Math::Vec2(other.X * other.box_size.X, other.Y * other.box_size.Y);
-	Math::Vec2 otherUpper = otherlower + other.box_size;
-	Math::Vec2 lower = position - box_offset;
-	Math::Vec2 upper = lower + box_size;
-
-	return (lower.X < otherUpper.X&& upper.X > otherlower.X &&
-		lower.Y < otherUpper.Y&& upper.Y > otherlower.Y);
+	return other.Detect(collider);
 }

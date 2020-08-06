@@ -6,10 +6,11 @@
 #include <vector>
 
 #include "SpriteRenderer.h"
+#include "Collider.h"
 
 struct Tile
 {
-	Entropy::Math::Vec2 box_size, box_offset;
+	BoxCollider collider;
 	unsigned int X, Y, TX, TY, DX, DY;
 	std::string Tileset;
 	bool Passable;

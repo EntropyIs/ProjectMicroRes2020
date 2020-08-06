@@ -5,13 +5,14 @@
 #include <string>
 
 #include "SpriteRenderer.h"
-#include "Level.h"
+#include "Collider.h"
 
 class GameObject
 {
 protected:
+	BoxCollider collider;
 	std::string name;
-	Entropy::Math::Vec2 position, velocity, box_size, box_offset, texture_offset, sprite_index;
+	Entropy::Math::Vec2 position, velocity, texture_offset, sprite_index;
 	std::string texture_name;
 
 public:
@@ -19,7 +20,7 @@ public:
 		Entropy::Math::Vec2 position = Entropy::Math::Vec2(0.0f, 0.0f), Entropy::Math::Vec2 boxSize = Entropy::Math::Vec2(8.0f, 8.0f),
 		Entropy::Math::Vec2 boxOffset = Entropy::Math::Vec2(4.0f, 4.0f), Entropy::Math::Vec2 textureOffset = Entropy::Math::Vec2(0.0f, 0.0f)) :
 		name(name), texture_name(spriteName), sprite_index(spriteIndex), position(position), velocity(0.0f, 0.0f),
-		box_size(boxSize), box_offset(boxOffset), texture_offset(textureOffset) {};
+		collider(position, boxSize, boxOffset), texture_offset(textureOffset) {};
 	GameObject() {};
 
 	virtual void Draw(SpriteRenderer& renderer);
@@ -41,6 +42,6 @@ public:
 	void setSpriteIndexX(float x);
 	void setSpriteIndexY(float y);
 
-	bool detectCollions(GameObject& other);
-	bool detectCollions(Tile& other);
+	bool detectCollion(GameObject& other);
+	bool detectCollion(BoxCollider& other);
 };

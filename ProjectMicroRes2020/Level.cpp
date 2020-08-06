@@ -84,11 +84,6 @@ std::string Level::getName()
 
 void Level::Draw(SpriteRenderer& renderer)
 {
-	for (unsigned int i = 0; i < entities.size(); i++)
-	{
-		entities[i].Draw(renderer);
-	}
-
 	Graphics::Texture texture = ResourceManager::getTexture(tiles[0].Tileset);
 	
 	for (unsigned int i = 0; i < tiles.size(); i++) // Render background tiles
@@ -99,21 +94,24 @@ void Level::Draw(SpriteRenderer& renderer)
 			(tiles[i].Y * spriteData.cel_height) + spriteData.cel_height / 2.0f),
 			ResourceManager::getTexture(tiles[i].Tileset), Math::Vec2((float)tiles[i].TX, (float)tiles[i].TY), spriteData);
 	}
-		
 }
 
 Tile::Tile(unsigned int x, unsigned int y, std::string tileset, unsigned int tX, unsigned int tY, bool passable) :
 	X(x), Y(y), Tileset(tileset), TX(tX), TY(tY), Passable(passable), Link(false), LinkedLevel(), DX(0), DY(0)
 {
 	SpriteData spriteData = ResourceManager::getSpriteSizeData(tileset);
-	box_size = Math::Vec2((float)spriteData.cel_width, (float)spriteData.cel_width);
-	box_offset = Math::Vec2((float)spriteData.cel_width/2, (float)spriteData.cel_width/2);
+	collider = BoxCollider(
+		Math::Vec2((float)x, (float)y),
+		Math::Vec2((float)spriteData.cel_width, (float)spriteData.cel_width),
+		Math::Vec2((float)spriteData.cel_width / 2, (float)spriteData.cel_width / 2));
 }
 
 Tile::Tile(unsigned int x, unsigned int y, std::string tileset, unsigned int tX, unsigned int tY, bool passable, const char* linkedLevel, unsigned int dX, unsigned int dY) :
 	X(x), Y(y), Tileset(tileset), TX(tX), TY(tY), Passable(passable), Link(true), LinkedLevel(linkedLevel), DX(dX), DY(dY)
 {
 	SpriteData spriteData = ResourceManager::getSpriteSizeData(tileset);
-	box_size = Math::Vec2((float)spriteData.cel_width, (float)spriteData.cel_width);
-	box_offset = Math::Vec2((float)spriteData.cel_width / 2, (float)spriteData.cel_width / 2);
+	collider = BoxCollider(
+		Math::Vec2((float)x, (float)y),
+		Math::Vec2((float)spriteData.cel_width, (float)spriteData.cel_width),
+		Math::Vec2((float)spriteData.cel_width / 2, (float)spriteData.cel_width / 2));
 }
