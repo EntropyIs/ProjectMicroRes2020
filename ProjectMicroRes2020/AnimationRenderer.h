@@ -23,5 +23,7 @@ public:
 	void Draw(SpriteRenderer& renderer, Entropy::Math::Vec2 position, float rotAngle = 0, Entropy::Math::Vec3 color = Entropy::Math::Vec3(1.0f));
 	void Update();
 
+	unsigned int getFrame();
+
 	void setRowNumber(unsigned int rowNumber);
 };

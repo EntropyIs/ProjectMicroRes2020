@@ -13,7 +13,7 @@ AnimationRenderer::AnimationRenderer(std::string spriteSheet, unsigned int numFr
 
 void AnimationRenderer::Draw(SpriteRenderer& renderer, Entropy::Math::Vec2 position, float rotAngle, Entropy::Math::Vec3 color)
 {
-	renderer.Draw(position, ResourceManager::getTexture(sprite_sheet), Math::Vec2(current_frame, row_num), ResourceManager::getSpriteSizeData(sprite_sheet), rotAngle, color);
+	renderer.Draw(position, ResourceManager::getTexture(sprite_sheet), Math::Vec2((float)current_frame, (float)row_num), ResourceManager::getSpriteSizeData(sprite_sheet), rotAngle, color);
 }
 
 void AnimationRenderer::Update()
@@ -26,6 +26,11 @@ void AnimationRenderer::Update()
 			if (current_frame >= num_frames)
 				current_frame = 0;
 	}
+}
+
+unsigned int AnimationRenderer::getFrame()
+{
+	return current_frame;
 }
 
 void AnimationRenderer::setRowNumber(unsigned int rowNumber)

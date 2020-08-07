@@ -6,10 +6,14 @@ class Slime : public AnimatedGameObject
 {
 private:
 	Entropy::Math::Vec3 color;
+
+	float angle;
+	float speed;
+
+	bool set;
+
 public:
-	Slime(std::string id, Entropy::Math::Vec2 position, Entropy::Math::Vec3 color = Entropy::Math::Vec3(1.0f)) :
-		AnimatedGameObject(id, "slime_sheet", 3, 0, 6, position, Entropy::Math::Vec2(8.0f, 8.0f),
-			Entropy::Math::Vec2(4.0f, 4.0f), Entropy::Math::Vec2(1.0f, 1.0f)), color(color) {};
+	Slime(std::string id, Entropy::Math::Vec2 position, Entropy::Math::Vec3 color = Entropy::Math::Vec3(1.0f));
 
 	virtual void Draw(SpriteRenderer& renderer) override;
 
