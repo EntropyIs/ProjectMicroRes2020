@@ -73,10 +73,10 @@ void GameObject::setSpriteIndexY(float y)
 
 bool GameObject::detectCollion(GameObject& other)
 {
-	return collider.Detect(other.collider);
+	return collider.detect(other.collider);
 }
 
 bool GameObject::detectCollion(BoxCollider& other)
 {
-	return other.Detect(collider);
+	return other.detect(collider);
 }

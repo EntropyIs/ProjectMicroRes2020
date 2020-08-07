@@ -84,6 +84,13 @@ std::string Level::getName()
 
 void Level::Draw(SpriteRenderer& renderer)
 {
+#ifdef _ShowCollider
+	for (unsigned int i = 0; i < tiles.size(); i++) // Draw Each Collider Hitbox
+	{
+		tiles[i].collider.draw();
+	}
+#endif // _ShowCollider
+
 	Graphics::Texture texture = ResourceManager::getTexture(tiles[0].Tileset);
 	
 	for (unsigned int i = 0; i < tiles.size(); i++) // Render background tiles
@@ -101,7 +108,9 @@ Tile::Tile(unsigned int x, unsigned int y, std::string tileset, unsigned int tX,
 {
 	SpriteData spriteData = ResourceManager::getSpriteSizeData(tileset);
 	collider = BoxCollider(
-		Math::Vec2((float)x, (float)y),
+		Math::Vec2(
+			(float)(x * spriteData.cel_width) + spriteData.cel_width / 2.0f,
+			(float)(y * spriteData.cel_width) + spriteData.cel_width / 2.0f),
 		Math::Vec2((float)spriteData.cel_width, (float)spriteData.cel_width),
 		Math::Vec2((float)spriteData.cel_width / 2, (float)spriteData.cel_width / 2));
 }
@@ -111,7 +120,9 @@ Tile::Tile(unsigned int x, unsigned int y, std::string tileset, unsigned int tX,
 {
 	SpriteData spriteData = ResourceManager::getSpriteSizeData(tileset);
 	collider = BoxCollider(
-		Math::Vec2((float)x, (float)y),
+		Math::Vec2(
+			(float)(x * spriteData.cel_width) + spriteData.cel_width / 2.0f,
+			(float)(y * spriteData.cel_width) + spriteData.cel_width / 2.0f),
 		Math::Vec2((float)spriteData.cel_width, (float)spriteData.cel_width),
-		Math::Vec2((float)spriteData.cel_width / 2, (float)spriteData.cel_width / 2));
+		Math::Vec2((float)(spriteData.cel_width / 2.0f), (float)(spriteData.cel_width / 2.0f)));
 }
