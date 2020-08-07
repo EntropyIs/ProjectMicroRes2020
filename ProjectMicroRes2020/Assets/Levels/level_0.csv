@@ -62,4 +62,4 @@ tile,4,7,test_tiles,3,2,0
 tile,5,7,test_tiles,4,2,0
 tile,6,7,test_tiles,4,2,0
 tile,7,7,test_tiles,4,2,0
-entity,enemy,slime,10,50
+entity,enemy,slime,48,24
