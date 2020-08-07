@@ -29,7 +29,7 @@ private:
 	std::string name;
 	std::vector<Tile> tiles;
 	std::vector<std::string> colliders;
-	std::vector<GameObject> entities;
+	std::vector<GameObject*> entities;
 
 public:
 	Level(const char* path, std::string name);

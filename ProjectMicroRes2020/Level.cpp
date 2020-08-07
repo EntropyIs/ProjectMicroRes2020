@@ -62,7 +62,7 @@ Level::Level(const char* path, std::string name) : name(name)
 			{
 				if (lineComp[2] == "slime") // Pharse slime enemy
 				{
-					entities.push_back(Slime(name + "_slime[" + lineComp[3] + "," + lineComp[4] + "]", Math::Vec2(std::stof(lineComp[3]), std::stof(lineComp[4]))));
+					entities.push_back(new Slime(name + "_slime[" + lineComp[3] + "," + lineComp[4] + "]", Math::Vec2(std::stof(lineComp[3]), std::stof(lineComp[4]))));
 				}
 			}
 		}
@@ -74,7 +74,7 @@ Level::Level(const char* path, std::string name) : name(name)
 			colliders.push_back(tiles[i].getID());
 
 	for (unsigned int i = 0; i < entities.size(); i++)
-		colliders.push_back(entities[i].getID());
+		colliders.push_back(entities[i]->getID());
 }
 
 std::vector<std::string> Level::getColliders()
@@ -89,8 +89,8 @@ BoxCollider& Level::getCollider(std::string object)
 			return tiles[i].collider;
 
 	for (unsigned int i = 0; i < entities.size(); i++)
-		if (entities[i].getID() == object)
-			return entities[i].getCollider();
+		if (entities[i]->getID() == object)
+			return entities[i]->getCollider();
 
 	std::string errString = "Object not found," + object;
 	throw std::exception(errString.c_str());
@@ -108,8 +108,8 @@ Tile& Level::getTile(std::string object)
 GameObject& Level::getEntity(std::string object)
 {
 	for (unsigned int i = 0; i < entities.size(); i++)
-		if (entities[i].getID() == object)
-			return entities[i];
+		if (entities[i]->getID() == object)
+			return *entities[i];
 	std::string errString = "Object not Entity," + object;
 	throw std::exception(errString.c_str());
 }
@@ -135,7 +135,7 @@ bool Level::isLink(std::string object)
 bool Level::isEntity(std::string object)
 {
 	for (unsigned int i = 0; i < entities.size(); i++)
-		if (entities[i].getID() == object)
+		if (entities[i]->getID() == object)
 			return true;
 	return false;
 }
@@ -156,7 +156,7 @@ void Level::Draw(SpriteRenderer& renderer)
 
 	for (unsigned int i = 0; i < entities.size(); i++)
 	{
-		entities[i].Draw(renderer);
+		entities[i]->Draw(renderer);
 	}
 
 	Graphics::Texture texture = ResourceManager::getTexture(tiles[0].Tileset);
@@ -175,7 +175,7 @@ void Level::Update()
 {
 	for (unsigned int i = 0; i < entities.size(); i++)
 	{
-		entities[i].Update();
+		entities[i]->Update();
 	}
 }
 
