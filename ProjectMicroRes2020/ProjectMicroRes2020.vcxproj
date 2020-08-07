@@ -168,8 +168,11 @@
   <ItemGroup>
     <None Include="Assets\Shaders\fBaseShader.glsl" />
     <None Include="Assets\Shaders\fFBShader.glsl" />
+    <None Include="Assets\Shaders\fHitboxShader.glsl" />
+    <None Include="Assets\Shaders\gHitboxShader.glsl" />
     <None Include="Assets\Shaders\vBaseShader.glsl" />
     <None Include="Assets\Shaders\vFBShader.glsl" />
+    <None Include="Assets\Shaders\vHitboxShader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedGameObject.h" />
