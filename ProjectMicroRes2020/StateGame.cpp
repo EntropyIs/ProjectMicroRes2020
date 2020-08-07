@@ -25,9 +25,6 @@ bool StateGame::init()
     player = GameObject("Player", "test_sprite", Math::Vec2(0.0f, 3.0f), Math::Vec2(32.0f, 32.0f), Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(0.0f, 2.0f));
     playerVelocity = Math::Vec2(0.0f, 0.0f);
 
-    slime = AnimatedGameObject("Slime", "slime_sheet", 3, 0, 6, Math::Vec2(10.0f, 50.0f), Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(1.0f, 1.0f));
-    slimeVelocity = Math::Vec2(0.0f, 0.0f);
-
     // Configure shaders
     ResourceManager::getShader("spriteShader").use();
     ResourceManager::getShader("spriteShader").setMat4("projection", Projection);
@@ -128,7 +125,6 @@ void StateGame::input(Graphics::Window& window)
 void StateGame::render()
 {
     player.Draw(renderer);
-    slime.Draw(renderer);
     level.getLevel().Draw(renderer);
 }
 
@@ -156,26 +152,24 @@ GameState* StateGame::update(GameState* gameState)
     player.Update();
     for (unsigned int i = 0; i < level.getLevel().getColliders().size(); i++)
     {
-        if (player.detectCollion(level.getLevel().getColliders()[i].collider))
+        std::string object = level.getLevel().getColliders()[i];
+        if (player.detectCollion(level.getLevel().getCollider(object)))
         {
-            if (!level.getLevel().getColliders()[i].Passable) // Wall
+            if (!level.getLevel().isWall(object)) // Wall
             {
                 player.undoUpdate(); // Step Back
                 player.setVelocity(Math::Vec2(0, 0)); // TODO: cancel out colision direction components? (i.e, slide along wall)
             }
-            else if (level.getLevel().getColliders()[i].Link) // Warp-point
+            else if (level.getLevel().isLink(object)) // Warp-point
             {
-                SpriteData spriteData = ResourceManager::getSpriteSizeData(level.getLevel().getColliders()[i].Tileset);
+                SpriteData spriteData = ResourceManager::getSpriteSizeData(level.getLevel().getTile(level.getLevel().getColliders()[i]).Tileset);
                 player.setPosition(Math::Vec2(
-                    level.getLevel().getColliders()[i].DX * spriteData.cel_width + (spriteData.cel_width/2.0f), 
-                    level.getLevel().getColliders()[i].DY * spriteData.cel_height + (spriteData.cel_height / 2.0f)));
-                level.setLevel(level.getLevel().getColliders()[i].LinkedLevel);
+                    level.getLevel().getTile(level.getLevel().getColliders()[i]).DX * spriteData.cel_width + (spriteData.cel_width/2.0f),
+                    level.getLevel().getTile(level.getLevel().getColliders()[i]).DY * spriteData.cel_height + (spriteData.cel_height / 2.0f)));
+                level.setLevel(level.getLevel().getTile(level.getLevel().getColliders()[i]).LinkedLevel);
             }
         }
     }
-
-    // Update Slime
-    slime.Update();
 
     if (pause) // Pause Menu Called
     {

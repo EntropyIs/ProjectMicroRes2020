@@ -24,9 +24,6 @@ private:
 	GameObject player;
 	Entropy::Math::Vec2 playerVelocity;
 
-	GameObject slime2;
-	Entropy::Math::Vec2 slime2Velocity;
-
 	AnimatedGameObject slime;
 	Entropy::Math::Vec2 slimeVelocity;
 

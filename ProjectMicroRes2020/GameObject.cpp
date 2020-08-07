@@ -71,6 +71,16 @@ void GameObject::setSpriteIndexY(float y)
 	sprite_index.Y = y;
 }
 
+std::string GameObject::getID()
+{
+	return id;
+}
+
+BoxCollider& GameObject::getCollider()
+{
+	return collider;
+}
+
 bool GameObject::detectCollion(GameObject& other)
 {
 	return collider.detect(other.collider);

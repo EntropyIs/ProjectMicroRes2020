@@ -7,17 +7,20 @@
 
 #include "SpriteRenderer.h"
 #include "Collider.h"
+#include "GameObject.h"
 
 struct Tile
 {
+	std::string id;
 	BoxCollider collider;
 	unsigned int X, Y, TX, TY, DX, DY;
 	std::string Tileset;
 	bool Passable;
 	bool Link;
 	std::string LinkedLevel;
-	Tile(unsigned int x, unsigned int y, std::string tileset, unsigned int tX, unsigned int tY, bool passable);
-	Tile(unsigned int x, unsigned int y, std::string tileset, unsigned int tX, unsigned int tY, bool passable, const char* linkedLevel, unsigned int dX, unsigned int dY);
+	Tile(std::string id, unsigned int x, unsigned int y, std::string tileset, unsigned int tX, unsigned int tY, bool passable);
+	Tile(std::string id, unsigned int x, unsigned int y, std::string tileset, unsigned int tX, unsigned int tY, bool passable, const char* linkedLevel, unsigned int dX, unsigned int dY);
+	std::string getID();
 };
 
 class Level
@@ -25,14 +28,25 @@ class Level
 private:
 	std::string name;
 	std::vector<Tile> tiles;
-	std::vector<Tile> colliders;
+	std::vector<std::string> colliders;
+	std::vector<GameObject> entities;
 
 public:
 	Level(const char* path, std::string name);
 	Level() {};
 
-	std::vector<Tile> getColliders();
+	std::vector<std::string> getColliders();
 	std::string getName();
 
+	BoxCollider& getCollider(std::string object);
+
+	Tile& getTile(std::string object);
+	GameObject& getEntity(std::string object);
+
+	bool isWall(std::string object);
+	bool isLink(std::string object);
+
 	void Draw(SpriteRenderer& renderer);
+
+	void Update();
 };

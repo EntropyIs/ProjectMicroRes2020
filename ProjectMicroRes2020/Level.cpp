@@ -1,10 +1,12 @@
 #include "Level.h"
 
 #include "ResourceManager.h"
+#include "Slime.h"
 
 #include <fstream>
 #include <sstream>
-#include <vector>
+
+#include <exception>
 
 using namespace Entropy;
 
@@ -47,11 +49,11 @@ Level::Level(const char* path, std::string name) : name(name)
 		if (lineComp[0] == "tile") // Pharse Tile
 		{
 			if (lineComp.size() == 10) // Warp Zone
-				tiles.push_back(Tile(std::stoi(lineComp[1]), std::stoi(lineComp[2]), lineComp[3],
+				tiles.push_back(Tile(name + "[" + lineComp[1] + "," + lineComp[2] + "]",std::stoi(lineComp[1]), std::stoi(lineComp[2]), lineComp[3],
 					std::stoi(lineComp[4]), std::stoi(lineComp[5]), std::stoi(lineComp[6]) == 1, 
 					lineComp[7].c_str(), std::stoi(lineComp[8]), std::stoi(lineComp[9])));
 			else if (lineComp.size() == 7) // Standard Tile
-				tiles.push_back(Tile(std::stoi(lineComp[1]), std::stoi(lineComp[2]), lineComp[3],
+				tiles.push_back(Tile(name + "[" + lineComp[1] + "," + lineComp[2] + "]", std::stoi(lineComp[1]), std::stoi(lineComp[2]), lineComp[3],
 					std::stoi(lineComp[4]), std::stoi(lineComp[5]), std::stoi(lineComp[6]) == 1));
 		}
 		else if (lineComp[0] == "entity") // Pharse Enemys
@@ -60,7 +62,7 @@ Level::Level(const char* path, std::string name) : name(name)
 			{
 				if (lineComp[2] == "slime") // Pharse slime enemy
 				{
-
+					entities.push_back(Slime(name + "_slime[" + lineComp[3] + "," + lineComp[4] + "]", Math::Vec2(std::stof(lineComp[3]), std::stof(lineComp[4]))));
 				}
 			}
 		}
@@ -69,12 +71,65 @@ Level::Level(const char* path, std::string name) : name(name)
 	// build colliders list
 	for (unsigned int i = 0; i < tiles.size(); i++)
 		if (!tiles[i].Passable || tiles[i].Link) // TODO: Add other colidable conditions
-			colliders.push_back(tiles[i]);
+			colliders.push_back(tiles[i].getID());
+
+	for (unsigned int i = 0; i < entities.size(); i++)
+		colliders.push_back(entities[i].getID());
 }
 
-std::vector<Tile> Level::getColliders()
+std::vector<std::string> Level::getColliders()
 {
 	return colliders;
+}
+
+BoxCollider& Level::getCollider(std::string object)
+{
+	for (unsigned int i = 0; i < tiles.size(); i++)
+		if (tiles[i].getID() == object)
+			return tiles[i].collider;
+
+	for (unsigned int i = 0; i < entities.size(); i++)
+		if (entities[i].getID() == object)
+			return entities[i].getCollider();
+
+	std::string errString = "Object not found," + object;
+	throw std::exception(errString.c_str());
+}
+
+Tile& Level::getTile(std::string object)
+{
+	for (unsigned int i = 0; i < tiles.size(); i++)
+		if (tiles[i].getID() == object)
+			return tiles[i];
+	std::string errString = "Object not Tile," + object;
+	throw std::exception(errString.c_str());
+}
+
+GameObject& Level::getEntity(std::string object)
+{
+	for (unsigned int i = 0; i < entities.size(); i++)
+		if (entities[i].getID() == object)
+			return entities[i];
+	std::string errString = "Object not Entity," + object;
+	throw std::exception(errString.c_str());
+}
+
+bool Level::isWall(std::string object)
+{
+	for (unsigned int i = 0; i < tiles.size(); i++)
+		if (tiles[i].getID() == object)
+			if(!tiles[i].Passable)
+			return true;
+	return false;
+}
+
+bool Level::isLink(std::string object)
+{
+	for (unsigned int i = 0; i < tiles.size(); i++)
+		if (tiles[i].getID() == object)
+			if (tiles[i].Link)
+				return true;
+	return false;
 }
 
 std::string Level::getName()
@@ -91,6 +146,11 @@ void Level::Draw(SpriteRenderer& renderer)
 	}
 #endif // _ShowCollider
 
+	for (unsigned int i = 0; i < entities.size(); i++)
+	{
+		entities[i].Draw(renderer);
+	}
+
 	Graphics::Texture texture = ResourceManager::getTexture(tiles[0].Tileset);
 	
 	for (unsigned int i = 0; i < tiles.size(); i++) // Render background tiles
@@ -103,8 +163,16 @@ void Level::Draw(SpriteRenderer& renderer)
 	}
 }
 
-Tile::Tile(unsigned int x, unsigned int y, std::string tileset, unsigned int tX, unsigned int tY, bool passable) :
-	X(x), Y(y), Tileset(tileset), TX(tX), TY(tY), Passable(passable), Link(false), LinkedLevel(), DX(0), DY(0)
+void Level::Update()
+{
+	for (unsigned int i = 0; i < entities.size(); i++)
+	{
+		entities[i].Update();
+	}
+}
+
+Tile::Tile(std::string id, unsigned int x, unsigned int y, std::string tileset, unsigned int tX, unsigned int tY, bool passable) :
+	id(id), X(x), Y(y), Tileset(tileset), TX(tX), TY(tY), Passable(passable), Link(false), LinkedLevel(), DX(0), DY(0)
 {
 	SpriteData spriteData = ResourceManager::getSpriteSizeData(tileset);
 	collider = BoxCollider(
@@ -115,8 +183,8 @@ Tile::Tile(unsigned int x, unsigned int y, std::string tileset, unsigned int tX,
 		Math::Vec2((float)spriteData.cel_width / 2, (float)spriteData.cel_width / 2));
 }
 
-Tile::Tile(unsigned int x, unsigned int y, std::string tileset, unsigned int tX, unsigned int tY, bool passable, const char* linkedLevel, unsigned int dX, unsigned int dY) :
-	X(x), Y(y), Tileset(tileset), TX(tX), TY(tY), Passable(passable), Link(true), LinkedLevel(linkedLevel), DX(dX), DY(dY)
+Tile::Tile(std::string id, unsigned int x, unsigned int y, std::string tileset, unsigned int tX, unsigned int tY, bool passable, const char* linkedLevel, unsigned int dX, unsigned int dY) :
+	id(id), X(x), Y(y), Tileset(tileset), TX(tX), TY(tY), Passable(passable), Link(true), LinkedLevel(linkedLevel), DX(dX), DY(dY)
 {
 	SpriteData spriteData = ResourceManager::getSpriteSizeData(tileset);
 	collider = BoxCollider(
@@ -125,4 +193,9 @@ Tile::Tile(unsigned int x, unsigned int y, std::string tileset, unsigned int tX,
 			(float)(y * spriteData.cel_width) + spriteData.cel_width / 2.0f),
 		Math::Vec2((float)spriteData.cel_width, (float)spriteData.cel_width),
 		Math::Vec2((float)(spriteData.cel_width / 2.0f), (float)(spriteData.cel_width / 2.0f)));
+}
+
+std::string Tile::getID()
+{
+	return id;
 }
