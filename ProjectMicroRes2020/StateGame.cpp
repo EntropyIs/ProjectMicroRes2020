@@ -155,7 +155,7 @@ GameState* StateGame::update(GameState* gameState)
         std::string object = level.getLevel().getColliders()[i];
         if (player.detectCollion(level.getLevel().getCollider(object)))
         {
-            if (!level.getLevel().isWall(object)) // Wall
+            if (level.getLevel().isWall(object)) // Wall
             {
                 player.undoUpdate(); // Step Back
                 player.setVelocity(Math::Vec2(0, 0)); // TODO: cancel out colision direction components? (i.e, slide along wall)
@@ -168,8 +168,16 @@ GameState* StateGame::update(GameState* gameState)
                     level.getLevel().getTile(level.getLevel().getColliders()[i]).DY * spriteData.cel_height + (spriteData.cel_height / 2.0f)));
                 level.setLevel(level.getLevel().getTile(level.getLevel().getColliders()[i]).LinkedLevel);
             }
+            else if (level.getLevel().isEntity(object)) // Entity (collectable or enemy)
+            {
+                player.undoUpdate(); // Step Back
+                player.setVelocity(Math::Vec2(0, 0)); //TODO: Handle collision with entity
+            }
         }
     }
+
+    // Update Level Data
+    level.getLevel().Update();
 
     if (pause) // Pause Menu Called
     {
@@ -177,10 +185,6 @@ GameState* StateGame::update(GameState* gameState)
         connectedStates[0]->init();
         return connectedStates[0];
     }
-
-    // Game over if collide with slime
-    //if(player.detectCollions(slime))
-        //return connectedStates[1];
 
     return gameState;
 }

@@ -45,6 +45,7 @@ public:
 
 	bool isWall(std::string object);
 	bool isLink(std::string object);
+	bool isEntity(std::string object);
 
 	void Draw(SpriteRenderer& renderer);
 

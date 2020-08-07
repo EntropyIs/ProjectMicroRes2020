@@ -132,6 +132,14 @@ bool Level::isLink(std::string object)
 	return false;
 }
 
+bool Level::isEntity(std::string object)
+{
+	for (unsigned int i = 0; i < entities.size(); i++)
+		if (entities[i].getID() == object)
+			return true;
+	return false;
+}
+
 std::string Level::getName()
 {
 	return name;
