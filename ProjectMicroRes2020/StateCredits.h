@@ -2,7 +2,6 @@
 
 #include <Entropy/GameState.h>
 #include <Entropy/Graphics/Window.h>
-#include <Entropy/Math/Vec2.h>
 
 #include "SpriteRenderer.h"
 
@@ -13,6 +12,7 @@ private:
 
 	bool key_down;
 	bool execute_selection;
+
 public:
 	StateCredits() : GameState("Credits", 1) {
 		init();
