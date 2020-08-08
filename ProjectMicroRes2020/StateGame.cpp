@@ -130,24 +130,6 @@ void StateGame::render()
 GameState* StateGame::update(GameState* gameState)
 {
     // Update Player
-    if (player.getVelocity().Y > 0.0f && player.getVelocity().X < 0.0f) // Up & Left
-        player.setSpriteIndexY(6);
-    else if (player.getVelocity().Y > 0.0f && player.getVelocity().X > 0.0f) // Up & Right
-        player.setSpriteIndexY(0);
-    else if (player.getVelocity().Y < 0.0f && player.getVelocity().X < 0.0f) // Down & Left
-        player.setSpriteIndexY(4);
-    else if (player.getVelocity().Y < 0.0f && player.getVelocity().X > 0.0f) // Down & Right
-        player.setSpriteIndexY(2);
-    else if (player.getVelocity().Y > 0.0f) // Up
-        player.setSpriteIndexY(7);
-    else if (player.getVelocity().Y < 0.0f) // Down
-        player.setSpriteIndexY(3);
-    else if (player.getVelocity().X > 0.0f) // Right
-        player.setSpriteIndexY(1);
-    else if (player.getVelocity().X < 0.0f) // Left
-        player.setSpriteIndexY(5);
-
-    // Process Player Movement
     player.Update();
 
     // Update Level Data

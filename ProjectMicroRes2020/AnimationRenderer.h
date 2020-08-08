@@ -14,6 +14,8 @@ private:
 	unsigned int row_num;
 	unsigned int current_frame;
 
+	bool playing;
+
 	std::string sprite_sheet;
 
 public:
@@ -24,6 +26,9 @@ public:
 	void Update();
 
 	unsigned int getFrame();
+
+	void playAnimation();
+	void stopAnimation();
 
 	void setRowNumber(unsigned int rowNumber);
 };
