@@ -15,6 +15,8 @@ Slime::Slime(std::string id, Math::Vec2 position, Math::Vec3 color) :
 	angle = (rand() % 62) / 10.0f;
 	speed = 0.0f;
 
+	health = 1;
+
 	set = false;
 }
 
@@ -60,4 +62,8 @@ void Slime::Update()
 			}
 		}
 	}
+
+	// Check if alive
+	if (health == 0)
+		alive = false;
 }

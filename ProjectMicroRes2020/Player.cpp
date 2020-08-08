@@ -5,6 +5,13 @@
 
 using namespace Entropy;
 
+Player::Player(std::string id, const char* spriteName, Entropy::Math::Vec2 spriteIndex, Entropy::Math::Vec2 position,
+    Entropy::Math::Vec2 boxSize, Entropy::Math::Vec2 boxOffset, Entropy::Math::Vec2 textureOffset) :
+    GameObject(id, spriteName, spriteIndex, position, boxSize, boxOffset, textureOffset) 
+{
+    health = 3;
+}
+
 void Player::Update()
 {
     performMovement();
@@ -32,10 +39,14 @@ void Player::Update()
             }
             else if (EntityManager::getLevel().isEntity(object)) // Entity (collectable or enemy)
             {
-                //undoMovement(); // Step Back
-                //setVelocity(Math::Vec2(0, 0)); //TODO: Handle collision with entity
+                undoMovement(); // Step Back
+                health--;
+                //TODO: Invonerable Timer
                 break;
             }
         }
+
+        if (health == 0)
+            alive = false;
     }
 }
