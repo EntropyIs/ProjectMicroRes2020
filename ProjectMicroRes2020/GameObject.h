@@ -40,6 +40,9 @@ public:
 	void setSpriteIndexX(float x);
 	void setSpriteIndexY(float y);
 
+	void performMovement();
+	void undoMovement();
+
 	std::string getID();
 
 	BoxCollider& getCollider();

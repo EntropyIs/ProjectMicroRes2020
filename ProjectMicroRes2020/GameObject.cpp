@@ -59,6 +59,18 @@ void GameObject::setSpriteIndexY(float y)
 	sprite_index.Y = y;
 }
 
+void GameObject::performMovement()
+{
+	position += velocity * ResourceManager::getTimeElapsed();
+	collider.setPosition(position);
+}
+
+void GameObject::undoMovement()
+{
+	position -= velocity * ResourceManager::getTimeElapsed();
+	collider.setPosition(position);
+}
+
 std::string GameObject::getID()
 {
 	return id;

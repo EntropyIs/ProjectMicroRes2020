@@ -7,8 +7,7 @@ using namespace Entropy;
 
 void Player::Update()
 {
-    position += velocity * ResourceManager::getTimeElapsed();
-    collider.setPosition(position);
+    performMovement();
 
     for (unsigned int i = 0; i < EntityManager::getLevel().getColliders().size(); i++)
     {
@@ -17,8 +16,7 @@ void Player::Update()
         {
             if (EntityManager::getLevel().isWall(object)) // Wall
             {
-                position -= velocity * ResourceManager::getTimeElapsed(); // Step Back
-                collider.setPosition(position);
+                undoMovement();// Step Back
                 setVelocity(Math::Vec2(0, 0)); // TODO: cancel out colision direction components? (i.e, slide along wall)
                 break;
             }
@@ -34,9 +32,8 @@ void Player::Update()
             }
             else if (EntityManager::getLevel().isEntity(object)) // Entity (collectable or enemy)
             {
-                position -= velocity * ResourceManager::getTimeElapsed(); // Step Back
-                collider.setPosition(position);
-                setVelocity(Math::Vec2(0, 0)); //TODO: Handle collision with entity
+                //undoMovement(); // Step Back
+                //setVelocity(Math::Vec2(0, 0)); //TODO: Handle collision with entity
                 break;
             }
         }
