@@ -2,7 +2,7 @@
 
 void AnimatedGameObject::Draw(SpriteRenderer& renderer)
 {
-	animationRenderer.Draw(renderer, position);
+	animationRenderer.Draw(renderer, position + texture_offset);
 }
 
 void AnimatedGameObject::Update()
