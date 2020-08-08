@@ -34,7 +34,7 @@ void StateMenu::input(Graphics::Window& window)
         {
             key_down = true;
             selection++;
-            if (selection > 3)
+            if (selection > 2)
                 selection = 0;
         }
         else if ((window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_W) && !key_down) ||
@@ -44,7 +44,7 @@ void StateMenu::input(Graphics::Window& window)
             key_down = true;
             selection--;
             if (selection < 0)
-                selection = 3;
+                selection = 2;
         }
         else if ((window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down) || (buttonData[2] == GLFW_PRESS && !key_down))
             execute_selection = true;
@@ -61,7 +61,7 @@ void StateMenu::input(Graphics::Window& window)
         {
             key_down = true;
             selection++;
-            if (selection > 3)
+            if (selection > 2)
                 selection = 0;
         }
         else if ((window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_W) && !key_down))
@@ -69,7 +69,7 @@ void StateMenu::input(Graphics::Window& window)
             key_down = true;
             selection--;
             if (selection < 0)
-                selection = 3;
+                selection = 2;
         }
         else if (window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down)
             execute_selection = true;
@@ -93,29 +93,18 @@ void StateMenu::render()
         Math::Vec2(17.5, 33.5), //a
         Math::Vec2(22.5, 33.5), //y
 
-        Math::Vec2(7.5, 25.5), //H
-        Math::Vec2(12.5, 25.5), //i
-        Math::Vec2(17.5, 25.5), //g
-        Math::Vec2(22.5, 25.5), //h
-        Math::Vec2(32.5, 25.5), //S
-        Math::Vec2(37.5, 25.5), //c
-        Math::Vec2(42.5, 25.5), //o
-        Math::Vec2(47.5, 25.5), //r
-        Math::Vec2(52.5, 25.5), //e
-        Math::Vec2(57.5, 25.5), //s
+        Math::Vec2(7.5, 25.5), //C
+        Math::Vec2(12.5, 25.5), //r
+        Math::Vec2(17.5, 25.5), //e
+        Math::Vec2(22.5, 25.5), //d
+        Math::Vec2(27.5, 25.5), //i
+        Math::Vec2(32.5, 25.5), //t
+        Math::Vec2(37.5, 25.5), //s
 
-        Math::Vec2(7.5, 17.5), //C
-        Math::Vec2(12.5, 17.5), //r
-        Math::Vec2(17.5, 17.5), //e
-        Math::Vec2(22.5, 17.5), //d
-        Math::Vec2(27.5, 17.5), //i
-        Math::Vec2(32.5, 17.5), //t
-        Math::Vec2(37.5, 17.5), //s
-
-        Math::Vec2(7.5, 9.5), //Q
-        Math::Vec2(12.5, 9.5), //u
-        Math::Vec2(17.5, 9.5), //i
-        Math::Vec2(22.5, 9.5), //t
+        Math::Vec2(7.5, 17.5), //Q
+        Math::Vec2(12.5, 17.5), //u
+        Math::Vec2(17.5, 17.5), //i
+        Math::Vec2(22.5, 17.5), //t
     };
 
     Entropy::Math::Vec2 textChar[] =
@@ -124,17 +113,6 @@ void StateMenu::render()
         Math::Vec2(12, 4), //l
         Math::Vec2(1, 4), //a
         Math::Vec2(9, 5), //y
-
-        Math::Vec2(8, 2), //H
-        Math::Vec2(9, 4), //i
-        Math::Vec2(7, 4), //g
-        Math::Vec2(8, 4), //h
-        Math::Vec2(3, 3), //S
-        Math::Vec2(3, 4), //c
-        Math::Vec2(15, 4), //o
-        Math::Vec2(2, 5), //r
-        Math::Vec2(5, 4), //e
-        Math::Vec2(3, 5), //s
 
         Math::Vec2(3, 2), //C
         Math::Vec2(2, 5), //r
@@ -154,32 +132,23 @@ void StateMenu::render()
     {
         for (unsigned int i = 0; i < 4; i++) 
             renderer.Draw(textPos[i], ResourceManager::getTexture("charset_black"), textChar[i], ResourceManager::getSpriteSizeData("charset_black"));
-        for (unsigned int i = 4; i < 25; i++) 
+        for (unsigned int i = 4; i < 15; i++) 
             renderer.Draw(textPos[i], ResourceManager::getTexture("charset_grey"), textChar[i], ResourceManager::getSpriteSizeData("charset_grey"));
     }
     if (selection == 1)
     {
         for (unsigned int i = 0; i < 4; i++)
             renderer.Draw(textPos[i], ResourceManager::getTexture("charset_grey"), textChar[i], ResourceManager::getSpriteSizeData("charset_grey"));
-        for (unsigned int i = 4; i < 14; i++)
+        for (unsigned int i = 4; i < 11; i++)
             renderer.Draw(textPos[i], ResourceManager::getTexture("charset_black"), textChar[i], ResourceManager::getSpriteSizeData("charset_black"));
-        for (unsigned int i = 14; i < 25; i++)
+        for (unsigned int i = 11; i < 15; i++)
             renderer.Draw(textPos[i], ResourceManager::getTexture("charset_grey"), textChar[i], ResourceManager::getSpriteSizeData("charset_grey"));
     }
     if (selection == 2)
     {
-        for (unsigned int i = 0; i < 14; i++)
+        for (unsigned int i = 0; i < 11; i++)
             renderer.Draw(textPos[i], ResourceManager::getTexture("charset_grey"), textChar[i], ResourceManager::getSpriteSizeData("charset_grey"));
-        for (unsigned int i = 14; i < 21; i++)
-            renderer.Draw(textPos[i], ResourceManager::getTexture("charset_black"), textChar[i], ResourceManager::getSpriteSizeData("charset_black"));
-        for (unsigned int i = 21; i < 25; i++)
-            renderer.Draw(textPos[i], ResourceManager::getTexture("charset_grey"), textChar[i], ResourceManager::getSpriteSizeData("charset_grey"));
-    }
-    if (selection == 3)
-    {
-        for (unsigned int i = 0; i < 21; i++)
-            renderer.Draw(textPos[i], ResourceManager::getTexture("charset_grey"), textChar[i], ResourceManager::getSpriteSizeData("charset_grey"));
-        for (unsigned int i = 21; i < 25; i++)
+        for (unsigned int i = 11; i < 15; i++)
             renderer.Draw(textPos[i], ResourceManager::getTexture("charset_black"), textChar[i], ResourceManager::getSpriteSizeData("charset_black"));
     }
 
@@ -200,9 +169,6 @@ Entropy::GameState* StateMenu::update(GameState* gameState)
             connectedStates[1]->init();
             return connectedStates[1];
         case 2:
-            connectedStates[2]->init();
-            return connectedStates[2];
-        case 3:
             gameFlag = false;
         default:
             break;

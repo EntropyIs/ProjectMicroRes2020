@@ -17,7 +17,7 @@ private:
 	bool execute_selection;
 
 public:
-	StateMenu() : GameState("Menu", 3) {
+	StateMenu() : GameState("Menu", 2) {
 		init();
 	};
 

@@ -51,4 +51,6 @@ public:
 
 	bool detectCollion(GameObject& other);
 	bool detectCollion(BoxCollider& other);
+
+	bool isAlive();
 };

@@ -153,17 +153,9 @@ std::string Level::getName()
 
 void Level::Draw(SpriteRenderer& renderer)
 {
-#ifdef _ShowCollider
-	for (unsigned int i = 0; i < tiles.size(); i++) // Draw Each Collider Hitbox
-	{
-		tiles[i].collider.draw();
-	}
-#endif // _ShowCollider
-
 	for (unsigned int i = 0; i < entities.size(); i++)
-	{
-		entities[i]->Draw(renderer);
-	}
+		if(entities[i]->isAlive())
+			entities[i]->Draw(renderer);
 
 	Graphics::Texture texture = ResourceManager::getTexture(tiles[0].Tileset);
 	
@@ -180,9 +172,8 @@ void Level::Draw(SpriteRenderer& renderer)
 void Level::Update()
 {
 	for (unsigned int i = 0; i < entities.size(); i++)
-	{
-		entities[i]->Update();
-	}
+		if (entities[i]->isAlive())
+			entities[i]->Update();
 }
 
 Tile::Tile(std::string id, unsigned int x, unsigned int y, std::string tileset, unsigned int tX, unsigned int tY, bool passable) :

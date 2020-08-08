@@ -159,6 +159,11 @@ GameState* StateGame::update(GameState* gameState)
         connectedStates[0]->init();
         return connectedStates[0];
     }
+    if (!player.isAlive()) // Player has died, game over
+    {
+        connectedStates[1]->init();
+        return connectedStates[1];
+    }
 
     return gameState;
 }

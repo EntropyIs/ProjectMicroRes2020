@@ -9,9 +9,7 @@
 #include "StateCredits.h"
 #include "StateGame.h"
 #include "StateGameOver.h"
-#include "StateHighScores.h"
 #include "StateMenu.h"
-#include "StateNewHighScore.h"
 #include "StatePause.h"
 
 #include "ResourceManager.h"
@@ -44,9 +42,7 @@ int WinMain()
 		StateCredits credits = StateCredits();
 		StateGame game = StateGame();
 		StateGameOver gameOver = StateGameOver();
-		StateHighScores highScores = StateHighScores();
 		StateMenu menu = StateMenu();
-		StateNewHighScore newHighScore = StateNewHighScore();
 		StatePause pause = StatePause();
 
 		// Load Levels
@@ -56,13 +52,9 @@ int WinMain()
 		credits.addConnection(0, &menu);
 		game.addConnection(0, &pause);
 		game.addConnection(1, &gameOver);
-		gameOver.addConnection(0, &newHighScore);
-		gameOver.addConnection(1, &menu);
-		highScores.addConnection(0, &menu);
+		gameOver.addConnection(0, &menu);
 		menu.addConnection(0, &game);
-		menu.addConnection(1, &highScores);
-		menu.addConnection(2, &credits);
-		newHighScore.addConnection(0, &highScores);
+		menu.addConnection(1, &credits);
 		pause.addConnection(0, &game);
 		pause.addConnection(1, &menu);
 
@@ -70,9 +62,7 @@ int WinMain()
 		credits.init();
 		game.init();
 		gameOver.init();
-		highScores.init();
 		menu.init();
-		newHighScore.init();
 		pause.init();
 
 		GameState * gameState = &menu;

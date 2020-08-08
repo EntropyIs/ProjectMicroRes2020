@@ -54,13 +54,7 @@
     <ClCompile Include="StateGameOver.cpp">
       <Filter>Source Files\GameStates</Filter>
     </ClCompile>
-    <ClCompile Include="StateHighScores.cpp">
-      <Filter>Source Files\GameStates</Filter>
-    </ClCompile>
     <ClCompile Include="StateMenu.cpp">
-      <Filter>Source Files\GameStates</Filter>
-    </ClCompile>
-    <ClCompile Include="StateNewHighScore.cpp">
       <Filter>Source Files\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="StatePause.cpp">
@@ -130,9 +124,6 @@
     <ClInclude Include="StateCredits.h">
       <Filter>Header Files\GameStates</Filter>
     </ClInclude>
-    <ClInclude Include="StateHighScores.h">
-      <Filter>Header Files\GameStates</Filter>
-    </ClInclude>
     <ClInclude Include="StateGame.h">
       <Filter>Header Files\GameStates</Filter>
     </ClInclude>
@@ -140,9 +131,6 @@
       <Filter>Header Files\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="StateGameOver.h">
-      <Filter>Header Files\GameStates</Filter>
-    </ClInclude>
-    <ClInclude Include="StateNewHighScore.h">
       <Filter>Header Files\GameStates</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">

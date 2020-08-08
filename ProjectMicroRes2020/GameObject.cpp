@@ -90,3 +90,8 @@ bool GameObject::detectCollion(BoxCollider& other)
 {
 	return other.detect(collider);
 }
+
+bool GameObject::isAlive()
+{
+	return alive;
+}
