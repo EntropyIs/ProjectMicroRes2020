@@ -15,6 +15,7 @@
 #include "StatePause.h"
 
 #include "ResourceManager.h"
+#include "EntityManager.h"
 
 using namespace Entropy;
 
@@ -47,6 +48,9 @@ int WinMain()
 		StateMenu menu = StateMenu();
 		StateNewHighScore newHighScore = StateNewHighScore();
 		StatePause pause = StatePause();
+
+		// Load Levels
+		EntityManager::setLevelManager("Assets/Levels/levels.csv");
 
 		// Connect Game States
 		credits.addConnection(0, &menu);

@@ -150,9 +150,11 @@
     <ClCompile Include="AnimatedGameObject.cpp" />
     <ClCompile Include="AnimationRenderer.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -178,9 +180,11 @@
     <ClInclude Include="AnimatedGameObject.h" />
     <ClInclude Include="AnimationRenderer.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="EntityManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="SpriteRenderer.h" />

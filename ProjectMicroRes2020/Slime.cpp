@@ -38,7 +38,8 @@ void Slime::Update()
 	velocity.Y = slime_velocity.Y;
 
 	// Move Slime
-	GameObject::Update();
+	position += velocity * ResourceManager::getTimeElapsed();
+	collider.setPosition(position);
 
 	// Handle Off Screen
 

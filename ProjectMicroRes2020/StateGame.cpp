@@ -9,10 +9,12 @@
 #include "ResourceManager.h"
 #include "AnimationRenderer.h"
 
+#include "EntityManager.h"
+
 using namespace Entropy;
 using Entropy::Graphics::GLKeys;
 
-StateGame::StateGame() : GameState("Game", 2), level()
+StateGame::StateGame() : GameState("Game", 2)
 {
     Projection = Math::Ortho(0.0f, 64.0f, 64.0f, 0.0f, -1.0f, 1.0f);
     pause = false;
@@ -22,16 +24,13 @@ StateGame::StateGame() : GameState("Game", 2), level()
 bool StateGame::init()
 {
     // Configure Entities
-    player = GameObject("Player", "test_sprite", Math::Vec2(0.0f, 3.0f), Math::Vec2(32.0f, 32.0f), Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(0.0f, 2.0f));
+    player = Player("Player", "test_sprite", Math::Vec2(0.0f, 3.0f), Math::Vec2(32.0f, 32.0f), Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(0.0f, 2.0f));
     playerVelocity = Math::Vec2(0.0f, 0.0f);
 
     // Configure shaders
     ResourceManager::getShader("spriteShader").use();
     ResourceManager::getShader("spriteShader").setMat4("projection", Projection);
     ResourceManager::getShader("spriteShader").setInt("spriteSheet", 0);
-
-    // Load Levels
-    level = LevelManager("Assets/Levels/levels.csv");
 
     pause = false;
 
@@ -125,7 +124,7 @@ void StateGame::input(Graphics::Window& window)
 void StateGame::render()
 {
     player.Draw(renderer);
-    level.getLevel().Draw(renderer);
+    EntityManager::getLevel().Draw(renderer);
 }
 
 GameState* StateGame::update(GameState* gameState)
@@ -150,38 +149,9 @@ GameState* StateGame::update(GameState* gameState)
 
     // Process Player Movement
     player.Update();
-    for (unsigned int i = 0; i < level.getLevel().getColliders().size(); i++)
-    {
-        std::string object = level.getLevel().getColliders()[i];
-        if (player.detectCollion(level.getLevel().getCollider(object)))
-        {
-            if (level.getLevel().isWall(object)) // Wall
-            {
-                player.undoUpdate(); // Step Back
-                player.setVelocity(Math::Vec2(0, 0)); // TODO: cancel out colision direction components? (i.e, slide along wall)
-                break;
-            }
-            else if (level.getLevel().isLink(object)) // Warp-point
-            {
-                Tile tile = level.getLevel().getTile(object);
-                SpriteData spriteData = ResourceManager::getSpriteSizeData(tile.Tileset);
-                player.setPosition(Math::Vec2(
-                    (tile.DX * spriteData.cel_width) + (spriteData.cel_width/2.0f),
-                    (tile.DY * spriteData.cel_height) + (spriteData.cel_height / 2.0f) ));
-                level.setLevel(tile.LinkedLevel);
-                break; // Found collision so stop checking others
-            }
-            else if (level.getLevel().isEntity(object)) // Entity (collectable or enemy)
-            {
-                player.undoUpdate(); // Step Back
-                player.setVelocity(Math::Vec2(0, 0)); //TODO: Handle collision with entity
-                break;
-            }
-        }
-    }
 
     // Update Level Data
-    level.getLevel().Update();
+    EntityManager::getLevel().Update();
 
     if (pause) // Pause Menu Called
     {

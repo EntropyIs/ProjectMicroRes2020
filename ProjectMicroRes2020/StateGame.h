@@ -10,7 +10,7 @@
 
 #include "SpriteRenderer.h"
 #include "LevelManager.h"
-#include "GameObject.h"
+#include "Player.h"
 
 #include "AnimatedGameObject.h"
 
@@ -21,11 +21,8 @@ private:
 
 	Entropy::Math::Vec2 spriteIndex;
 	Entropy::Math::Vec2 spritePos;
-	GameObject player;
+	Player player;
 	Entropy::Math::Vec2 playerVelocity;
-
-	AnimatedGameObject slime;
-	Entropy::Math::Vec2 slimeVelocity;
 
 	float accel = 60.0f;
 	float maxVel = 30.0f;
@@ -34,9 +31,6 @@ private:
 	SpriteRenderer renderer;
 
 	bool pause;
-
-	LevelManager level;
-
 public:
 	StateGame();
 

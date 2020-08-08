@@ -9,18 +9,6 @@ void GameObject::Draw(SpriteRenderer& renderer)
 	renderer.Draw(position + texture_offset, ResourceManager::getTexture(texture_name), sprite_index, ResourceManager::getSpriteSizeData(texture_name));
 }
 
-void GameObject::Update()
-{
-	position += velocity * ResourceManager::getTimeElapsed();
-	collider.setPosition(position);
-}
-
-void GameObject::undoUpdate()
-{
-	position -= velocity * ResourceManager::getTimeElapsed();
-	collider.setPosition(position);
-}
-
 void GameObject::setVelocity(Entropy::Math::Vec2 velocity)
 {
 	this->velocity = velocity;

@@ -24,9 +24,7 @@ public:
 	GameObject() {};
 
 	virtual void Draw(SpriteRenderer& renderer);
-
-	virtual void Update();
-	virtual void undoUpdate();
+	virtual void Update() = 0;
 
 	void setVelocity(Entropy::Math::Vec2 velocity);
 	void setVelocityX(float velocity);
