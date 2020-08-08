@@ -24,7 +24,7 @@ StateGame::StateGame() : GameState("Game", 2)
 bool StateGame::init()
 {
     // Configure Entities
-    player = Player("Player", "test_sprite", Math::Vec2(0.0f, 3.0f), Math::Vec2(32.0f, 32.0f), Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(0.0f, 2.0f));
+    player = Player("Player", "test_sprite", 3, Math::Vec2(32.0f, 32.0f), Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(0.0f, 2.0f));
     playerVelocity = Math::Vec2(0.0f, 0.0f);
 
     // Configure shaders

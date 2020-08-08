@@ -5,11 +5,13 @@
 
 using namespace Entropy;
 
-Player::Player(std::string id, const char* spriteName, Entropy::Math::Vec2 spriteIndex, Entropy::Math::Vec2 position,
+Player::Player(std::string id, const char* spriteName, unsigned int row, Entropy::Math::Vec2 position,
     Entropy::Math::Vec2 boxSize, Entropy::Math::Vec2 boxOffset, Entropy::Math::Vec2 textureOffset) :
-    GameObject(id, spriteName, spriteIndex, position, boxSize, boxOffset, textureOffset) 
+    AnimatedGameObject(id, spriteName, 1, row, 6, position, boxSize, boxOffset, textureOffset)
 {
     health = 3;
+    timer = 0.0f;
+    vulnerable = true;
 }
 
 void Player::Update()
@@ -37,13 +39,22 @@ void Player::Update()
                 EntityManager::setLevel(tile.LinkedLevel);
                 break; // Found collision so stop checking others
             }
-            else if (EntityManager::getLevel().isEntity(object)) // Entity (collectable or enemy)
+            else if (EntityManager::getLevel().isEntity(object) && vulnerable) // Entity (collectable or enemy)
             {
                 undoMovement(); // Step Back
                 health--;
-                //TODO: Invonerable Timer
+                vulnerable = false;
+                timer = invulnerable_time;
                 break;
             }
+        }
+
+        if (!vulnerable)
+        {
+            float timeElapsed = ResourceManager::getTimeElapsed();
+            timer -= ResourceManager::getTimeElapsed();
+            if (timer <= 0.0f)
+                vulnerable = true;
         }
 
         if (health == 0)
