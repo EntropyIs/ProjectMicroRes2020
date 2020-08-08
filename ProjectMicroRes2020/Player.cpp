@@ -67,7 +67,7 @@ void Player::Update()
                 undoMovement(); // Step Back
                 health--;
                 vulnerable = false;
-                timer = invulnerable_time;
+                timer = 0;
                 break;
             }
         }
@@ -75,8 +75,8 @@ void Player::Update()
         if (!vulnerable)
         {
             float timeElapsed = ResourceManager::getTimeElapsed();
-            timer -= ResourceManager::getTimeElapsed();
-            if (timer <= 0.0f)
+            timer += ResourceManager::getTimeElapsed();
+            if (timer > invulnerable_time)
                 vulnerable = true;
         }
 
