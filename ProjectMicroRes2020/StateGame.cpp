@@ -159,19 +159,23 @@ GameState* StateGame::update(GameState* gameState)
             {
                 player.undoUpdate(); // Step Back
                 player.setVelocity(Math::Vec2(0, 0)); // TODO: cancel out colision direction components? (i.e, slide along wall)
+                break;
             }
             else if (level.getLevel().isLink(object)) // Warp-point
             {
-                SpriteData spriteData = ResourceManager::getSpriteSizeData(level.getLevel().getTile(level.getLevel().getColliders()[i]).Tileset);
+                Tile tile = level.getLevel().getTile(object);
+                SpriteData spriteData = ResourceManager::getSpriteSizeData(tile.Tileset);
                 player.setPosition(Math::Vec2(
-                    level.getLevel().getTile(level.getLevel().getColliders()[i]).DX * spriteData.cel_width + (spriteData.cel_width/2.0f),
-                    level.getLevel().getTile(level.getLevel().getColliders()[i]).DY * spriteData.cel_height + (spriteData.cel_height / 2.0f)));
-                level.setLevel(level.getLevel().getTile(level.getLevel().getColliders()[i]).LinkedLevel);
+                    (tile.DX * spriteData.cel_width) + (spriteData.cel_width/2.0f),
+                    (tile.DY * spriteData.cel_height) + (spriteData.cel_height / 2.0f) ));
+                level.setLevel(tile.LinkedLevel);
+                break; // Found collision so stop checking others
             }
             else if (level.getLevel().isEntity(object)) // Entity (collectable or enemy)
             {
                 player.undoUpdate(); // Step Back
                 player.setVelocity(Math::Vec2(0, 0)); //TODO: Handle collision with entity
+                break;
             }
         }
     }

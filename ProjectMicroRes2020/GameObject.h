@@ -10,7 +10,7 @@
 class GameObject
 {
 protected:
-	BoxCollider collider;
+	BoxCollider collider; 
 	std::string id;
 	Entropy::Math::Vec2 position, velocity, texture_offset, sprite_index;
 	std::string texture_name;
