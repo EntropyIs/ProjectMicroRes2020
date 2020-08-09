@@ -1,10 +1,10 @@
 tile,0,0,test_tiles,0,1,0
-tile,1,0,test_tiles,0,1,0
-tile,2,0,test_tiles,0,1,0
-tile,3,0,test_tiles,0,1,0
-tile,4,0,test_tiles,0,1,0
-tile,5,0,test_tiles,0,1,0
-tile,6,0,test_tiles,0,1,0
+tile,1,0,test_tiles,0,0,1,overworld_7_5,1,6
+tile,2,0,test_tiles,0,0,1,overworld_7_5,2,6
+tile,3,0,test_tiles,0,0,1,overworld_7_5,3,6
+tile,4,0,test_tiles,0,0,1,overworld_7_5,4,6
+tile,5,0,test_tiles,0,0,1,overworld_7_5,5,6
+tile,6,0,test_tiles,0,0,1,overworld_7_5,6,6
 tile,7,0,test_tiles,0,1,0
 
 tile,0,1,test_tiles,0,1,0
@@ -22,7 +22,7 @@ tile,2,2,test_tiles,0,0,1
 tile,3,2,test_tiles,0,0,1
 tile,4,2,test_tiles,0,0,1
 tile,5,2,test_tiles,0,0,1
-tile,6,2,test_tiles,0,0,1
+tile,6,2,test_tiles,0,1,0
 tile,7,2,test_tiles,0,1,0
 
 tile,0,3,test_tiles,0,1,0
@@ -31,7 +31,7 @@ tile,2,3,test_tiles,0,0,1
 tile,3,3,test_tiles,0,0,1
 tile,4,3,test_tiles,0,0,1
 tile,5,3,test_tiles,0,0,1
-tile,6,3,test_tiles,0,0,1
+tile,6,3,test_tiles,0,1,0
 tile,7,3,test_tiles,0,1,0
 
 tile,0,4,test_tiles,0,1,0
@@ -41,7 +41,7 @@ tile,3,4,test_tiles,0,0,1
 tile,4,4,test_tiles,0,0,1
 tile,5,4,test_tiles,0,0,1
 tile,6,4,test_tiles,0,0,1
-tile,7,4,test_tiles,0,1,0
+tile,7,4,test_tiles,0,0,1,overworld_6_6,1,4
 
 tile,0,5,test_tiles,0,1,0
 tile,1,5,test_tiles,0,0,1
@@ -50,16 +50,16 @@ tile,3,5,test_tiles,0,0,1
 tile,4,5,test_tiles,0,0,1
 tile,5,5,test_tiles,0,0,1
 tile,6,5,test_tiles,0,0,1
-tile,7,5,test_tiles,0,1,0
+tile,7,5,test_tiles,0,0,1,overworld_6_6,1,5
 
 tile,0,6,test_tiles,0,1,0
-tile,1,6,test_tiles,0,0,1
+tile,1,6,test_tiles,0,1,0
 tile,2,6,test_tiles,0,0,1
 tile,3,6,test_tiles,0,0,1
 tile,4,6,test_tiles,0,0,1
 tile,5,6,test_tiles,0,0,1
 tile,6,6,test_tiles,0,0,1
-tile,7,6,test_tiles,0,1,0
+tile,7,6,test_tiles,0,0,1,overworld_6_6,1,6
 
 tile,0,7,test_tiles,0,1,0
 tile,1,7,test_tiles,0,1,0
