@@ -1,8 +1,8 @@
 tile,0,0,test_tiles,0,1,0
 tile,1,0,test_tiles,0,1,0
-tile,2,0,test_tiles,0,1,0
-tile,3,0,test_tiles,0,1,0
-tile,4,0,test_tiles,0,1,0
+tile,2,0,test_tiles,0,0,1,overworld_2_6,2,6
+tile,3,0,test_tiles,0,0,1,overworld_2_6,3,6
+tile,4,0,test_tiles,0,0,1,overworld_2_6,4,6
 tile,5,0,test_tiles,0,1,0
 tile,6,0,test_tiles,0,1,0
 tile,7,0,test_tiles,0,1,0
