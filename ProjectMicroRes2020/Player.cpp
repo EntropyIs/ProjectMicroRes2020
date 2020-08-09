@@ -5,9 +5,9 @@
 
 using namespace Entropy;
 
-Player::Player(std::string id, const char* spriteName, unsigned int row, Entropy::Math::Vec2 position,
+Player::Player(const char* spriteName, unsigned int row, Entropy::Math::Vec2 position,
     Entropy::Math::Vec2 boxSize, Entropy::Math::Vec2 boxOffset, Entropy::Math::Vec2 textureOffset) :
-    AnimatedGameObject(id, spriteName, 4, row, 12, position, boxSize, boxOffset, textureOffset)
+    AnimatedGameObject("Player", spriteName, 4, row, 12, position, boxSize, boxOffset, textureOffset)
 {
     health = 3;
     timer = 0.0f;

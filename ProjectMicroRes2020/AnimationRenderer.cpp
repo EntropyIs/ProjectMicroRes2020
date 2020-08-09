@@ -10,6 +10,8 @@ AnimationRenderer::AnimationRenderer(std::string spriteSheet, unsigned int numFr
 	current_time = 0.0f;
 	current_frame = 0;
 	playing = true;
+	playOnce = false;
+	complete = false;
 }
 
 void AnimationRenderer::Draw(SpriteRenderer& renderer, Entropy::Math::Vec2 position, float rotAngle, Entropy::Math::Vec3 color)
@@ -26,8 +28,13 @@ void AnimationRenderer::Update()
 		{
 			current_time -= frame_advance_time;
 			current_frame++;
-			if (current_frame >= num_frames)
+			if (current_frame >= num_frames && !playOnce)
 				current_frame = 0;
+			else if (current_frame >= num_frames && playOnce)
+			{
+				playing = false;
+				complete = true;
+			}
 		}
 	}
 }
@@ -42,11 +49,23 @@ void AnimationRenderer::playAnimation()
 	playing = true;
 }
 
+void AnimationRenderer::playAnimationOnce()
+{
+	playing = true;
+	playOnce = true;
+	complete = false;
+}
+
 void AnimationRenderer::stopAnimation()
 {
 	playing = false;
 	current_frame = 0; // Assume frame 0 is idle
 	current_time = 0;
+}
+
+bool AnimationRenderer::isComplete()
+{
+	return complete;
 }
 
 void AnimationRenderer::setRowNumber(unsigned int rowNumber)

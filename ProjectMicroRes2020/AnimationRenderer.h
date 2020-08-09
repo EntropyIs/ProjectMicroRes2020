@@ -15,6 +15,8 @@ private:
 	unsigned int current_frame;
 
 	bool playing;
+	bool playOnce;
+	bool complete;
 
 	std::string sprite_sheet;
 
@@ -28,7 +30,10 @@ public:
 	unsigned int getFrame();
 
 	void playAnimation();
+	void playAnimationOnce();
 	void stopAnimation();
+
+	bool isComplete();
 
 	void setRowNumber(unsigned int rowNumber);
 };

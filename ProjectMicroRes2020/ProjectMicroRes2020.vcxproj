@@ -155,6 +155,7 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerWeapon.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerWeapon.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="SpriteRenderer.h" />
