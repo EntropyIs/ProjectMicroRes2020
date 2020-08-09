@@ -62,10 +62,10 @@ tile,6,6,test_tiles,0,0,1
 tile,7,6,test_tiles,0,1,0
 
 tile,0,7,test_tiles,0,1,0
-tile,1,7,test_tiles,0,1,0
-tile,2,7,test_tiles,0,1,0
-tile,3,7,test_tiles,0,1,0
-tile,4,7,test_tiles,0,1,0
-tile,5,7,test_tiles,0,1,0
-tile,6,7,test_tiles,0,1,0
+tile,1,7,test_tiles,0,0,1,overworld_6_0,1,1
+tile,2,7,test_tiles,0,0,1,overworld_6_0,2,1
+tile,3,7,test_tiles,0,0,1,overworld_6_0,3,1
+tile,4,7,test_tiles,0,0,1,overworld_6_0,4,1
+tile,5,7,test_tiles,0,0,1,overworld_6_0,5,1
+tile,6,7,test_tiles,0,0,1,overworld_6_0,6,1
 tile,7,7,test_tiles,0,1,0

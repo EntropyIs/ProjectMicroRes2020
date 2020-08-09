@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <iostream>
 
 LevelManager::LevelManager(const char* levelList)
 {
@@ -48,6 +49,10 @@ LevelManager::LevelManager(const char* levelList)
 
 void LevelManager::setLevel(std::string levelName)
 {
+#ifdef _DEBUG
+	std::cout << "Moving to Level: " << levelName << std::endl;
+#endif // _DEBUG
+
 	for (unsigned int i = 0; i < levels.size(); i++)
 		if (levels[i].getName() == levelName)
 			currentLevel = i;
