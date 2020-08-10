@@ -24,8 +24,7 @@ StateGame::StateGame() : GameState("Game", 2)
 bool StateGame::init()
 {
     // Configure Entities
-    player = Player("test_sprite", 3, Math::Vec2(32.0f, 32.0f), Math::Vec2(6.0f, 6.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(-1.0f, 2.0f));
-    playerVelocity = Math::Vec2(0.0f, 0.0f);
+    EntityManager::setPlayer(Player("test_sprite", 3, Math::Vec2(32.0f, 32.0f), Math::Vec2(6.0f, 6.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(-1.0f, 2.0f)));
 
     // Configure shaders
     ResourceManager::getShader("spriteShader").use();
@@ -54,58 +53,58 @@ void StateGame::input(Graphics::Window& window)
             (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_LEFT)) ||
             axisData[0] < (0.0f - threshold) && axisData[1] < (0.0f - threshold)
             )
-            player.setVelocity(Math::Vec2(-maxAngle, maxAngle));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, maxAngle));
         else if ((window.getKeyPressed(GLKeys::KEY_A) && window.getKeyPressed(GLKeys::KEY_S)) ||
             (window.getKeyPressed(GLKeys::KEY_LEFT) && window.getKeyPressed(GLKeys::KEY_DOWN)) ||
             axisData[0] < (0.0f - threshold) && axisData[1] > (0.0f + threshold)
             )
-            player.setVelocity(Math::Vec2(-maxAngle, -maxAngle));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, -maxAngle));
         else if ((window.getKeyPressed(GLKeys::KEY_S) && window.getKeyPressed(GLKeys::KEY_D)) ||
             (window.getKeyPressed(GLKeys::KEY_DOWN) && window.getKeyPressed(GLKeys::KEY_RIGHT)) ||
             axisData[0] > (0.0f + threshold) && axisData[1] > (0.0f + threshold)
             )
-            player.setVelocity(Math::Vec2(maxAngle, -maxAngle));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, -maxAngle));
         else if ((window.getKeyPressed(GLKeys::KEY_W) && window.getKeyPressed(GLKeys::KEY_D)) ||
             (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_RIGHT)) ||
             axisData[0] > (0.0f + threshold) && axisData[1] < (0.0f - threshold)
             )
-            player.setVelocity(Math::Vec2(maxAngle, maxAngle));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, maxAngle));
         else if (window.getKeyPressed(GLKeys::KEY_A) || window.getKeyPressed(GLKeys::KEY_LEFT) || axisData[0] < (0.0f - threshold))
-            player.setVelocity(Math::Vec2(-maxVel, 0));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(-maxVel, 0));
         else if (window.getKeyPressed(GLKeys::KEY_S) || window.getKeyPressed(GLKeys::KEY_DOWN) || axisData[1] > (0.0f + threshold))
-            player.setVelocity(Math::Vec2(0, -maxVel));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(0, -maxVel));
         else if (window.getKeyPressed(GLKeys::KEY_D) || window.getKeyPressed(GLKeys::KEY_RIGHT) || axisData[0] > (0.0f + threshold))
-            player.setVelocity(Math::Vec2(maxVel, 0));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(maxVel, 0));
         else if (window.getKeyPressed(GLKeys::KEY_W) || window.getKeyPressed(GLKeys::KEY_UP) || axisData[1] < (0.0f - threshold))
-            player.setVelocity(Math::Vec2(0, maxVel));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(0, maxVel));
         else
-            player.setVelocity(Math::Vec2(0, 0));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(0, 0));
     }
     else // Keyboard Only Movement
     {
         // Character Movement
         if ((window.getKeyPressed(GLKeys::KEY_W) && window.getKeyPressed(GLKeys::KEY_A)) ||
             (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_LEFT)))
-            player.setVelocity(Math::Vec2(-maxAngle, maxAngle));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, maxAngle));
         else if ((window.getKeyPressed(GLKeys::KEY_A) && window.getKeyPressed(GLKeys::KEY_S)) ||
             (window.getKeyPressed(GLKeys::KEY_LEFT) && window.getKeyPressed(GLKeys::KEY_DOWN)))
-            player.setVelocity(Math::Vec2(-maxAngle, -maxAngle));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, -maxAngle));
         else if ((window.getKeyPressed(GLKeys::KEY_S) && window.getKeyPressed(GLKeys::KEY_D)) ||
             (window.getKeyPressed(GLKeys::KEY_DOWN) && window.getKeyPressed(GLKeys::KEY_RIGHT)))
-            player.setVelocity(Math::Vec2(maxAngle, -maxAngle));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, -maxAngle));
         else if ((window.getKeyPressed(GLKeys::KEY_W) && window.getKeyPressed(GLKeys::KEY_D)) ||
             (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_RIGHT)))
-            player.setVelocity(Math::Vec2(maxAngle, maxAngle));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, maxAngle));
         else if (window.getKeyPressed(GLKeys::KEY_A) || window.getKeyPressed(GLKeys::KEY_LEFT))
-            player.setVelocity(Math::Vec2(-maxVel, 0));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(-maxVel, 0));
         else if (window.getKeyPressed(GLKeys::KEY_S) || window.getKeyPressed(GLKeys::KEY_DOWN))
-            player.setVelocity(Math::Vec2(0, -maxVel));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(0, -maxVel));
         else if (window.getKeyPressed(GLKeys::KEY_D) || window.getKeyPressed(GLKeys::KEY_RIGHT))
-            player.setVelocity(Math::Vec2(maxVel, 0));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(maxVel, 0));
         else if (window.getKeyPressed(GLKeys::KEY_W) || window.getKeyPressed(GLKeys::KEY_UP))
-            player.setVelocity(Math::Vec2(0, maxVel));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(0, maxVel));
         else
-            player.setVelocity(Math::Vec2(0, 0));
+            EntityManager::getPlayer().setVelocity(Math::Vec2(0, 0));
     }
 
     // Pause
@@ -123,14 +122,14 @@ void StateGame::input(Graphics::Window& window)
 
 void StateGame::render()
 {
-    player.Draw(renderer);
+    EntityManager::getPlayer().Draw(renderer);
     EntityManager::getLevel().Draw(renderer);
 }
 
 GameState* StateGame::update(GameState* gameState)
 {
     // Update Player
-    player.Update();
+    EntityManager::getPlayer().Update();
 
     // Update Level Data
     EntityManager::getLevel().Update();
@@ -141,7 +140,7 @@ GameState* StateGame::update(GameState* gameState)
         connectedStates[0]->init();
         return connectedStates[0];
     }
-    if (!player.isAlive()) // Player has died, game over
+    if (!EntityManager::getPlayer().isAlive()) // Player has died, game over
     {
         connectedStates[1]->init();
         return connectedStates[1];

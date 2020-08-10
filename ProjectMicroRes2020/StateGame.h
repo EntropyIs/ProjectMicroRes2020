@@ -19,11 +19,6 @@ class StateGame : public Entropy::GameState
 private:
 	Entropy::Math::Mat4 Projection;
 
-	Entropy::Math::Vec2 spriteIndex;
-	Entropy::Math::Vec2 spritePos;
-	Player player;
-	Entropy::Math::Vec2 playerVelocity;
-
 	float accel = 60.0f;
 	float maxVel = 30.0f;
 	float maxAngle = 21.21f;

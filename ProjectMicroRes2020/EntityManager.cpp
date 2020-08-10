@@ -1,6 +1,8 @@
 #include "EntityManager.h"
 
 LevelManager EntityManager::levelManager;
+Player EntityManager::player;
+PlayerWeapon EntityManager::playerWeapon;
 
 Level& EntityManager::getLevel()
 {
