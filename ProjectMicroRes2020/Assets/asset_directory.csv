@@ -8,3 +8,4 @@ sprite, random_assets, random_assets.png, 8, 8, 8, 8
 sprite, charset_black, charset_black.png, 16, 6, 5, 7
 sprite, charset_grey, charset_grey.png, 16, 6, 5, 7
 sprite, charset_white, charset_white.png, 16, 6, 5, 7
+sprite, test_sword, test_sword.png, 7, 8, 8, 8

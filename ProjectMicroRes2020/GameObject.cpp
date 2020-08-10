@@ -6,7 +6,8 @@ using namespace Entropy;
 
 void GameObject::Draw(SpriteRenderer& renderer)
 {
-	renderer.Draw(position + texture_offset, ResourceManager::getTexture(texture_name), sprite_index, ResourceManager::getSpriteSizeData(texture_name));
+	if (alive)
+		renderer.Draw(position + texture_offset, ResourceManager::getTexture(texture_name), sprite_index, ResourceManager::getSpriteSizeData(texture_name));
 }
 
 void GameObject::setVelocity(Entropy::Math::Vec2 velocity)
@@ -37,6 +38,11 @@ float GameObject::getVelocityX()
 float GameObject::getVelocityY()
 {
 	return velocity.Y;
+}
+
+Entropy::Math::Vec2 GameObject::getPosition()
+{
+	return position;
 }
 
 void GameObject::setPosition(Entropy::Math::Vec2 position)

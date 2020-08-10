@@ -36,6 +36,8 @@ public:
 	float getVelocityX();
 	float getVelocityY();
 
+	Entropy::Math::Vec2 getPosition();
+
 	void setPosition(Entropy::Math::Vec2 position);
 
 	void setSpriteIndex(Entropy::Math::Vec2 spriteIndex);

@@ -83,28 +83,28 @@ void StateGame::input(Graphics::Window& window)
     else // Keyboard Only Movement
     {
         // Character Movement
-        if ((window.getKeyPressed(GLKeys::KEY_W) && window.getKeyPressed(GLKeys::KEY_A)) ||
-            (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_LEFT)))
+        if ((window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_LEFT)))
             EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, maxAngle));
-        else if ((window.getKeyPressed(GLKeys::KEY_A) && window.getKeyPressed(GLKeys::KEY_S)) ||
-            (window.getKeyPressed(GLKeys::KEY_LEFT) && window.getKeyPressed(GLKeys::KEY_DOWN)))
+        else if ((window.getKeyPressed(GLKeys::KEY_LEFT) && window.getKeyPressed(GLKeys::KEY_DOWN)))
             EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, -maxAngle));
-        else if ((window.getKeyPressed(GLKeys::KEY_S) && window.getKeyPressed(GLKeys::KEY_D)) ||
-            (window.getKeyPressed(GLKeys::KEY_DOWN) && window.getKeyPressed(GLKeys::KEY_RIGHT)))
+        else if ((window.getKeyPressed(GLKeys::KEY_DOWN) && window.getKeyPressed(GLKeys::KEY_RIGHT)))
             EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, -maxAngle));
-        else if ((window.getKeyPressed(GLKeys::KEY_W) && window.getKeyPressed(GLKeys::KEY_D)) ||
-            (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_RIGHT)))
+        else if ((window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_RIGHT)))
             EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, maxAngle));
-        else if (window.getKeyPressed(GLKeys::KEY_A) || window.getKeyPressed(GLKeys::KEY_LEFT))
+        else if (window.getKeyPressed(GLKeys::KEY_LEFT))
             EntityManager::getPlayer().setVelocity(Math::Vec2(-maxVel, 0));
-        else if (window.getKeyPressed(GLKeys::KEY_S) || window.getKeyPressed(GLKeys::KEY_DOWN))
+        else if (window.getKeyPressed(GLKeys::KEY_DOWN))
             EntityManager::getPlayer().setVelocity(Math::Vec2(0, -maxVel));
-        else if (window.getKeyPressed(GLKeys::KEY_D) || window.getKeyPressed(GLKeys::KEY_RIGHT))
+        else if (window.getKeyPressed(GLKeys::KEY_RIGHT))
             EntityManager::getPlayer().setVelocity(Math::Vec2(maxVel, 0));
-        else if (window.getKeyPressed(GLKeys::KEY_W) || window.getKeyPressed(GLKeys::KEY_UP))
+        else if (window.getKeyPressed(GLKeys::KEY_UP))
             EntityManager::getPlayer().setVelocity(Math::Vec2(0, maxVel));
         else
             EntityManager::getPlayer().setVelocity(Math::Vec2(0, 0));
+
+        // Attack / Interact
+        if (window.getKeyPressed(GLKeys::KEY_Z))
+            EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 0, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f)));
     }
 
     // Pause
@@ -123,6 +123,7 @@ void StateGame::input(Graphics::Window& window)
 void StateGame::render()
 {
     EntityManager::getPlayer().Draw(renderer);
+    EntityManager::getPlayerWeapon().Draw(renderer);
     EntityManager::getLevel().Draw(renderer);
 }
 
@@ -130,6 +131,7 @@ GameState* StateGame::update(GameState* gameState)
 {
     // Update Player
     EntityManager::getPlayer().Update();
+    EntityManager::getPlayerWeapon().Update();
 
     // Update Level Data
     EntityManager::getLevel().Update();

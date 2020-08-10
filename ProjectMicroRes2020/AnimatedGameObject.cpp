@@ -2,7 +2,8 @@
 
 void AnimatedGameObject::Draw(SpriteRenderer& renderer)
 {
-	animationRenderer.Draw(renderer, position + texture_offset);
+	if(alive) // Only render if alive
+		animationRenderer.Draw(renderer, position + texture_offset);
 }
 
 void AnimatedGameObject::Update()
