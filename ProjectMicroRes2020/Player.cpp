@@ -9,7 +9,7 @@ Player::Player(const char* spriteName, unsigned int row, Entropy::Math::Vec2 pos
     Entropy::Math::Vec2 boxSize, Entropy::Math::Vec2 boxOffset, Entropy::Math::Vec2 textureOffset) :
     AnimatedGameObject("Player", spriteName, 4, row, 12, position, boxSize, boxOffset, textureOffset)
 {
-    health = 3;
+    health = 6;
     timer = 0.0f;
     vulnerable = true;
 }
@@ -115,4 +115,52 @@ void Player::Update()
         if (health == 0)
             alive = false;
     }
+}
+
+void Player::Draw(SpriteRenderer& renderer)
+{
+    // draw hearts
+    switch (health)
+    {
+    case 6:
+        renderer.Draw(heartPosition + heartOffset + heartOffset, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(0.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        renderer.Draw(heartPosition + heartOffset, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(0.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        renderer.Draw(heartPosition, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(0.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        break;
+    case 5:
+        renderer.Draw(heartPosition + heartOffset + heartOffset, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(1.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        renderer.Draw(heartPosition + heartOffset, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(0.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        renderer.Draw(heartPosition, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(0.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        break;
+    case 4:
+        renderer.Draw(heartPosition + heartOffset + heartOffset, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(2.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        renderer.Draw(heartPosition + heartOffset, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(0.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        renderer.Draw(heartPosition, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(0.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        break;
+    case 3:
+        renderer.Draw(heartPosition + heartOffset + heartOffset, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(2.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        renderer.Draw(heartPosition + heartOffset, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(1.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        renderer.Draw(heartPosition, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(0.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        break;
+    case 2:
+        renderer.Draw(heartPosition + heartOffset + heartOffset, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(2.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        renderer.Draw(heartPosition + heartOffset, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(2.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        renderer.Draw(heartPosition, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(0.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        break;
+    case 1:
+        renderer.Draw(heartPosition + heartOffset + heartOffset, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(2.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        renderer.Draw(heartPosition + heartOffset, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(2.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        renderer.Draw(heartPosition, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(1.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        break;
+    case 0:
+        renderer.Draw(heartPosition + heartOffset + heartOffset, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(2.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        renderer.Draw(heartPosition + heartOffset, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(2.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        renderer.Draw(heartPosition, ResourceManager::getTexture("heart_sprite"), Entropy::Math::Vec2(2.0f, 0.0f), ResourceManager::getSpriteSizeData("heart_sprite"));
+        break;
+    default:
+        break;
+    }
+
+    // Draw Character
+    AnimatedGameObject::Draw(renderer);
 }
