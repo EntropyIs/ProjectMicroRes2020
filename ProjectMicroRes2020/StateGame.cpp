@@ -104,7 +104,33 @@ void StateGame::input(Graphics::Window& window)
 
         // Attack / Interact
         if (window.getKeyPressed(GLKeys::KEY_Z))
-            EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 0, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f)));
+            switch (EntityManager::getPlayer().getLastDirection())
+            {
+            case UPLEFT:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 6, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-6.0f, 6.0f)));
+                break;
+            case UPRIGHT:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 0, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(6.0f, 6.0f)));
+                break;
+            case DOWNLEFT:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 4, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-6.0f, -6.0f)));
+                break;
+            case DOWNRIGHT:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 2, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(6.0f, -6.0f)));
+                break;
+            case LEFT:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 5, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-7.0f, 0.0f)));
+                break;
+            case RIGHT:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 1, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(7.0f, 0.0f)));
+                break;
+            case UP:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 7, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(0.0f, 7.0f)));
+                break;
+            case DOWN:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 3, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(0.0f, -7.0f)));
+                break;
+            }
     }
 
     // Pause
@@ -122,8 +148,18 @@ void StateGame::input(Graphics::Window& window)
 
 void StateGame::render()
 {
-    EntityManager::getPlayer().Draw(renderer);
-    EntityManager::getPlayerWeapon().Draw(renderer);
+    if (EntityManager::getPlayer().getLastDirection() == DOWN ||
+        EntityManager::getPlayer().getLastDirection() == DOWNLEFT ||
+        EntityManager::getPlayer().getLastDirection() == DOWNRIGHT)
+    {
+        EntityManager::getPlayerWeapon().Draw(renderer);
+        EntityManager::getPlayer().Draw(renderer);
+    }
+    else
+    {
+        EntityManager::getPlayer().Draw(renderer);
+        EntityManager::getPlayerWeapon().Draw(renderer);
+    }
     EntityManager::getLevel().Draw(renderer);
 }
 
