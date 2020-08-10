@@ -93,11 +93,14 @@ void Player::Update()
             }
             else if (EntityManager::getLevel().isEntity(object) && vulnerable) // Entity (collectable or enemy)
             {
-                undoMovement(); // Step Back
-                health--;
-                vulnerable = false;
-                timer = 0;
-                break;
+                if (EntityManager::getLevel().getEntity(object).isAlive())
+                {
+                    undoMovement(); // Step Back
+                    health--;
+                    vulnerable = false;
+                    timer = 0;
+                    break;
+                }
             }
         }
 

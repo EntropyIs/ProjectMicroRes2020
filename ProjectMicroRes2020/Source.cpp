@@ -45,9 +45,6 @@ int WinMain()
 		StateMenu menu = StateMenu();
 		StatePause pause = StatePause();
 
-		// Load Levels
-		EntityManager::setLevelManager("Assets/Levels/levels.csv");
-
 		// Connect Game States
 		credits.addConnection(0, &menu);
 		game.addConnection(0, &pause);
