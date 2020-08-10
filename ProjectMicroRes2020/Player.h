@@ -13,8 +13,8 @@ private:
 
 	Direction lastDirection;
 
-	Entropy::Math::Vec2 heartPosition = Entropy::Math::Vec2(8.0f, 56.0f);
-	Entropy::Math::Vec2 heartOffset = Entropy::Math::Vec2(9.0f, 0.0f);
+	Entropy::Math::Vec2 heartPosition = Entropy::Math::Vec2(3.0f, 61.0f);
+	Entropy::Math::Vec2 heartOffset = Entropy::Math::Vec2(4.0f, 0.0f);
 
 public:
 	Player(const char* spriteName, unsigned int row = 0.0f,
