@@ -14,26 +14,55 @@ Player::Player(const char* spriteName, unsigned int row, Entropy::Math::Vec2 pos
     vulnerable = true;
 }
 
+Direction Player::getLastDirection()
+{
+    return lastDirection;
+}
+
 void Player::Update()
 {
     // Set Sprite Direction and Animate
     animationRenderer.playAnimation();
     if (getVelocity().Y > 0.0f && getVelocity().X < 0.0f) // Up & Left
+    {
         animationRenderer.setRowNumber(6);
+        lastDirection = Direction::UPLEFT;
+    }
     else if (getVelocity().Y > 0.0f && getVelocity().X > 0.0f) // Up & Right
+    {
         animationRenderer.setRowNumber(0);
+        lastDirection = Direction::UPRIGHT;
+    }
     else if (getVelocity().Y < 0.0f && getVelocity().X < 0.0f) // Down & Left
+    {
         animationRenderer.setRowNumber(4);
+        lastDirection = Direction::DOWNLEFT;
+    }
     else if (getVelocity().Y < 0.0f && getVelocity().X > 0.0f) // Down & Right
+    {
         animationRenderer.setRowNumber(2);
+        lastDirection = Direction::DOWNRIGHT;
+    }
     else if (getVelocity().Y > 0.0f) // Up
+    {
         animationRenderer.setRowNumber(7);
+        lastDirection = Direction::UP;
+    }
     else if (getVelocity().Y < 0.0f) // Down
+    {
         animationRenderer.setRowNumber(3);
+        lastDirection = Direction::DOWN;
+    }
     else if (getVelocity().X > 0.0f) // Right
+    {
         animationRenderer.setRowNumber(1);
+        lastDirection = Direction::RIGHT;
+    }
     else if (getVelocity().X < 0.0f) // Left
+    {
         animationRenderer.setRowNumber(5);
+        lastDirection = Direction::LEFT;
+    }
     else
         animationRenderer.stopAnimation();
     animationRenderer.Update();

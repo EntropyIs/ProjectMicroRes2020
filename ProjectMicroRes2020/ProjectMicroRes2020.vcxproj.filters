@@ -172,5 +172,8 @@
     <ClInclude Include="PlayerWeapon.h">
       <Filter>Header Files\Model\Entity</Filter>
     </ClInclude>
+    <ClInclude Include="Direction.h">
+      <Filter>Header Files\Model\Entity</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

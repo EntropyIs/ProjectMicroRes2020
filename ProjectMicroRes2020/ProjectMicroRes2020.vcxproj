@@ -179,6 +179,7 @@
     <ClInclude Include="AnimatedGameObject.h" />
     <ClInclude Include="AnimationRenderer.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="Direction.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Level.h" />
