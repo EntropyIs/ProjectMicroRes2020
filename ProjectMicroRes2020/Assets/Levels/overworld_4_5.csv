@@ -69,3 +69,5 @@ tile,4,7,test_tiles,0,0,1,overworld_3_5,4,1
 tile,5,7,test_tiles,0,0,1,overworld_3_5,5,1
 tile,6,7,test_tiles,0,0,1,overworld_3_5,6,1
 tile,7,7,test_tiles,0,1,0
+
+entity,enemy,slime,48,24

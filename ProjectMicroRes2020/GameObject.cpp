@@ -89,12 +89,16 @@ BoxCollider& GameObject::getCollider()
 
 bool GameObject::detectCollion(GameObject& other)
 {
-	return collider.detect(other.collider);
+	if(other.isAlive())
+		return collider.detect(other.collider);
+	return false; // Cannot colide with dead things
 }
 
 bool GameObject::detectCollion(BoxCollider& other)
 {
-	return other.detect(collider);
+	if(alive)
+		return other.detect(collider);
+	return false; // Cannot colide with dead things
 }
 
 bool GameObject::isAlive()

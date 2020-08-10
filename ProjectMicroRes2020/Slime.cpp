@@ -63,6 +63,9 @@ void Slime::Update()
 		}
 	}
 
+	if (detectCollion(EntityManager::getPlayerWeapon().getCollider()))
+		health--; // take away health if hits player wepon
+
 	// Check if alive
 	if (health == 0)
 		alive = false;
