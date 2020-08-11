@@ -165,6 +165,7 @@
     <ClCompile Include="StateGameOver.cpp" />
     <ClCompile Include="StateMenu.cpp" />
     <ClCompile Include="StatePause.cpp" />
+    <ClCompile Include="StrongSlime.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\fBaseShader.glsl" />
@@ -194,6 +195,7 @@
     <ClInclude Include="StateGameOver.h" />
     <ClInclude Include="StateMenu.h" />
     <ClInclude Include="StatePause.h" />
+    <ClInclude Include="StrongSlime.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

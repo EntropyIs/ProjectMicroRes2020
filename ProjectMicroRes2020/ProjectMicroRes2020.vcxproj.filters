@@ -96,6 +96,9 @@
     <ClCompile Include="PlayerWeapon.cpp">
       <Filter>Source Files\Model\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="StrongSlime.cpp">
+      <Filter>Source Files\Model\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\vFBShader.glsl">
@@ -173,6 +176,9 @@
       <Filter>Header Files\Model\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Direction.h">
+      <Filter>Header Files\Model\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="StrongSlime.h">
       <Filter>Header Files\Model\Entity</Filter>
     </ClInclude>
   </ItemGroup>
