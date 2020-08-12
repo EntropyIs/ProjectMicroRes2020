@@ -16,6 +16,10 @@ private:
 	Entropy::Math::Vec2 heartPosition = Entropy::Math::Vec2(3.0f, 61.0f);
 	Entropy::Math::Vec2 heartOffset = Entropy::Math::Vec2(4.0f, 0.0f);
 
+	bool hurting;
+
+	unsigned int hurtAnim;
+
 public:
 	Player(const char* spriteName, unsigned int row = 0.0f,
 		Entropy::Math::Vec2 position = Entropy::Math::Vec2(0.0f, 0.0f), Entropy::Math::Vec2 boxSize = Entropy::Math::Vec2(8.0f, 8.0f),

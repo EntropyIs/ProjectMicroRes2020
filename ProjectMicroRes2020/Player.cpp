@@ -12,6 +12,8 @@ Player::Player(const char* spriteName, unsigned int row, Entropy::Math::Vec2 pos
     health = 6;
     timer = 0.0f;
     vulnerable = true;
+    hurting = false;
+    hurtAnim = 0;
 }
 
 Direction Player::getLastDirection()
@@ -21,50 +23,84 @@ Direction Player::getLastDirection()
 
 void Player::Update()
 {
-    // Set Sprite Direction and Animate
-    animationRenderer.playAnimation();
-    if (getVelocity().Y > 0.0f && getVelocity().X < 0.0f) // Up & Left
+    if (!hurting)
     {
-        animationRenderer.setRowNumber(2);
-        lastDirection = Direction::UPLEFT;
+        // Set Sprite Direction and Animate
+        animationRenderer.playAnimation();
+        if (getVelocity().Y > 0.0f && getVelocity().X < 0.0f) // Up & Left
+        {
+            animationRenderer.setRowNumber(10);
+            lastDirection = Direction::UPLEFT;
+        }
+        else if (getVelocity().Y > 0.0f && getVelocity().X > 0.0f) // Up & Right
+        {
+            animationRenderer.setRowNumber(12);
+            lastDirection = Direction::UPRIGHT;
+        }
+        else if (getVelocity().Y < 0.0f && getVelocity().X < 0.0f) // Down & Left
+        {
+            animationRenderer.setRowNumber(8);
+            lastDirection = Direction::DOWNLEFT;
+        }
+        else if (getVelocity().Y < 0.0f && getVelocity().X > 0.0f) // Down & Right
+        {
+            animationRenderer.setRowNumber(14);
+            lastDirection = Direction::DOWNRIGHT;
+        }
+        else if (getVelocity().Y > 0.0f) // Up
+        {
+            animationRenderer.setRowNumber(11);
+            lastDirection = Direction::UP;
+        }
+        else if (getVelocity().Y < 0.0f) // Down
+        {
+            animationRenderer.setRowNumber(15);
+            lastDirection = Direction::DOWN;
+        }
+        else if (getVelocity().X > 0.0f) // Right
+        {
+            animationRenderer.setRowNumber(13);
+            lastDirection = Direction::RIGHT;
+        }
+        else if (getVelocity().X < 0.0f) // Left
+        {
+            animationRenderer.setRowNumber(9);
+            lastDirection = Direction::LEFT;
+        }
+        else // Idle
+        {
+            animationRenderer.stopAnimation();
+            switch (lastDirection)
+            {
+            case UPRIGHT:
+                animationRenderer.setRowNumber(4);
+                break;
+            case RIGHT:
+                animationRenderer.setRowNumber(5);
+                break;
+            case DOWNRIGHT:
+                animationRenderer.setRowNumber(6);
+                break;
+            case DOWN:
+                animationRenderer.setRowNumber(7);
+                break;
+            case DOWNLEFT:
+                animationRenderer.setRowNumber(0);
+                break;
+            case LEFT:
+                animationRenderer.setRowNumber(1);
+                break;
+            case UPLEFT:
+                animationRenderer.setRowNumber(2);
+                break;
+            case UP:
+                animationRenderer.setRowNumber(3);
+                break;
+            default:
+                break;
+            }
+        }
     }
-    else if (getVelocity().Y > 0.0f && getVelocity().X > 0.0f) // Up & Right
-    {
-        animationRenderer.setRowNumber(4);
-        lastDirection = Direction::UPRIGHT;
-    }
-    else if (getVelocity().Y < 0.0f && getVelocity().X < 0.0f) // Down & Left
-    {
-        animationRenderer.setRowNumber(0);
-        lastDirection = Direction::DOWNLEFT;
-    }
-    else if (getVelocity().Y < 0.0f && getVelocity().X > 0.0f) // Down & Right
-    {
-        animationRenderer.setRowNumber(6);
-        lastDirection = Direction::DOWNRIGHT;
-    }
-    else if (getVelocity().Y > 0.0f) // Up
-    {
-        animationRenderer.setRowNumber(3);
-        lastDirection = Direction::UP;
-    }
-    else if (getVelocity().Y < 0.0f) // Down
-    {
-        animationRenderer.setRowNumber(7);
-        lastDirection = Direction::DOWN;
-    }
-    else if (getVelocity().X > 0.0f) // Right
-    {
-        animationRenderer.setRowNumber(5);
-        lastDirection = Direction::RIGHT;
-    }
-    else if (getVelocity().X < 0.0f) // Left
-    {
-        animationRenderer.setRowNumber(1);
-        lastDirection = Direction::LEFT;
-    }
-    else
-        animationRenderer.stopAnimation();
     animationRenderer.Update();
 
     // Move Character
@@ -98,13 +134,61 @@ void Player::Update()
                     undoMovement(); // Step Back
                     health--;
                     vulnerable = false;
+                    hurting = true;
+                    hurtAnim = 2;
+                    animationRenderer.playAnimationOnce();
                     timer = 0;
+
+                    switch (lastDirection)
+                    {
+                    case UPRIGHT:
+                        animationRenderer.setRowNumber(28);
+                        break;
+                    case RIGHT:
+                        animationRenderer.setRowNumber(29);
+                        break;
+                    case DOWNRIGHT:
+                        animationRenderer.setRowNumber(30);
+                        break;
+                    case DOWN:
+                        animationRenderer.setRowNumber(31);
+                        break;
+                    case DOWNLEFT:
+                        animationRenderer.setRowNumber(24);
+                        break;
+                    case LEFT:
+                        animationRenderer.setRowNumber(25);
+                        break;
+                    case UPLEFT:
+                        animationRenderer.setRowNumber(26);
+                        break;
+                    case UP:
+                        animationRenderer.setRowNumber(27);
+                        break;
+                    default:
+                        break;
+                    }
+
                     break;
                 }
             }
         }
 
-        if (!vulnerable)
+        // Tickdown Hurt Animation
+        if (hurting)
+        {
+            if (animationRenderer.isComplete() && hurtAnim == 0)
+            {
+                hurting = false;
+            }
+            else if (animationRenderer.isComplete())
+            {
+                hurtAnim--;
+                animationRenderer.playAnimationOnce();
+            }
+        }
+            
+        if (!vulnerable && !hurting)
         {
             float timeElapsed = ResourceManager::getTimeElapsed();
             timer += ResourceManager::getTimeElapsed();

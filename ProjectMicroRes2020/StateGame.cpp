@@ -80,6 +80,36 @@ void StateGame::input(Graphics::Window& window)
             EntityManager::getPlayer().setVelocity(Math::Vec2(0, maxVel));
         else
             EntityManager::getPlayer().setVelocity(Math::Vec2(0, 0));
+
+        // Attack / Interact
+        if ((window.getKeyPressed(GLKeys::KEY_Z) || (buttonData[2] == GLFW_PRESS)) && !EntityManager::getPlayerWeapon().isAlive())
+            switch (EntityManager::getPlayer().getLastDirection())
+            {
+            case UPLEFT:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 6, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-6.0f, 6.0f)));
+                break;
+            case UPRIGHT:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 0, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(6.0f, 6.0f)));
+                break;
+            case DOWNLEFT:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 4, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-6.0f, -6.0f)));
+                break;
+            case DOWNRIGHT:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 2, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(6.0f, -6.0f)));
+                break;
+            case LEFT:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 5, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-7.0f, 0.0f)));
+                break;
+            case RIGHT:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 1, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(7.0f, 0.0f)));
+                break;
+            case UP:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 7, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(0.0f, 7.0f)));
+                break;
+            case DOWN:
+                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 3, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(0.0f, -7.0f)));
+                break;
+            }
     }
     else // Keyboard Only Movement
     {
@@ -105,7 +135,7 @@ void StateGame::input(Graphics::Window& window)
 
         // Attack / Interact
         if (window.getKeyPressed(GLKeys::KEY_Z))
-            switch (EntityManager::getPlayer().getLastDirection())
+            switch (EntityManager::getPlayer().getLastDirection() && !EntityManager::getPlayerWeapon().isAlive())
             {
             case UPLEFT:
                 EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 6, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-6.0f, 6.0f)));
