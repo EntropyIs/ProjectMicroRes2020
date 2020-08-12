@@ -2,7 +2,7 @@ shader, quadShader, Shaders/vFBShader.glsl, Shaders/fFBShader.glsl
 shader, spriteShader, Shaders/vBaseShader.glsl, Shaders/fBaseShader.glsl
 shader, hitboxShader, Shaders/vHitboxShader.glsl, Shaders/fHitboxShader.glsl, Shaders/gHitboxShader.glsl
 sprite, player_sheet, player-animations.png, 2, 8, 8, 12
-sprite, slime_sheet, slime_sheet.png, 3, 1, 10, 10
+sprite, slime_sheet, slime_sheet.png, 3, 2, 10, 10
 sprite, test_tiles, test_tiles.png, 8, 8, 8, 8
 sprite, random_assets, random_assets.png, 8, 8, 8, 8
 sprite, charset_black, charset_black.png, 16, 6, 5, 7
