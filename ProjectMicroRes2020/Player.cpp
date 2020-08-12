@@ -7,7 +7,7 @@ using namespace Entropy;
 
 Player::Player(const char* spriteName, unsigned int row, Entropy::Math::Vec2 position,
     Entropy::Math::Vec2 boxSize, Entropy::Math::Vec2 boxOffset, Entropy::Math::Vec2 textureOffset) :
-    AnimatedGameObject("Player", spriteName, 4, row, 12, position, boxSize, boxOffset, textureOffset)
+    AnimatedGameObject("Player", spriteName, 2, row, 6, position, boxSize, boxOffset, textureOffset)
 {
     health = 6;
     timer = 0.0f;
@@ -25,42 +25,42 @@ void Player::Update()
     animationRenderer.playAnimation();
     if (getVelocity().Y > 0.0f && getVelocity().X < 0.0f) // Up & Left
     {
-        animationRenderer.setRowNumber(6);
+        animationRenderer.setRowNumber(2);
         lastDirection = Direction::UPLEFT;
     }
     else if (getVelocity().Y > 0.0f && getVelocity().X > 0.0f) // Up & Right
     {
-        animationRenderer.setRowNumber(0);
+        animationRenderer.setRowNumber(4);
         lastDirection = Direction::UPRIGHT;
     }
     else if (getVelocity().Y < 0.0f && getVelocity().X < 0.0f) // Down & Left
     {
-        animationRenderer.setRowNumber(4);
+        animationRenderer.setRowNumber(0);
         lastDirection = Direction::DOWNLEFT;
     }
     else if (getVelocity().Y < 0.0f && getVelocity().X > 0.0f) // Down & Right
     {
-        animationRenderer.setRowNumber(2);
+        animationRenderer.setRowNumber(6);
         lastDirection = Direction::DOWNRIGHT;
     }
     else if (getVelocity().Y > 0.0f) // Up
     {
-        animationRenderer.setRowNumber(7);
+        animationRenderer.setRowNumber(3);
         lastDirection = Direction::UP;
     }
     else if (getVelocity().Y < 0.0f) // Down
     {
-        animationRenderer.setRowNumber(3);
+        animationRenderer.setRowNumber(7);
         lastDirection = Direction::DOWN;
     }
     else if (getVelocity().X > 0.0f) // Right
     {
-        animationRenderer.setRowNumber(1);
+        animationRenderer.setRowNumber(5);
         lastDirection = Direction::RIGHT;
     }
     else if (getVelocity().X < 0.0f) // Left
     {
-        animationRenderer.setRowNumber(5);
+        animationRenderer.setRowNumber(1);
         lastDirection = Direction::LEFT;
     }
     else

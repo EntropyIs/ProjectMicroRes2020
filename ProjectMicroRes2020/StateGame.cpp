@@ -24,7 +24,7 @@ StateGame::StateGame() : GameState("Game", 2)
 bool StateGame::init()
 {
     // Configure Entities
-    EntityManager::setPlayer(Player("test_sprite", 3, Math::Vec2(32.0f, 32.0f), Math::Vec2(6.0f, 6.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(-1.0f, 2.0f)));
+    EntityManager::setPlayer(Player("player_sheet", 7, Math::Vec2(32.0f, 32.0f), Math::Vec2(6.0f, 6.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(-1.0f, 2.0f)));
     EntityManager::setLevelManager("Assets/Levels/levels.csv");
 
     // Configure shaders
