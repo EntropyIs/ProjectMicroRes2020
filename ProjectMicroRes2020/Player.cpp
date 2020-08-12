@@ -21,83 +21,123 @@ Direction Player::getLastDirection()
     return lastDirection;
 }
 
+void Player::setAttacking()
+{
+    attacking = true;
+}
+
 void Player::Update()
 {
     if (!hurting)
     {
-        // Set Sprite Direction and Animate
-        animationRenderer.playAnimation();
-        if (getVelocity().Y > 0.0f && getVelocity().X < 0.0f) // Up & Left
+        if (attacking)
         {
-            animationRenderer.setRowNumber(10);
-            lastDirection = Direction::UPLEFT;
-        }
-        else if (getVelocity().Y > 0.0f && getVelocity().X > 0.0f) // Up & Right
-        {
-            animationRenderer.setRowNumber(12);
-            lastDirection = Direction::UPRIGHT;
-        }
-        else if (getVelocity().Y < 0.0f && getVelocity().X < 0.0f) // Down & Left
-        {
-            animationRenderer.setRowNumber(8);
-            lastDirection = Direction::DOWNLEFT;
-        }
-        else if (getVelocity().Y < 0.0f && getVelocity().X > 0.0f) // Down & Right
-        {
-            animationRenderer.setRowNumber(14);
-            lastDirection = Direction::DOWNRIGHT;
-        }
-        else if (getVelocity().Y > 0.0f) // Up
-        {
-            animationRenderer.setRowNumber(11);
-            lastDirection = Direction::UP;
-        }
-        else if (getVelocity().Y < 0.0f) // Down
-        {
-            animationRenderer.setRowNumber(15);
-            lastDirection = Direction::DOWN;
-        }
-        else if (getVelocity().X > 0.0f) // Right
-        {
-            animationRenderer.setRowNumber(13);
-            lastDirection = Direction::RIGHT;
-        }
-        else if (getVelocity().X < 0.0f) // Left
-        {
-            animationRenderer.setRowNumber(9);
-            lastDirection = Direction::LEFT;
-        }
-        else // Idle
-        {
-            animationRenderer.stopAnimation();
             switch (lastDirection)
             {
             case UPRIGHT:
-                animationRenderer.setRowNumber(4);
+                animationRenderer.setRowNumber(20);
                 break;
             case RIGHT:
-                animationRenderer.setRowNumber(5);
+                animationRenderer.setRowNumber(21);
                 break;
             case DOWNRIGHT:
-                animationRenderer.setRowNumber(6);
+                animationRenderer.setRowNumber(22);
                 break;
             case DOWN:
-                animationRenderer.setRowNumber(7);
+                animationRenderer.setRowNumber(23);
                 break;
             case DOWNLEFT:
-                animationRenderer.setRowNumber(0);
+                animationRenderer.setRowNumber(16);
                 break;
             case LEFT:
-                animationRenderer.setRowNumber(1);
+                animationRenderer.setRowNumber(17);
                 break;
             case UPLEFT:
-                animationRenderer.setRowNumber(2);
+                animationRenderer.setRowNumber(18);
                 break;
             case UP:
-                animationRenderer.setRowNumber(3);
+                animationRenderer.setRowNumber(19);
                 break;
             default:
                 break;
+            }
+        }
+        else
+        {
+            // Set Sprite Direction and Animate
+            animationRenderer.playAnimation();
+            if (getVelocity().Y > 0.0f && getVelocity().X < 0.0f) // Up & Left
+            {
+                animationRenderer.setRowNumber(10);
+                lastDirection = Direction::UPLEFT;
+            }
+            else if (getVelocity().Y > 0.0f && getVelocity().X > 0.0f) // Up & Right
+            {
+                animationRenderer.setRowNumber(12);
+                lastDirection = Direction::UPRIGHT;
+            }
+            else if (getVelocity().Y < 0.0f && getVelocity().X < 0.0f) // Down & Left
+            {
+                animationRenderer.setRowNumber(8);
+                lastDirection = Direction::DOWNLEFT;
+            }
+            else if (getVelocity().Y < 0.0f && getVelocity().X > 0.0f) // Down & Right
+            {
+                animationRenderer.setRowNumber(14);
+                lastDirection = Direction::DOWNRIGHT;
+            }
+            else if (getVelocity().Y > 0.0f) // Up
+            {
+                animationRenderer.setRowNumber(11);
+                lastDirection = Direction::UP;
+            }
+            else if (getVelocity().Y < 0.0f) // Down
+            {
+                animationRenderer.setRowNumber(15);
+                lastDirection = Direction::DOWN;
+            }
+            else if (getVelocity().X > 0.0f) // Right
+            {
+                animationRenderer.setRowNumber(13);
+                lastDirection = Direction::RIGHT;
+            }
+            else if (getVelocity().X < 0.0f) // Left
+            {
+                animationRenderer.setRowNumber(9);
+                lastDirection = Direction::LEFT;
+            }
+            else // Idle
+            {
+                animationRenderer.stopAnimation();
+                switch (lastDirection)
+                {
+                case UPRIGHT:
+                    animationRenderer.setRowNumber(4);
+                    break;
+                case RIGHT:
+                    animationRenderer.setRowNumber(5);
+                    break;
+                case DOWNRIGHT:
+                    animationRenderer.setRowNumber(6);
+                    break;
+                case DOWN:
+                    animationRenderer.setRowNumber(7);
+                    break;
+                case DOWNLEFT:
+                    animationRenderer.setRowNumber(0);
+                    break;
+                case LEFT:
+                    animationRenderer.setRowNumber(1);
+                    break;
+                case UPLEFT:
+                    animationRenderer.setRowNumber(2);
+                    break;
+                case UP:
+                    animationRenderer.setRowNumber(3);
+                    break;
+                default:
+                    break;
+                }
             }
         }
     }
@@ -187,7 +227,13 @@ void Player::Update()
                 animationRenderer.playAnimationOnce();
             }
         }
-            
+
+        // Check if still attacking;
+        if (attacking)
+            if (!EntityManager::getPlayerWeapon().isAlive())
+                attacking = false;
+           
+        // Tickdown Invunralbility
         if (!vulnerable && !hurting)
         {
             float timeElapsed = ResourceManager::getTimeElapsed();

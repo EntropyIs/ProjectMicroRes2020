@@ -17,6 +17,7 @@ private:
 	Entropy::Math::Vec2 heartOffset = Entropy::Math::Vec2(4.0f, 0.0f);
 
 	bool hurting;
+	bool attacking;
 
 	unsigned int hurtAnim;
 
@@ -27,6 +28,8 @@ public:
 	Player() {};
 
 	Direction getLastDirection();
+
+	void setAttacking();
 
 	virtual void Update() override;
 	virtual void Draw(SpriteRenderer& renderer) override;
