@@ -26,6 +26,12 @@ void Player::setAttacking()
     attacking = true;
 }
 
+void Player::stop()
+{
+    setVelocity(Math::Vec2(0, 0));
+    animationRenderer.stopAnimation();
+}
+
 void Player::Update()
 {
     if (!hurting)

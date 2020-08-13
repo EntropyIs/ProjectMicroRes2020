@@ -66,36 +66,41 @@ void StateGame::input(Graphics::Window& window)
     float threshold = 0.8f; // axis deadzone threshold
 
     // Character Movement
-    if ((window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_LEFT)) ||
-        x < (0.0f - threshold) && y < (0.0f - threshold)
-        )
-        EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, maxAngle));
-    else if ((window.getKeyPressed(GLKeys::KEY_LEFT) && window.getKeyPressed(GLKeys::KEY_DOWN)) ||
-        x < (0.0f - threshold) && y > (0.0f + threshold)
-        )
-        EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, -maxAngle));
-    else if ((window.getKeyPressed(GLKeys::KEY_DOWN) && window.getKeyPressed(GLKeys::KEY_RIGHT)) ||
-        x > (0.0f + threshold) && y > (0.0f + threshold)
-        )
-        EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, -maxAngle));
-    else if ((window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_RIGHT)) ||
-        x > (0.0f + threshold) && y < (0.0f - threshold)
-        )
-        EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, maxAngle));
-    else if (window.getKeyPressed(GLKeys::KEY_LEFT) || x < (0.0f - threshold))
-        EntityManager::getPlayer().setVelocity(Math::Vec2(-maxVel, 0));
-    else if (window.getKeyPressed(GLKeys::KEY_DOWN) || y > (0.0f + threshold))
-        EntityManager::getPlayer().setVelocity(Math::Vec2(0, -maxVel));
-    else if (window.getKeyPressed(GLKeys::KEY_RIGHT) || x > (0.0f + threshold))
-        EntityManager::getPlayer().setVelocity(Math::Vec2(maxVel, 0));
-    else if (window.getKeyPressed(GLKeys::KEY_UP) || y < (0.0f - threshold))
-        EntityManager::getPlayer().setVelocity(Math::Vec2(0, maxVel));
-    else
-        EntityManager::getPlayer().setVelocity(Math::Vec2(0, 0));
+    if (!EntityManager::getPlayerWeapon().isAlive()) // if not attacking
+    {
+        if ((window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_LEFT)) ||
+            x < (0.0f - threshold) && y < (0.0f - threshold)
+            )
+            EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, maxAngle));
+        else if ((window.getKeyPressed(GLKeys::KEY_LEFT) && window.getKeyPressed(GLKeys::KEY_DOWN)) ||
+            x < (0.0f - threshold) && y >(0.0f + threshold)
+            )
+            EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, -maxAngle));
+        else if ((window.getKeyPressed(GLKeys::KEY_DOWN) && window.getKeyPressed(GLKeys::KEY_RIGHT)) ||
+            x > (0.0f + threshold) && y > (0.0f + threshold)
+            )
+            EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, -maxAngle));
+        else if ((window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_RIGHT)) ||
+            x > (0.0f + threshold) && y < (0.0f - threshold)
+            )
+            EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, maxAngle));
+        else if (window.getKeyPressed(GLKeys::KEY_LEFT) || x < (0.0f - threshold))
+            EntityManager::getPlayer().setVelocity(Math::Vec2(-maxVel, 0));
+        else if (window.getKeyPressed(GLKeys::KEY_DOWN) || y > (0.0f + threshold))
+            EntityManager::getPlayer().setVelocity(Math::Vec2(0, -maxVel));
+        else if (window.getKeyPressed(GLKeys::KEY_RIGHT) || x > (0.0f + threshold))
+            EntityManager::getPlayer().setVelocity(Math::Vec2(maxVel, 0));
+        else if (window.getKeyPressed(GLKeys::KEY_UP) || y < (0.0f - threshold))
+            EntityManager::getPlayer().setVelocity(Math::Vec2(0, maxVel));
+        else
+            EntityManager::getPlayer().stop();
+    }
 
     // Attack / Interact
     if ((window.getKeyPressed(GLKeys::KEY_Z) || (attack)) && !EntityManager::getPlayerWeapon().isAlive())
     {
+        EntityManager::getPlayer().stop();
+
         switch (EntityManager::getPlayer().getLastDirection())
         {
         case UPLEFT:
@@ -140,7 +145,8 @@ void StateGame::input(Graphics::Window& window)
             break;
         }
     }
-    else if (window.getKeyPressed(GLKeys::KEY_ESCAPE) || start)
+
+    if (window.getKeyPressed(GLKeys::KEY_ESCAPE) || start)
         pause = true;
 }
 

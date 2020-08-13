@@ -30,6 +30,8 @@ public:
 
 	void setAttacking();
 
+	void stop();
+
 	virtual void Update() override;
 	virtual void Draw(SpriteRenderer& renderer) override;
 };
