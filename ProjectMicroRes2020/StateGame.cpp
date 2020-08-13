@@ -24,7 +24,7 @@ StateGame::StateGame() : GameState("Game", 2)
 bool StateGame::init()
 {
     // Configure Entities
-    EntityManager::setPlayer(Player("player_sheet", 7, Math::Vec2(32.0f, 32.0f), Math::Vec2(6.0f, 6.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(-1.0f, 2.0f)));
+    EntityManager::setPlayer(Player("char_player", 7, Math::Vec2(32.0f, 32.0f), Math::Vec2(6.0f, 6.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(-1.0f, 2.0f)));
     EntityManager::setLevelManager("Assets/Levels/levels.csv");
 
     // Configure shaders
@@ -45,154 +45,103 @@ void StateGame::input(Graphics::Window& window)
     const float* axisData = joystickController.getAxisData(GLFW_JOYSTICK_1, &axisCount);
     const unsigned char* buttonData = joystickController.getButtonsData(GLFW_JOYSTICK_1, &buttonCount);
 
-    if (axisCount >= 2) // Joystick has 2 or more axis
+    float x = 0.0f;
+    float y = 0.0f;
+
+    if (axisCount >= 2)
     {
-        float threshold = 0.8f; // axis deadzone threshold
-
-        // Character Movement
-        if ((window.getKeyPressed(GLKeys::KEY_W) && window.getKeyPressed(GLKeys::KEY_A)) ||
-            (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_LEFT)) ||
-            axisData[0] < (0.0f - threshold) && axisData[1] < (0.0f - threshold)
-            )
-            EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, maxAngle));
-        else if ((window.getKeyPressed(GLKeys::KEY_A) && window.getKeyPressed(GLKeys::KEY_S)) ||
-            (window.getKeyPressed(GLKeys::KEY_LEFT) && window.getKeyPressed(GLKeys::KEY_DOWN)) ||
-            axisData[0] < (0.0f - threshold) && axisData[1] > (0.0f + threshold)
-            )
-            EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, -maxAngle));
-        else if ((window.getKeyPressed(GLKeys::KEY_S) && window.getKeyPressed(GLKeys::KEY_D)) ||
-            (window.getKeyPressed(GLKeys::KEY_DOWN) && window.getKeyPressed(GLKeys::KEY_RIGHT)) ||
-            axisData[0] > (0.0f + threshold) && axisData[1] > (0.0f + threshold)
-            )
-            EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, -maxAngle));
-        else if ((window.getKeyPressed(GLKeys::KEY_W) && window.getKeyPressed(GLKeys::KEY_D)) ||
-            (window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_RIGHT)) ||
-            axisData[0] > (0.0f + threshold) && axisData[1] < (0.0f - threshold)
-            )
-            EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, maxAngle));
-        else if (window.getKeyPressed(GLKeys::KEY_A) || window.getKeyPressed(GLKeys::KEY_LEFT) || axisData[0] < (0.0f - threshold))
-            EntityManager::getPlayer().setVelocity(Math::Vec2(-maxVel, 0));
-        else if (window.getKeyPressed(GLKeys::KEY_S) || window.getKeyPressed(GLKeys::KEY_DOWN) || axisData[1] > (0.0f + threshold))
-            EntityManager::getPlayer().setVelocity(Math::Vec2(0, -maxVel));
-        else if (window.getKeyPressed(GLKeys::KEY_D) || window.getKeyPressed(GLKeys::KEY_RIGHT) || axisData[0] > (0.0f + threshold))
-            EntityManager::getPlayer().setVelocity(Math::Vec2(maxVel, 0));
-        else if (window.getKeyPressed(GLKeys::KEY_W) || window.getKeyPressed(GLKeys::KEY_UP) || axisData[1] < (0.0f - threshold))
-            EntityManager::getPlayer().setVelocity(Math::Vec2(0, maxVel));
-        else
-            EntityManager::getPlayer().setVelocity(Math::Vec2(0, 0));
-
-        // Attack / Interact
-        if ((window.getKeyPressed(GLKeys::KEY_Z) || (buttonData[2] == GLFW_PRESS)) && !EntityManager::getPlayerWeapon().isAlive())
-            switch (EntityManager::getPlayer().getLastDirection())
-            {
-            case UPLEFT:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 6, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-6.0f, 6.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            case UPRIGHT:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 0, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(6.0f, 6.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            case DOWNLEFT:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 4, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-6.0f, -6.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            case DOWNRIGHT:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 2, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(6.0f, -6.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            case LEFT:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 5, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-7.0f, 0.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            case RIGHT:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 1, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(7.0f, 0.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            case UP:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 7, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(0.0f, 7.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            case DOWN:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 3, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(0.0f, -7.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            }
+        x = axisData[0];
+        y = axisData[1];
     }
-    else // Keyboard Only Movement
-    {
-        // Character Movement
-        if ((window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_LEFT)))
-            EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, maxAngle));
-        else if ((window.getKeyPressed(GLKeys::KEY_LEFT) && window.getKeyPressed(GLKeys::KEY_DOWN)))
-            EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, -maxAngle));
-        else if ((window.getKeyPressed(GLKeys::KEY_DOWN) && window.getKeyPressed(GLKeys::KEY_RIGHT)))
-            EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, -maxAngle));
-        else if ((window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_RIGHT)))
-            EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, maxAngle));
-        else if (window.getKeyPressed(GLKeys::KEY_LEFT))
-            EntityManager::getPlayer().setVelocity(Math::Vec2(-maxVel, 0));
-        else if (window.getKeyPressed(GLKeys::KEY_DOWN))
-            EntityManager::getPlayer().setVelocity(Math::Vec2(0, -maxVel));
-        else if (window.getKeyPressed(GLKeys::KEY_RIGHT))
-            EntityManager::getPlayer().setVelocity(Math::Vec2(maxVel, 0));
-        else if (window.getKeyPressed(GLKeys::KEY_UP))
-            EntityManager::getPlayer().setVelocity(Math::Vec2(0, maxVel));
-        else
-            EntityManager::getPlayer().setVelocity(Math::Vec2(0, 0));
 
-        // Attack / Interact
-        if (window.getKeyPressed(GLKeys::KEY_Z) && !EntityManager::getPlayerWeapon().isAlive())
+    bool start = false;
+    bool attack = false;
+
+    if (buttonCount >= 10)
+    {
+        start = buttonData[9] == GLFW_PRESS;
+        attack = buttonData[2] == GLFW_PRESS;
+    }
+
+    float threshold = 0.8f; // axis deadzone threshold
+
+    // Character Movement
+    if ((window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_LEFT)) ||
+        x < (0.0f - threshold) && y < (0.0f - threshold)
+        )
+        EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, maxAngle));
+    else if ((window.getKeyPressed(GLKeys::KEY_LEFT) && window.getKeyPressed(GLKeys::KEY_DOWN)) ||
+        x < (0.0f - threshold) && y > (0.0f + threshold)
+        )
+        EntityManager::getPlayer().setVelocity(Math::Vec2(-maxAngle, -maxAngle));
+    else if ((window.getKeyPressed(GLKeys::KEY_DOWN) && window.getKeyPressed(GLKeys::KEY_RIGHT)) ||
+        x > (0.0f + threshold) && y > (0.0f + threshold)
+        )
+        EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, -maxAngle));
+    else if ((window.getKeyPressed(GLKeys::KEY_UP) && window.getKeyPressed(GLKeys::KEY_RIGHT)) ||
+        x > (0.0f + threshold) && y < (0.0f - threshold)
+        )
+        EntityManager::getPlayer().setVelocity(Math::Vec2(maxAngle, maxAngle));
+    else if (window.getKeyPressed(GLKeys::KEY_LEFT) || x < (0.0f - threshold))
+        EntityManager::getPlayer().setVelocity(Math::Vec2(-maxVel, 0));
+    else if (window.getKeyPressed(GLKeys::KEY_DOWN) || y > (0.0f + threshold))
+        EntityManager::getPlayer().setVelocity(Math::Vec2(0, -maxVel));
+    else if (window.getKeyPressed(GLKeys::KEY_RIGHT) || x > (0.0f + threshold))
+        EntityManager::getPlayer().setVelocity(Math::Vec2(maxVel, 0));
+    else if (window.getKeyPressed(GLKeys::KEY_UP) || y < (0.0f - threshold))
+        EntityManager::getPlayer().setVelocity(Math::Vec2(0, maxVel));
+    else
+        EntityManager::getPlayer().setVelocity(Math::Vec2(0, 0));
+
+    // Attack / Interact
+    if ((window.getKeyPressed(GLKeys::KEY_Z) || (attack)) && !EntityManager::getPlayerWeapon().isAlive())
+    {
+        switch (EntityManager::getPlayer().getLastDirection())
         {
-            switch (EntityManager::getPlayer().getLastDirection())
-            {
-            case UPLEFT:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 6, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-6.0f, 6.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            case UPRIGHT:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 0, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(6.0f, 6.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            case DOWNLEFT:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 4, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-6.0f, -6.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            case DOWNRIGHT:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 2, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(6.0f, -6.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            case LEFT:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 5, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-7.0f, 0.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            case RIGHT:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 1, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(7.0f, 0.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            case UP:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 7, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(0.0f, 7.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            case DOWN:
-                EntityManager::setPlayerWeapon(PlayerWeapon("test_sword", 3, EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(0.0f, -7.0f)));
-                EntityManager::getPlayer().setAttacking();
-                break;
-            }
+        case UPLEFT:
+            EntityManager::setPlayerWeapon(PlayerWeapon("char_player_weapon", 2, 
+                EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-8.0f, 4.0f)));
+            EntityManager::getPlayer().setAttacking();
+            break;
+        case UPRIGHT:
+            EntityManager::setPlayerWeapon(PlayerWeapon("char_player_weapon", 4, 
+                EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(6.0f, 4.0f)));
+            EntityManager::getPlayer().setAttacking();
+            break;
+        case DOWNLEFT:
+            EntityManager::setPlayerWeapon(PlayerWeapon("char_player_weapon", 0, 
+                EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-6.0f, -6.0f)));
+            EntityManager::getPlayer().setAttacking();
+            break;
+        case DOWNRIGHT:
+            EntityManager::setPlayerWeapon(PlayerWeapon("char_player_weapon", 6, 
+                EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(6.0f, -6.0f)));
+            EntityManager::getPlayer().setAttacking();
+            break;
+        case LEFT:
+            EntityManager::setPlayerWeapon(PlayerWeapon("char_player_weapon", 1, 
+                EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-9.0f, -2.0f)));
+            EntityManager::getPlayer().setAttacking();
+            break;
+        case RIGHT:
+            EntityManager::setPlayerWeapon(PlayerWeapon("char_player_weapon", 5, 
+                EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(7.0f, 1.0f)));
+            EntityManager::getPlayer().setAttacking();
+            break;
+        case UP:
+            EntityManager::setPlayerWeapon(PlayerWeapon("char_player_weapon", 3, 
+                EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(1.0f, 9.0f)));
+            EntityManager::getPlayer().setAttacking();
+            break;
+        case DOWN:
+            EntityManager::setPlayerWeapon(PlayerWeapon("char_player_weapon", 7, 
+                EntityManager::getPlayer().getPosition() + Math::Vec2(8.0f, 8.0f), Math::Vec2(-1.0f, -8.0f)));
+            EntityManager::getPlayer().setAttacking();
+            break;
         }
     }
-
-    // Pause
-    if (buttonCount > 0) // Controler has buttons
-    {
-        if (window.getKeyPressed(GLKeys::KEY_ESCAPE) || buttonData[9] == GLFW_PRESS)
-            pause = true;
-    }
-    else
-    {
-        if (window.getKeyPressed(GLKeys::KEY_ESCAPE))
-            pause = true;
-    }
+    else if (window.getKeyPressed(GLKeys::KEY_ESCAPE) || start)
+        pause = true;
 }
 
 void StateGame::render()

@@ -32,7 +32,6 @@ void AnimationRenderer::Update()
 				current_frame = 0;
 			else if (current_frame >= num_frames && playOnce)
 			{
-				current_frame = 0;
 				playing = false;
 				complete = true;
 			}

@@ -7,7 +7,7 @@ using namespace Entropy;
 
 Player::Player(const char* spriteName, unsigned int row, Entropy::Math::Vec2 position,
     Entropy::Math::Vec2 boxSize, Entropy::Math::Vec2 boxOffset, Entropy::Math::Vec2 textureOffset) :
-    AnimatedGameObject("Player", spriteName, 2, row, 6, position, boxSize, boxOffset, textureOffset)
+    AnimatedGameObject("player", spriteName, 2, row, 6, position, boxSize, boxOffset, textureOffset)
 {
     health = 6;
     timer = 0.0f;

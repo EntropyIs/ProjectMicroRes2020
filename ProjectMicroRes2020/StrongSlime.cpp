@@ -9,7 +9,7 @@
 using namespace Entropy;
 
 StrongSlime::StrongSlime(std::string id, Math::Vec2 position, Math::Vec3 color) :
-	AnimatedGameObject(id, "slime_sheet", 3, 0, 6, position, Math::Vec2(8.0f, 8.0f),
+	AnimatedGameObject(id, "char_sauce", 3, 0, 6, position, Math::Vec2(8.0f, 8.0f),
 		Math::Vec2(4.0f, 4.0f), Math::Vec2(1.0f, 1.0f)), color(color)
 {
 	angle = (rand() % 62) / 10.0f;
