@@ -72,3 +72,8 @@ void AnimationRenderer::setRowNumber(unsigned int rowNumber)
 {
 	row_num = rowNumber;
 }
+
+void AnimationRenderer::setNumFrames(unsigned int numFrames)
+{
+	num_frames = numFrames;
+}

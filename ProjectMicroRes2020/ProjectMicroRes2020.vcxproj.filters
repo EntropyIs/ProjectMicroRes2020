@@ -81,9 +81,6 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="Slime.cpp">
-      <Filter>Source Files\Model\Entity</Filter>
-    </ClCompile>
     <ClCompile Include="EntityManager.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
@@ -96,7 +93,10 @@
     <ClCompile Include="PlayerWeapon.cpp">
       <Filter>Source Files\Model\Entity</Filter>
     </ClCompile>
-    <ClCompile Include="StrongSlime.cpp">
+    <ClCompile Include="Ketchup.cpp">
+      <Filter>Source Files\Model\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Mustard.cpp">
       <Filter>Source Files\Model\Entity</Filter>
     </ClCompile>
   </ItemGroup>
@@ -157,9 +157,6 @@
     <ClInclude Include="AnimatedGameObject.h">
       <Filter>Header Files\Model\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="Slime.h">
-      <Filter>Header Files\Model\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
@@ -178,7 +175,10 @@
     <ClInclude Include="Direction.h">
       <Filter>Header Files\Model\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="StrongSlime.h">
+    <ClInclude Include="Mustard.h">
+      <Filter>Header Files\Model\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Ketchup.h">
       <Filter>Header Files\Model\Entity</Filter>
     </ClInclude>
   </ItemGroup>

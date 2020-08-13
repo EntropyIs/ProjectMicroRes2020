@@ -157,7 +157,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerWeapon.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="Slime.cpp" />
+    <ClCompile Include="Ketchup.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="StateCredits.cpp" />
@@ -165,7 +165,7 @@
     <ClCompile Include="StateGameOver.cpp" />
     <ClCompile Include="StateMenu.cpp" />
     <ClCompile Include="StatePause.cpp" />
-    <ClCompile Include="StrongSlime.cpp" />
+    <ClCompile Include="Mustard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\fBaseShader.glsl" />
@@ -188,14 +188,14 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerWeapon.h" />
     <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="Slime.h" />
+    <ClInclude Include="Ketchup.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="StateCredits.h" />
     <ClInclude Include="StateGame.h" />
     <ClInclude Include="StateGameOver.h" />
     <ClInclude Include="StateMenu.h" />
     <ClInclude Include="StatePause.h" />
-    <ClInclude Include="StrongSlime.h" />
+    <ClInclude Include="Mustard.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

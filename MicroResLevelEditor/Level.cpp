@@ -65,10 +65,10 @@ Level::Level(const char* path, std::string name) : name(name)
 				if (lineComp[2] == "slime") // Pharse slime enemy
 				{
 					if(lineComp.size() == 5) // default slime with position
-						entities.push_back(new Slime(name + "_slime[" + lineComp[3] + "," + lineComp[4] + "]", 
+						entities.push_back(new Ketchup(name + "_slime[" + lineComp[3] + "," + lineComp[4] + "]", 
 							Math::Vec2(std::stof(lineComp[3]), std::stof(lineComp[4]))));
 					else if (lineComp.size() == 8) // slime with position & recoloring
-						entities.push_back(new Slime(name + "_slime[" + lineComp[3] + "," + lineComp[4] + "]", 
+						entities.push_back(new Ketchup(name + "_slime[" + lineComp[3] + "," + lineComp[4] + "]", 
 							Math::Vec2(std::stof(lineComp[3]), std::stof(lineComp[4])), 
 							Math::Vec3(std::stof(lineComp[5]), std::stof(lineComp[6]), std::stof(lineComp[7]))));
 				}
@@ -76,10 +76,10 @@ Level::Level(const char* path, std::string name) : name(name)
 				if (lineComp[2] == "strong_slime") // Pharse strong slime enemy
 				{
 					if (lineComp.size() == 5) // default slime with position
-						entities.push_back(new StrongSlime(name + "_strong_slime[" + lineComp[3] + "," + lineComp[4] + "]",
+						entities.push_back(new Mustard(name + "_strong_slime[" + lineComp[3] + "," + lineComp[4] + "]",
 							Math::Vec2(std::stof(lineComp[3]), std::stof(lineComp[4]))));
 					else if (lineComp.size() == 8) // slime with position & recoloring
-						entities.push_back(new StrongSlime(name + "_strong_slime[" + lineComp[3] + "," + lineComp[4] + "]",
+						entities.push_back(new Mustard(name + "_strong_slime[" + lineComp[3] + "," + lineComp[4] + "]",
 							Math::Vec2(std::stof(lineComp[3]), std::stof(lineComp[4])),
 							Math::Vec3(std::stof(lineComp[5]), std::stof(lineComp[6]), std::stof(lineComp[7]))));
 				}

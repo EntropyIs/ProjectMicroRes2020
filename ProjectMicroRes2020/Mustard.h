@@ -2,7 +2,7 @@
 
 #include "AnimatedGameObject.h"
 
-class Slime : public AnimatedGameObject
+class Mustard : public AnimatedGameObject
 {
 private:
 	Entropy::Math::Vec3 color;
@@ -13,7 +13,7 @@ private:
 	bool set;
 
 public:
-	Slime(std::string id, Entropy::Math::Vec2 position, Entropy::Math::Vec3 color = Entropy::Math::Vec3(1.0f));
+	Mustard(std::string id, Entropy::Math::Vec2 position, Entropy::Math::Vec3 color = Entropy::Math::Vec3(1.0f));
 
 	virtual void Draw(SpriteRenderer& renderer) override;
 

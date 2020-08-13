@@ -22,7 +22,7 @@ private:
 
 public:
 	AnimationRenderer(std::string spriteSheet, unsigned int numFrames, unsigned int rowNum, unsigned int fps);
-	AnimationRenderer() : current_frame(0), current_time(0.0f), frame_advance_time(0.0f), num_frames(0), row_num(0), sprite_sheet() {};
+	AnimationRenderer() : current_frame(0), current_time(0.0f), frame_advance_time(0.0f), num_frames(0), row_num(0), sprite_sheet(), playing(false), complete(false), playOnce(false) {};
 
 	void Draw(SpriteRenderer& renderer, Entropy::Math::Vec2 position, float rotAngle = 0, Entropy::Math::Vec3 color = Entropy::Math::Vec3(1.0f));
 	void Update();
@@ -36,4 +36,5 @@ public:
 	bool isComplete();
 
 	void setRowNumber(unsigned int rowNumber);
+	void setNumFrames(unsigned int numFrames);
 };

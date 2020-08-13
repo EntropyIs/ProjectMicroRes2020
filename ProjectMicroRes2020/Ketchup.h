@@ -2,7 +2,7 @@
 
 #include "AnimatedGameObject.h"
 
-class StrongSlime : public AnimatedGameObject
+class Ketchup : public AnimatedGameObject
 {
 private:
 	Entropy::Math::Vec3 color;
@@ -13,7 +13,7 @@ private:
 	bool set;
 
 public:
-	StrongSlime(std::string id, Entropy::Math::Vec2 position, Entropy::Math::Vec3 color = Entropy::Math::Vec3(1.0f));
+	Ketchup(std::string id, Entropy::Math::Vec2 position, Entropy::Math::Vec3 color = Entropy::Math::Vec3(1.0f));
 
 	virtual void Draw(SpriteRenderer& renderer) override;
 

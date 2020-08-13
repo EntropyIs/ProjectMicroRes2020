@@ -13,6 +13,8 @@ Player::Player(const char* spriteName, unsigned int row, Entropy::Math::Vec2 pos
     timer = 0.0f;
     vulnerable = true;
     hurting = false;
+    attacking = false;
+    lastDirection = Direction::DOWN;
     hurtAnim = 0;
 }
 
@@ -29,7 +31,6 @@ void Player::setAttacking()
 void Player::stop()
 {
     setVelocity(Math::Vec2(0, 0));
-    animationRenderer.stopAnimation();
 }
 
 void Player::Update()
@@ -42,27 +43,35 @@ void Player::Update()
             {
             case UPRIGHT:
                 animationRenderer.setRowNumber(20);
+                animationRenderer.setNumFrames(1);
                 break;
             case RIGHT:
                 animationRenderer.setRowNumber(21);
+                animationRenderer.setNumFrames(1);
                 break;
             case DOWNRIGHT:
                 animationRenderer.setRowNumber(22);
+                animationRenderer.setNumFrames(1);
                 break;
             case DOWN:
                 animationRenderer.setRowNumber(23);
+                animationRenderer.setNumFrames(1);
                 break;
             case DOWNLEFT:
                 animationRenderer.setRowNumber(16);
+                animationRenderer.setNumFrames(1);
                 break;
             case LEFT:
                 animationRenderer.setRowNumber(17);
+                animationRenderer.setNumFrames(1);
                 break;
             case UPLEFT:
                 animationRenderer.setRowNumber(18);
+                animationRenderer.setNumFrames(1);
                 break;
             case UP:
                 animationRenderer.setRowNumber(19);
+                animationRenderer.setNumFrames(1);
                 break;
             default:
                 break;
@@ -75,41 +84,49 @@ void Player::Update()
             if (getVelocity().Y > 0.0f && getVelocity().X < 0.0f) // Up & Left
             {
                 animationRenderer.setRowNumber(10);
+                animationRenderer.setNumFrames(2);
                 lastDirection = Direction::UPLEFT;
             }
             else if (getVelocity().Y > 0.0f && getVelocity().X > 0.0f) // Up & Right
             {
                 animationRenderer.setRowNumber(12);
+                animationRenderer.setNumFrames(2);
                 lastDirection = Direction::UPRIGHT;
             }
             else if (getVelocity().Y < 0.0f && getVelocity().X < 0.0f) // Down & Left
             {
                 animationRenderer.setRowNumber(8);
+                animationRenderer.setNumFrames(2);
                 lastDirection = Direction::DOWNLEFT;
             }
             else if (getVelocity().Y < 0.0f && getVelocity().X > 0.0f) // Down & Right
             {
                 animationRenderer.setRowNumber(14);
+                animationRenderer.setNumFrames(2);
                 lastDirection = Direction::DOWNRIGHT;
             }
             else if (getVelocity().Y > 0.0f) // Up
             {
                 animationRenderer.setRowNumber(11);
+                animationRenderer.setNumFrames(2);
                 lastDirection = Direction::UP;
             }
             else if (getVelocity().Y < 0.0f) // Down
             {
                 animationRenderer.setRowNumber(15);
+                animationRenderer.setNumFrames(2);
                 lastDirection = Direction::DOWN;
             }
             else if (getVelocity().X > 0.0f) // Right
             {
                 animationRenderer.setRowNumber(13);
+                animationRenderer.setNumFrames(2);
                 lastDirection = Direction::RIGHT;
             }
             else if (getVelocity().X < 0.0f) // Left
             {
                 animationRenderer.setRowNumber(9);
+                animationRenderer.setNumFrames(2);
                 lastDirection = Direction::LEFT;
             }
             else // Idle
@@ -119,27 +136,35 @@ void Player::Update()
                 {
                 case UPRIGHT:
                     animationRenderer.setRowNumber(4);
+                    animationRenderer.setNumFrames(1);
                     break;
                 case RIGHT:
                     animationRenderer.setRowNumber(5);
+                    animationRenderer.setNumFrames(1);
                     break;
                 case DOWNRIGHT:
                     animationRenderer.setRowNumber(6);
+                    animationRenderer.setNumFrames(1);
                     break;
                 case DOWN:
                     animationRenderer.setRowNumber(7);
+                    animationRenderer.setNumFrames(1);
                     break;
                 case DOWNLEFT:
                     animationRenderer.setRowNumber(0);
+                    animationRenderer.setNumFrames(1);
                     break;
                 case LEFT:
                     animationRenderer.setRowNumber(1);
+                    animationRenderer.setNumFrames(1);
                     break;
                 case UPLEFT:
                     animationRenderer.setRowNumber(2);
+                    animationRenderer.setNumFrames(1);
                     break;
                 case UP:
                     animationRenderer.setRowNumber(3);
+                    animationRenderer.setNumFrames(1);
                     break;
                 default:
                     break;
@@ -189,27 +214,35 @@ void Player::Update()
                     {
                     case UPRIGHT:
                         animationRenderer.setRowNumber(28);
+                        animationRenderer.setNumFrames(2);
                         break;
                     case RIGHT:
                         animationRenderer.setRowNumber(29);
+                        animationRenderer.setNumFrames(2);
                         break;
                     case DOWNRIGHT:
                         animationRenderer.setRowNumber(30);
+                        animationRenderer.setNumFrames(2);
                         break;
                     case DOWN:
                         animationRenderer.setRowNumber(31);
+                        animationRenderer.setNumFrames(2);
                         break;
                     case DOWNLEFT:
                         animationRenderer.setRowNumber(24);
+                        animationRenderer.setNumFrames(2);
                         break;
                     case LEFT:
                         animationRenderer.setRowNumber(25);
+                        animationRenderer.setNumFrames(2);
                         break;
                     case UPLEFT:
                         animationRenderer.setRowNumber(26);
+                        animationRenderer.setNumFrames(2);
                         break;
                     case UP:
                         animationRenderer.setRowNumber(27);
+                        animationRenderer.setNumFrames(2);
                         break;
                     default:
                         break;
@@ -219,6 +252,7 @@ void Player::Update()
                 }
             }
         }
+
 
         // Tickdown Hurt Animation
         if (hurting)

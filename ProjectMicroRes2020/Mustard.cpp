@@ -1,4 +1,4 @@
-#include "Slime.h"
+#include "Mustard.h"
 
 #include <Entropy/Math/Transform2D.h>
 #include <Entropy/Math/Converters.h>
@@ -8,24 +8,24 @@
 
 using namespace Entropy;
 
-Slime::Slime(std::string id, Math::Vec2 position, Math::Vec3 color) :
-	AnimatedGameObject(id, "char_sauce", 3, 1, 6, position, Math::Vec2(8.0f, 8.0f),
+Mustard::Mustard(std::string id, Math::Vec2 position, Math::Vec3 color) :
+	AnimatedGameObject(id, "char_sauce", 3, 0, 6, position, Math::Vec2(8.0f, 8.0f),
 		Math::Vec2(4.0f, 4.0f), Math::Vec2(1.0f, 1.0f)), color(color)
 {
 	angle = (rand() % 62) / 10.0f;
 	speed = 0.0f;
 
-	health = 1;
+	health = 3;
 
 	set = false;
 }
 
-void Slime::Draw(SpriteRenderer& renderer)
+void Mustard::Draw(SpriteRenderer& renderer)
 {
 	animationRenderer.Draw(renderer, position, 0.0f, color);
 }
 
-void Slime::Update()
+void Mustard::Update()
 {
 	animationRenderer.Update();
 
@@ -45,14 +45,14 @@ void Slime::Update()
 	velocity.X = slime_velocity.X;
 	velocity.Y = slime_velocity.Y;
 
-	// Move Slime
+	// Move Mustard
 	performMovement();
 
 	// Handle Collsions
 	for (unsigned int i = 0; i < EntityManager::getLevel().getColliders().size(); i++)
 	{
 		std::string object = EntityManager::getLevel().getColliders()[i];
-		if (object != id &&  detectCollion(EntityManager::getLevel().getCollider(object)))
+		if (object != id && detectCollion(EntityManager::getLevel().getCollider(object)))
 		{
 			if (EntityManager::getLevel().isWall(object) || EntityManager::getLevel().isLink(object) || EntityManager::getLevel().isEntity(object)) // Wall, WarpPoint or Entity
 			{

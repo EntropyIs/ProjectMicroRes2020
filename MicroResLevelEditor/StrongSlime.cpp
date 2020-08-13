@@ -8,7 +8,7 @@
 
 using namespace Entropy;
 
-StrongSlime::StrongSlime(std::string id, Math::Vec2 position, Math::Vec3 color) :
+Mustard::Mustard(std::string id, Math::Vec2 position, Math::Vec3 color) :
 	AnimatedGameObject(id, "slime_sheet", 3, 0, 6, position, Math::Vec2(8.0f, 8.0f),
 		Math::Vec2(4.0f, 4.0f), Math::Vec2(1.0f, 1.0f)), color(color)
 {
@@ -20,12 +20,12 @@ StrongSlime::StrongSlime(std::string id, Math::Vec2 position, Math::Vec3 color) 
 	set = false;
 }
 
-void StrongSlime::Draw(SpriteRenderer& renderer)
+void Mustard::Draw(SpriteRenderer& renderer)
 {
 	animationRenderer.Draw(renderer, position, 0.0f, color);
 }
 
-void StrongSlime::Update()
+void Mustard::Update()
 {
 	animationRenderer.Update();
 
@@ -45,7 +45,7 @@ void StrongSlime::Update()
 	velocity.X = slime_velocity.X;
 	velocity.Y = slime_velocity.Y;
 
-	// Move StrongSlime
+	// Move Mustard
 	performMovement();
 
 	// Handle Collsions

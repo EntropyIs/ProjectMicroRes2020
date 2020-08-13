@@ -1,8 +1,8 @@
 #include "Level.h"
 
 #include "ResourceManager.h"
-#include "Slime.h"
-#include "StrongSlime.h"
+#include "Ketchup.h"
+#include "Mustard.h"
 
 #include <fstream>
 #include <sstream>
@@ -61,25 +61,35 @@ Level::Level(const char* path, std::string name) : name(name)
 		{
 			if (lineComp[1] == "enemy")
 			{
-				if (lineComp[2] == "slime") // Pharse slime enemy
+				if (lineComp[2] == "ketchup") // Pharse ketchup enemy
 				{
-					if(lineComp.size() == 5) // default slime with position
-						entities.push_back(new Slime(name + "_slime[" + lineComp[3] + "," + lineComp[4] + "]", 
-							Math::Vec2(std::stof(lineComp[3]), std::stof(lineComp[4]))));
-					else if (lineComp.size() == 8) // slime with position & recoloring
-						entities.push_back(new Slime(name + "_slime[" + lineComp[3] + "," + lineComp[4] + "]", 
-							Math::Vec2(std::stof(lineComp[3]), std::stof(lineComp[4])), 
+					if(lineComp.size() == 5) // ketchup with position
+						entities.push_back(new Ketchup(name + "_ketchup[" + lineComp[3] + "," + lineComp[4] + "]", 
+							Math::Vec2(std::stof(lineComp[3]) * 8.0f + 4.0f, std::stof(lineComp[4]) * 8.0f + 4.0f)));
+					else if (lineComp.size() == 8) // ketchup with position & recoloring
+						entities.push_back(new Ketchup(name + "_ketchup[" + lineComp[3] + "," + lineComp[4] + "]", 
+							Math::Vec2(std::stof(lineComp[3]) * 8.0f + 4.0f, std::stof(lineComp[4]) * 8.0f + 4.0f),
 							Math::Vec3(std::stof(lineComp[5]), std::stof(lineComp[6]), std::stof(lineComp[7]))));
 				}
 
-				if (lineComp[2] == "strong_slime") // Pharse strong slime enemy
+				if (lineComp[2] == "mustard") // Pharse mustard enemy
 				{
-					if (lineComp.size() == 5) // default slime with position
-						entities.push_back(new StrongSlime(name + "_strong_slime[" + lineComp[3] + "," + lineComp[4] + "]",
-							Math::Vec2(std::stof(lineComp[3]), std::stof(lineComp[4]))));
-					else if (lineComp.size() == 8) // slime with position & recoloring
-						entities.push_back(new StrongSlime(name + "_strong_slime[" + lineComp[3] + "," + lineComp[4] + "]",
-							Math::Vec2(std::stof(lineComp[3]), std::stof(lineComp[4])),
+					if (lineComp.size() == 5) // mustard with position
+						entities.push_back(new Mustard(name + "_mustard[" + lineComp[3] + "," + lineComp[4] + "]",
+							Math::Vec2(std::stof(lineComp[3]) * 8.0f + 4.0f, std::stof(lineComp[4]) * 8.0f + 4.0f)));
+					else if (lineComp.size() == 8) // mustard with position & recoloring
+						entities.push_back(new Mustard(name + "_mustard[" + lineComp[3] + "," + lineComp[4] + "]",
+							Math::Vec2(std::stof(lineComp[3]) * 8.0f + 4.0f, std::stof(lineComp[4]) * 8.0f + 4.0f),
+							Math::Vec3(std::stof(lineComp[5]), std::stof(lineComp[6]), std::stof(lineComp[7]))));
+				}
+				if (lineComp[2] == "hotdog") // Pharse hotdog enemy
+				{
+					if (lineComp.size() == 5) // default hotdog with position
+						entities.push_back(new Mustard(name + "_hotdog[" + lineComp[3] + "," + lineComp[4] + "]",
+							Math::Vec2(std::stof(lineComp[3]) * 8.0f + 4.0f, std::stof(lineComp[4]) * 8.0f + 4.0f)));
+					else if (lineComp.size() == 8) // hotdog with position & recoloring
+						entities.push_back(new Mustard(name + "_hotdog[" + lineComp[3] + "," + lineComp[4] + "]",
+							Math::Vec2(std::stof(lineComp[3]) * 8.0f + 4.0f, std::stof(lineComp[4]) * 8.0f + 4.0f),
 							Math::Vec3(std::stof(lineComp[5]), std::stof(lineComp[6]), std::stof(lineComp[7]))));
 				}
 			}
