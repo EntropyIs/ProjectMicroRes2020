@@ -1,13 +1,19 @@
 shader, quadShader, Shaders/vFBShader.glsl, Shaders/fFBShader.glsl
 shader, spriteShader, Shaders/vBaseShader.glsl, Shaders/fBaseShader.glsl
 shader, hitboxShader, Shaders/vHitboxShader.glsl, Shaders/fHitboxShader.glsl, Shaders/gHitboxShader.glsl
-sprite, player_sheet, player-animations.png, 2, 32, 8, 12
-sprite, slime_sheet, slime_sheet.png, 3, 2, 10, 10
-sprite, test_tiles, test_tiles.png, 8, 8, 8, 8
-sprite, random_assets, random_assets.png, 8, 8, 8, 8
+
+sprite, char_player, sprite-player.png, 2, 32, 8, 12
+sprite, char_player, sprite-player-weapon.png, 7, 8, 8, 8
+sprite, char_hotdog, sprite-hotdog.png, 7, 11, 10, 10
+sprite, char_sauce, sprite-sauce.png, 7, 6, 10, 10
+
 sprite, charset_black, charset_black.png, 16, 6, 5, 7
 sprite, charset_grey, charset_grey.png, 16, 6, 5, 7
 sprite, charset_white, charset_white.png, 16, 6, 5, 7
-sprite, test_sword, test_sword.png, 7, 8, 8, 8
+
+sprite, random_assets, random_assets.png, 8, 8, 8, 8
 sprite, heart_sprite, heart_sprite.png, 3, 1, 4, 4
+
 sprite, grass_world, grass_world.png, 10, 16, 8, 8
+
+sprite, marker, marker.png, 4, 1, 8, 8
