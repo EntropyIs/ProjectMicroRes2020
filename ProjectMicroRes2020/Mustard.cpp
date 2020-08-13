@@ -6,6 +6,8 @@
 #include "EntityManager.h"
 #include "ResourceManager.h"
 
+#include <iostream>
+
 using namespace Entropy;
 
 Mustard::Mustard(std::string id, Math::Vec2 position, Math::Vec3 color) :
@@ -63,8 +65,13 @@ void Mustard::Update()
 		}
 	}
 
-	if (detectCollion(EntityManager::getPlayerWeapon().getCollider()))
+	if (detectCollion(EntityManager::getPlayerWeapon().getCollider()) && EntityManager::getPlayerWeapon().isAlive())
+	{
+#ifdef _DEBUG
+		std::cout << this->id << ", hit by: " << EntityManager::getPlayerWeapon().getID() << std::endl;
+#endif // _DEBUG
 		health--; // take away health if hits player wepon
+	}
 
 	// Check if alive
 	if (health == 0)

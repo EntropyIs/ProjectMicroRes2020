@@ -3,6 +3,8 @@
 #include "EntityManager.h"
 #include "ResourceManager.h"
 
+#include <iostream>
+
 using namespace Entropy;
 
 Player::Player(const char* spriteName, unsigned int row, Entropy::Math::Vec2 position,
@@ -202,6 +204,9 @@ void Player::Update()
             {
                 if (EntityManager::getLevel().getEntity(object).isAlive())
                 {
+#ifdef _DEBUG
+                    std::cout << this->id << ", hit by: " << object << std::endl;
+#endif // _DEBUG
                     undoMovement(); // Step Back
                     health--;
                     vulnerable = false;
