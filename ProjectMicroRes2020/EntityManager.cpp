@@ -3,6 +3,7 @@
 LevelManager EntityManager::levelManager;
 Player EntityManager::player;
 PlayerWeapon EntityManager::playerWeapon;
+HotdogWeapon EntityManager::hotdogWeapon;
 
 Level& EntityManager::getLevel()
 {
@@ -32,6 +33,16 @@ PlayerWeapon& EntityManager::getPlayerWeapon()
 void EntityManager::setPlayerWeapon(PlayerWeapon weapon)
 {
     playerWeapon = weapon;
+}
+
+HotdogWeapon& EntityManager::getHotdogWeapon()
+{
+    return hotdogWeapon;
+}
+
+void EntityManager::setHotdogWeapon(HotdogWeapon weapon)
+{
+    hotdogWeapon = weapon;
 }
 
 void EntityManager::setLevelManager(const char* levelList)

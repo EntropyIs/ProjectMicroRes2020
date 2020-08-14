@@ -5,6 +5,7 @@ shader, hitboxShader, Shaders/vHitboxShader.glsl, Shaders/fHitboxShader.glsl, Sh
 sprite, char_player, sprite-player.png, 2, 32, 8, 12
 sprite, char_player_weapon, sprite-player-weapon.png, 7, 8, 8, 8
 sprite, char_hotdog, sprite-hotdog.png, 7, 12, 10, 10
+sprite, char_hotdog_weapon, sprite-hotdog-projectile.png, 2, 4, 8, 8
 sprite, char_sauce, sprite-sauce.png, 7, 6, 10, 10
 
 sprite, charset_black, charset_black.png, 16, 6, 5, 7
