@@ -21,6 +21,7 @@ Mustard::Mustard(std::string id, Math::Vec2 position, Math::Vec3 color) :
 
 	hurting = false;
 	dieing = false;
+	set = false;
 	hurtAnim = 0;
 }
 

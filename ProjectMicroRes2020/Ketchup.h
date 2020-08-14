@@ -12,6 +12,7 @@ private:
 
 	bool hurting;
 	bool dieing;
+	bool set;
 
 	unsigned int hurtAnim;
 
