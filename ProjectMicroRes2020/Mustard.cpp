@@ -20,6 +20,10 @@ Mustard::Mustard(std::string id, Math::Vec2 position, Math::Vec3 color) :
 	health = 3;
 
 	set = false;
+
+	hurting = false;
+	dieing = false;
+	hurtAnim = 0;
 }
 
 void Mustard::Draw(SpriteRenderer& renderer)
@@ -31,49 +35,79 @@ void Mustard::Update()
 {
 	animationRenderer.Update();
 
-	// Set Movement Pattern
-	if (animationRenderer.getFrame() == 1 && !set) // frame 1, begin moveing
+	if (!hurting && !dieing)
 	{
-		angle += 0.5f;
-		speed = 20.0f;
-		set = true;
-	}
-	else if (animationRenderer.getFrame() == 2 && set) // frame 2, stop moving
-	{
-		speed = 0.0f;
-		set = false;
-	}
-	Entropy::Math::Vec3 slime_velocity = Math::Rotate(angle) * Math::Vec3(speed, 0.0f, 0.0f);
-	velocity.X = slime_velocity.X;
-	velocity.Y = slime_velocity.Y;
-
-	// Move Mustard
-	performMovement();
-
-	// Handle Collsions
-	for (unsigned int i = 0; i < EntityManager::getLevel().getColliders().size(); i++)
-	{
-		std::string object = EntityManager::getLevel().getColliders()[i];
-		if (object != id && detectCollion(EntityManager::getLevel().getCollider(object)))
+		// Set Movement Pattern
+		if (animationRenderer.getFrame() == 1 && !set) // frame 1, begin moveing
 		{
-			if (EntityManager::getLevel().isWall(object) || EntityManager::getLevel().isLink(object) || EntityManager::getLevel().isEntity(object)) // Wall, WarpPoint or Entity
+			angle += 0.5f;
+			speed = 20.0f;
+			set = true;
+		}
+		else if (animationRenderer.getFrame() == 2 && set) // frame 2, stop moving
+		{
+			speed = 0.0f;
+			set = false;
+		}
+		Entropy::Math::Vec3 slime_velocity = Math::Rotate(angle) * Math::Vec3(speed, 0.0f, 0.0f);
+		velocity.X = slime_velocity.X;
+		velocity.Y = slime_velocity.Y;
+
+		// Move Mustard
+		performMovement();
+
+		// Handle Collsions
+		for (unsigned int i = 0; i < EntityManager::getLevel().getColliders().size(); i++)
+		{
+			std::string object = EntityManager::getLevel().getColliders()[i];
+			if (object != id && detectCollion(EntityManager::getLevel().getCollider(object)))
 			{
-				undoMovement();// Step Back
-				angle += Math::Radians(180.0f); // set angle 180 deg from current;
-				break;
+				if (EntityManager::getLevel().isWall(object) || EntityManager::getLevel().isLink(object) || EntityManager::getLevel().isEntity(object)) // Wall, WarpPoint or Entity
+				{
+					undoMovement();// Step Back
+					angle += Math::Radians(180.0f); // set angle 180 deg from current;
+					break;
+				}
 			}
+		}
+
+		if (detectCollion(EntityManager::getPlayerWeapon().getCollider()) && EntityManager::getPlayerWeapon().isAlive())
+		{
+#ifdef _DEBUG
+			std::cout << this->id << ", hit by: " << EntityManager::getPlayerWeapon().getID() << std::endl;
+#endif // _DEBUG
+			health--; // take away health if hits player wepon
+			animationRenderer.setRowNumber(2);
+			animationRenderer.setNumFrames(2);
+			hurting = true;
+			hurtAnim = 3;
+			animationRenderer.playAnimationOnce();
 		}
 	}
 
-	if (detectCollion(EntityManager::getPlayerWeapon().getCollider()) && EntityManager::getPlayerWeapon().isAlive())
+	if (hurting && animationRenderer.isComplete())
 	{
-#ifdef _DEBUG
-		std::cout << this->id << ", hit by: " << EntityManager::getPlayerWeapon().getID() << std::endl;
-#endif // _DEBUG
-		health--; // take away health if hits player wepon
+		hurtAnim--;
+		if (hurtAnim <= 0)
+		{
+			hurting = false;
+			animationRenderer.setRowNumber(0);
+			animationRenderer.setNumFrames(3);
+		}
+		else 
+			animationRenderer.playAnimationOnce();
+	}
+
+	if (health == 0 && !hurting && !dieing)
+	{
+		dieing = true;
+		hurting = false;
+		animationRenderer.setRowNumber(4);
+		animationRenderer.setNumFrames(7);
+		animationRenderer.playAnimationOnce();
 	}
 
 	// Check if alive
-	if (health == 0)
+	if (dieing && animationRenderer.isComplete())
 		alive = false;
 }
