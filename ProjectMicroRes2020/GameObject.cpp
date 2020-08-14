@@ -105,3 +105,8 @@ bool GameObject::isAlive()
 {
 	return alive;
 }
+
+void GameObject::kill()
+{
+	alive = false;
+}

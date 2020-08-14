@@ -25,6 +25,8 @@ bool StateGame::init()
 {
     // Configure Entities
     EntityManager::setPlayer(Player("char_player", 7, Math::Vec2(32.0f, 32.0f), Math::Vec2(6.0f, 6.0f), Math::Vec2(4.0f, 4.0f), Math::Vec2(-1.0f, 2.0f)));
+    EntityManager::getPlayerWeapon().kill();
+    EntityManager::getHotdogWeapon().kill();
     EntityManager::setLevelManager("Assets/Levels/levels.csv");
 
     // Configure shaders
@@ -164,6 +166,7 @@ void StateGame::render()
         EntityManager::getPlayer().Draw(renderer);
         EntityManager::getPlayerWeapon().Draw(renderer);
     }
+    EntityManager::getHotdogWeapon().Draw(renderer);
     EntityManager::getLevel().Draw(renderer);
 }
 
@@ -175,6 +178,7 @@ GameState* StateGame::update(GameState* gameState)
 
     // Update Level Data
     EntityManager::getLevel().Update();
+    EntityManager::getHotdogWeapon().Update();
 
     if (pause) // Pause Menu Called
     {

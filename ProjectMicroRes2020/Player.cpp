@@ -179,6 +179,7 @@ void Player::Update()
     // Move Character
     performMovement();
 
+    // Get Collisions
     for (unsigned int i = 0; i < EntityManager::getLevel().getColliders().size(); i++)
     {
         std::string object = EntityManager::getLevel().getColliders()[i];
@@ -257,39 +258,93 @@ void Player::Update()
                 }
             }
         }
-
-
-        // Tickdown Hurt Animation
-        if (hurting)
-        {
-            if (animationRenderer.isComplete() && hurtAnim == 0)
-            {
-                hurting = false;
-            }
-            else if (animationRenderer.isComplete())
-            {
-                hurtAnim--;
-                animationRenderer.playAnimationOnce();
-            }
-        }
-
-        // Check if still attacking;
-        if (attacking)
-            if (!EntityManager::getPlayerWeapon().isAlive())
-                attacking = false;
-           
-        // Tickdown Invunralbility
-        if (!vulnerable && !hurting)
-        {
-            float timeElapsed = ResourceManager::getTimeElapsed();
-            timer += ResourceManager::getTimeElapsed();
-            if (timer > invulnerable_time)
-                vulnerable = true;
-        }
-
-        if (health == 0)
-            alive = false;
     }
+
+    if (EntityManager::getHotdogWeapon().detectCollion(collider) && vulnerable)
+    {
+#ifdef _DEBUG
+        std::cout << this->id << ", hit by: HotdogWeapon" << std::endl;
+#endif // _DEBUG
+
+        EntityManager::getHotdogWeapon().kill();
+
+        undoMovement(); // Step Back
+        health--;
+        vulnerable = false;
+        hurting = true;
+        hurtAnim = 2;
+        animationRenderer.playAnimationOnce();
+        timer = 0;
+
+        switch (lastDirection)
+        {
+        case UPRIGHT:
+            animationRenderer.setRowNumber(28);
+            animationRenderer.setNumFrames(2);
+            break;
+        case RIGHT:
+            animationRenderer.setRowNumber(29);
+            animationRenderer.setNumFrames(2);
+            break;
+        case DOWNRIGHT:
+            animationRenderer.setRowNumber(30);
+            animationRenderer.setNumFrames(2);
+            break;
+        case DOWN:
+            animationRenderer.setRowNumber(31);
+            animationRenderer.setNumFrames(2);
+            break;
+        case DOWNLEFT:
+            animationRenderer.setRowNumber(24);
+            animationRenderer.setNumFrames(2);
+            break;
+        case LEFT:
+            animationRenderer.setRowNumber(25);
+            animationRenderer.setNumFrames(2);
+            break;
+        case UPLEFT:
+            animationRenderer.setRowNumber(26);
+            animationRenderer.setNumFrames(2);
+            break;
+        case UP:
+            animationRenderer.setRowNumber(27);
+            animationRenderer.setNumFrames(2);
+            break;
+        default:
+            break;
+        }
+    }
+
+    // Tickdown Hurt Animation
+    if (hurting)
+    {
+        if (animationRenderer.isComplete() && hurtAnim == 0)
+        {
+            hurting = false;
+        }
+        else if (animationRenderer.isComplete())
+        {
+            hurtAnim--;
+            animationRenderer.playAnimationOnce();
+        }
+    }
+
+    // Check if still attacking;
+    if (attacking)
+        if (!EntityManager::getPlayerWeapon().isAlive())
+            attacking = false;
+           
+    // Tickdown Invunralbility
+    if (!vulnerable && !hurting)
+    {
+        float timeElapsed = ResourceManager::getTimeElapsed();
+        timer += ResourceManager::getTimeElapsed();
+        if (timer > invulnerable_time)
+            vulnerable = true;
+    }
+
+    if (health == 0)
+        alive = false;
 }
 
 void Player::Draw(SpriteRenderer& renderer)

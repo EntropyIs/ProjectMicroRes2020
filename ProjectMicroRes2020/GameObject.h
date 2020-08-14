@@ -55,4 +55,5 @@ public:
 	bool detectCollion(BoxCollider& other);
 
 	bool isAlive();
+	void kill();
 };
