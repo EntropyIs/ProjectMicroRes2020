@@ -78,3 +78,8 @@ void AnimationRenderer::setNumFrames(unsigned int numFrames)
 {
 	num_frames = numFrames;
 }
+
+void AnimationRenderer::setFPS(unsigned int fps)
+{
+	frame_advance_time = 1.0f / fps;
+}

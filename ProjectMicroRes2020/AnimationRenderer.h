@@ -37,4 +37,5 @@ public:
 
 	void setRowNumber(unsigned int rowNumber);
 	void setNumFrames(unsigned int numFrames);
+	void setFPS(unsigned int fps);
 };

@@ -80,9 +80,10 @@ void Mustard::Update()
 			health--; // take away health if hits player wepon
 			animationRenderer.setRowNumber(2);
 			animationRenderer.setNumFrames(2);
+			animationRenderer.setFPS(8);
+			animationRenderer.playAnimationOnce();
 			hurting = true;
 			hurtAnim = 3;
-			animationRenderer.playAnimationOnce();
 		}
 	}
 
@@ -94,6 +95,7 @@ void Mustard::Update()
 			hurting = false;
 			animationRenderer.setRowNumber(0);
 			animationRenderer.setNumFrames(3);
+			animationRenderer.setFPS(6);
 			animationRenderer.playAnimation();
 		}
 		else
@@ -106,6 +108,7 @@ void Mustard::Update()
 		hurting = false;
 		animationRenderer.setRowNumber(4);
 		animationRenderer.setNumFrames(7);
+		animationRenderer.setFPS(12);
 		animationRenderer.playAnimationOnce();
 	}
 

@@ -1,4 +1,4 @@
-#include "Ketchup.h"
+#include "Hotdog.h"
 
 #include <Entropy/Math/Transform2D.h>
 #include <Entropy/Math/Converters.h>
@@ -10,8 +10,8 @@
 
 using namespace Entropy;
 
-Ketchup::Ketchup(std::string id, Math::Vec2 position, Math::Vec3 color) :
-	AnimatedGameObject(id, "char_sauce", 3, 1, 6, position, Math::Vec2(8.0f, 8.0f),
+Hotdog::Hotdog(std::string id, Math::Vec2 position, Math::Vec3 color) :
+	AnimatedGameObject(id, "char_hotdog", 6, 0, 6, position, Math::Vec2(8.0f, 8.0f),
 		Math::Vec2(4.0f, 4.0f), Math::Vec2(1.0f, 1.0f)), color(color)
 {
 	angle = (rand() % 62) / 10.0f;
@@ -26,32 +26,57 @@ Ketchup::Ketchup(std::string id, Math::Vec2 position, Math::Vec3 color) :
 	hurtAnim = 0;
 }
 
-void Ketchup::Draw(SpriteRenderer& renderer)
+void Hotdog::Draw(SpriteRenderer& renderer)
 {
 	animationRenderer.Draw(renderer, position, 0.0f, color);
 }
 
-void Ketchup::Update()
+void Hotdog::Update()
 {
 	animationRenderer.Update();
 
 	if (!hurting && !dieing)
 	{
 		// Set Movement Pattern
-		if (animationRenderer.getFrame() == 1 && !set) // frame 1, begin moveing
+		if (moveTimer <= 0)
 		{
-			angle += 0.5f;
-			speed = 20.0f;
-			set = true;
+			unsigned int direction = rand() % 5;
+
+			switch (direction)
+			{
+			case 0:
+				lastDirection = Direction::LEFT;
+				break;
+			case 1:
+				lastDirection = Direction::DOWN;
+				break;
+			case 2:
+				lastDirection = Direction::RIGHT;
+				break;
+			case 3:
+				lastDirection = Direction::UP;
+				break;
+			default:
+				lastDirection = Direction::DOWN;
+				break;
+			}
+
+			switch (lastDirection)
+			{
+			case RIGHT:
+				break;
+			case DOWN:
+				break;
+			case LEFT:
+				break;
+			case UP:
+				break;
+			default:
+				break;
+			}
+
+			moveTimer = rand() % 4;
 		}
-		else if (animationRenderer.getFrame() == 2 && set) // frame 2, stop moving
-		{
-			speed = 0.0f;
-			set = false;
-		}
-		Entropy::Math::Vec3 slime_velocity = Math::Rotate(angle) * Math::Vec3(speed, 0.0f, 0.0f);
-		velocity.X = slime_velocity.X;
-		velocity.Y = slime_velocity.Y;
 
 		// Move Mustard
 		performMovement();
@@ -113,4 +138,8 @@ void Ketchup::Update()
 	// Check if alive
 	if (dieing && animationRenderer.isComplete())
 		alive = false;
+
+	// Update Timers
+	moveTimer -= ResourceManager::getTimeElapsed();
+		attackTimer -= ResourceManager::getTimeElapsed();
 }
