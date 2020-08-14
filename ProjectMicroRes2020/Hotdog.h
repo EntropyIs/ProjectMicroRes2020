@@ -9,11 +9,6 @@ private:
 	Entropy::Math::Vec3 color;
 	Direction lastDirection;
 
-	float angle;
-	float speed;
-
-	bool set;
-
 	bool hurting;
 	bool dieing;
 

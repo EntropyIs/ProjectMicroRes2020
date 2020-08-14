@@ -3,6 +3,7 @@
 #include "ResourceManager.h"
 #include "Ketchup.h"
 #include "Mustard.h"
+#include "Hotdog.h"
 
 #include <fstream>
 #include <sstream>
@@ -85,10 +86,10 @@ Level::Level(const char* path, std::string name) : name(name)
 				if (lineComp[2] == "hotdog") // Pharse hotdog enemy
 				{
 					if (lineComp.size() == 5) // default hotdog with position
-						entities.push_back(new Mustard(name + "_hotdog[" + lineComp[3] + "," + lineComp[4] + "]",
+						entities.push_back(new Hotdog(name + "_hotdog[" + lineComp[3] + "," + lineComp[4] + "]",
 							Math::Vec2(std::stof(lineComp[3]) * 8.0f + 4.0f, std::stof(lineComp[4]) * 8.0f + 4.0f)));
 					else if (lineComp.size() == 8) // hotdog with position & recoloring
-						entities.push_back(new Mustard(name + "_hotdog[" + lineComp[3] + "," + lineComp[4] + "]",
+						entities.push_back(new Hotdog(name + "_hotdog[" + lineComp[3] + "," + lineComp[4] + "]",
 							Math::Vec2(std::stof(lineComp[3]) * 8.0f + 4.0f, std::stof(lineComp[4]) * 8.0f + 4.0f),
 							Math::Vec3(std::stof(lineComp[5]), std::stof(lineComp[6]), std::stof(lineComp[7]))));
 				}

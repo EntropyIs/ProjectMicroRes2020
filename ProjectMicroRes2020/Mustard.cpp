@@ -19,8 +19,6 @@ Mustard::Mustard(std::string id, Math::Vec2 position, Math::Vec3 color) :
 
 	health = 3;
 
-	set = false;
-
 	hurting = false;
 	dieing = false;
 	hurtAnim = 0;

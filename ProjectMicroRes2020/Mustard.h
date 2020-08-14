@@ -10,8 +10,6 @@ private:
 	float angle;
 	float speed;
 
-	bool set;
-
 	bool hurting;
 	bool dieing;
 

@@ -14,12 +14,7 @@ Hotdog::Hotdog(std::string id, Math::Vec2 position, Math::Vec3 color) :
 	AnimatedGameObject(id, "char_hotdog", 6, 0, 6, position, Math::Vec2(8.0f, 8.0f),
 		Math::Vec2(4.0f, 4.0f), Math::Vec2(1.0f, 1.0f)), color(color)
 {
-	angle = (rand() % 62) / 10.0f;
-	speed = 0.0f;
-
-	health = 1;
-
-	set = false;
+	health = 2;
 
 	hurting = false;
 	dieing = false;
@@ -46,36 +41,27 @@ void Hotdog::Update()
 			{
 			case 0:
 				lastDirection = Direction::LEFT;
+				animationRenderer.setRowNumber(0);
+				velocity = Math::Vec2(-10.0f, 0.0f);
 				break;
 			case 1:
 				lastDirection = Direction::DOWN;
+				animationRenderer.setRowNumber(3);
+				velocity = Math::Vec2(0.0f, -10.0f);
 				break;
 			case 2:
 				lastDirection = Direction::RIGHT;
+				animationRenderer.setRowNumber(2);
+				velocity = Math::Vec2(10.0f, 0.0f);
 				break;
 			case 3:
 				lastDirection = Direction::UP;
-				break;
-			default:
-				lastDirection = Direction::DOWN;
-				break;
-			}
-
-			switch (lastDirection)
-			{
-			case RIGHT:
-				break;
-			case DOWN:
-				break;
-			case LEFT:
-				break;
-			case UP:
-				break;
-			default:
+				animationRenderer.setRowNumber(1);
+				velocity = Math::Vec2(0.0f, 10.0f);
 				break;
 			}
 
-			moveTimer = rand() % 4;
+			moveTimer = (float) (rand() % 4);
 		}
 
 		// Move Mustard
@@ -90,7 +76,29 @@ void Hotdog::Update()
 				if (EntityManager::getLevel().isWall(object) || EntityManager::getLevel().isLink(object) || EntityManager::getLevel().isEntity(object)) // Wall, WarpPoint or Entity
 				{
 					undoMovement();// Step Back
-					angle += Math::Radians(180.0f); // set angle 180 deg from current;
+					switch (lastDirection)
+					{
+					case RIGHT:
+						lastDirection = Direction::LEFT;
+						animationRenderer.setRowNumber(0);
+						velocity = Math::Vec2(-10.0f, 0.0f);
+						break;
+					case DOWN:
+						lastDirection = Direction::UP;
+						animationRenderer.setRowNumber(1);
+						velocity = Math::Vec2(0.0f, 10.0f);
+						break;
+					case LEFT:
+						lastDirection = Direction::RIGHT;
+						animationRenderer.setRowNumber(2);
+						velocity = Math::Vec2(10.0f, 0.0f);
+						break;
+					case UP:
+						lastDirection = Direction::DOWN;
+						animationRenderer.setRowNumber(3);
+						velocity = Math::Vec2(0.0f, -10.0f);
+						break;
+					}
 					break;
 				}
 			}
@@ -102,9 +110,26 @@ void Hotdog::Update()
 			std::cout << this->id << ", hit by: " << EntityManager::getPlayerWeapon().getID() << std::endl;
 #endif // _DEBUG
 			health--; // take away health if hits player wepon
-			animationRenderer.setRowNumber(3);
+
+			switch (lastDirection)
+			{
+			case RIGHT:
+				animationRenderer.setRowNumber(6);
+				break;
+			case DOWN:
+				animationRenderer.setRowNumber(7);
+				break;
+			case LEFT:
+				animationRenderer.setRowNumber(4);
+				break;
+			case UP:
+				animationRenderer.setRowNumber(5);
+				break;
+			default:
+				break;
+			}
 			animationRenderer.setNumFrames(2);
-			animationRenderer.setFPS(12);
+			animationRenderer.setFPS(8);
 			animationRenderer.playAnimationOnce();
 			hurting = true;
 			hurtAnim = 3;
@@ -117,8 +142,33 @@ void Hotdog::Update()
 		if (hurtAnim <= 0)
 		{
 			hurting = false;
-			animationRenderer.setRowNumber(1);
-			animationRenderer.setNumFrames(3);
+			switch (lastDirection)
+			{
+			case RIGHT:
+				lastDirection = Direction::RIGHT;
+				animationRenderer.setRowNumber(2);
+				velocity = Math::Vec2(10.0f, 0.0f);
+				
+				break;
+			case DOWN:
+				lastDirection = Direction::DOWN;
+				animationRenderer.setRowNumber(3);
+				velocity = Math::Vec2(0.0f, -10.0f);
+				break;
+			case LEFT:
+				lastDirection = Direction::LEFT;
+				animationRenderer.setRowNumber(0);
+				velocity = Math::Vec2(-10.0f, 0.0f);
+				break;
+			case UP:
+				lastDirection = Direction::UP;
+				animationRenderer.setRowNumber(1);
+				velocity = Math::Vec2(0.0f, 10.0f);
+				break;
+			default:
+				break;
+			}
+			animationRenderer.setNumFrames(6);
 			animationRenderer.setFPS(6);
 			animationRenderer.playAnimation();
 		}
@@ -129,7 +179,7 @@ void Hotdog::Update()
 	if (health == 0 && !hurting && !dieing)
 	{
 		dieing = true;
-		animationRenderer.setRowNumber(5);
+		animationRenderer.setRowNumber(11);
 		animationRenderer.setNumFrames(7);
 		animationRenderer.setFPS(12);
 		animationRenderer.playAnimationOnce();
@@ -141,5 +191,5 @@ void Hotdog::Update()
 
 	// Update Timers
 	moveTimer -= ResourceManager::getTimeElapsed();
-		attackTimer -= ResourceManager::getTimeElapsed();
+	attackTimer -= ResourceManager::getTimeElapsed();
 }
