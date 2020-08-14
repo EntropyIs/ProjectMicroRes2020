@@ -49,6 +49,7 @@ void Mustard::Update()
 			speed = 0.0f;
 			set = false;
 		}
+
 		Entropy::Math::Vec3 slime_velocity = Math::Rotate(angle) * Math::Vec3(speed, 0.0f, 0.0f);
 		velocity.X = slime_velocity.X;
 		velocity.Y = slime_velocity.Y;
@@ -93,8 +94,9 @@ void Mustard::Update()
 			hurting = false;
 			animationRenderer.setRowNumber(0);
 			animationRenderer.setNumFrames(3);
+			animationRenderer.playAnimation();
 		}
-		else 
+		else
 			animationRenderer.playAnimationOnce();
 	}
 
