@@ -93,6 +93,7 @@ void Ketchup::Update()
 			hurting = false;
 			animationRenderer.setRowNumber(1);
 			animationRenderer.setNumFrames(3);
+			animationRenderer.playAnimation();
 		}
 		else
 			animationRenderer.playAnimationOnce();
