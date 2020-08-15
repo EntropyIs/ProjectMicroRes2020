@@ -112,6 +112,7 @@ void Hotdog::Update()
 #ifdef _DEBUG
 				std::cout << this->id << ", shooting" << std::endl;
 #endif // _DEBUG
+				ResourceManager::playAudio("sfx_enemy_shoot");
 				switch (lastDirection)
 				{
 				case RIGHT:
@@ -135,7 +136,6 @@ void Hotdog::Update()
 						Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f)));
 					break;
 				}
-				ResourceManager::playAudio("sfx_sploo");
 				attackTimer = (float)(rand() % 6);
 			}
 		}
@@ -145,6 +145,7 @@ void Hotdog::Update()
 #ifdef _DEBUG
 			std::cout << this->id << ", hit by: " << EntityManager::getPlayerWeapon().getID() << std::endl;
 #endif // _DEBUG
+			ResourceManager::playAudio("sfx_enemy_hurt");
 			health--; // take away health if hits player wepon
 
 			switch (lastDirection)

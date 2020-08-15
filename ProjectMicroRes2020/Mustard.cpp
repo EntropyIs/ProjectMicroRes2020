@@ -42,7 +42,6 @@ void Mustard::Update()
 			angle += 0.5f;
 			speed = 20.0f;
 			set = true;
-			ResourceManager::playAudio("sfx_bloop");
 		}
 		else if (animationRenderer.getFrame() == 2 && set) // frame 2, stop moving
 		{
@@ -77,6 +76,7 @@ void Mustard::Update()
 #ifdef _DEBUG
 			std::cout << this->id << ", hit by: " << EntityManager::getPlayerWeapon().getID() << std::endl;
 #endif // _DEBUG
+			ResourceManager::playAudio("sfx_enemy_hurt");
 			health--; // take away health if hits player wepon
 			animationRenderer.setRowNumber(2);
 			animationRenderer.setNumFrames(2);
