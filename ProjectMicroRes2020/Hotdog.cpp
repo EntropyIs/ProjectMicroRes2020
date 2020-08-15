@@ -135,6 +135,7 @@ void Hotdog::Update()
 						Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f)));
 					break;
 				}
+				ResourceManager::playAudio("sfx_sploo");
 				attackTimer = (float)(rand() % 6);
 			}
 		}
