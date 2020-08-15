@@ -40,9 +40,6 @@
     <Filter Include="Source Files\Model\Renderer">
       <UniqueIdentifier>{e455c432-26f8-4dcc-85f1-15af2b71c236}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\AL Framework">
-      <UniqueIdentifier>{90276e97-0efb-4296-a0c9-9e8ebe61b258}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -111,17 +108,8 @@
     <ClCompile Include="Audio.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\Middleware\OpenAl\include\AL_FRAMEWORK\aldlist.cpp">
-      <Filter>Source Files\AL Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Middleware\OpenAl\include\AL_FRAMEWORK\CWaves.cpp">
-      <Filter>Source Files\AL Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Middleware\OpenAl\include\AL_FRAMEWORK\Framework.cpp">
-      <Filter>Source Files\AL Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Middleware\OpenAl\include\AL_FRAMEWORK\LoadOAL.cpp">
-      <Filter>Source Files\AL Framework</Filter>
+    <ClCompile Include="AudioEngine.cpp">
+      <Filter>Source Files\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +200,9 @@
       <Filter>Header Files\Model\Entity</Filter>
     </ClInclude>
     <ClInclude Include="Audio.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioEngine.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
   </ItemGroup>

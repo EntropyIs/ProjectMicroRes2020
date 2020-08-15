@@ -15,7 +15,7 @@ sprite, charset_white, charset_white.png, 16, 6, 5, 7
 sprite, random_assets, random_assets.png, 8, 8, 8, 8
 sprite, heart_sprite, heart_sprite.png, 3, 1, 4, 4
 
-sprite, grass_world, grass_world.png, 10, 16, 8, 8
+sprite, grass_world, grass_world.png, 16, 16, 8, 8
 
 sprite, marker, marker.png, 4, 1, 8, 8
 

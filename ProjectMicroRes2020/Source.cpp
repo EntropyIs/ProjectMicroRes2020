@@ -3,7 +3,6 @@
 #include <Entropy/Graphics/Shader.h>
 #include <Entropy/Graphics/Mesh.h>
 
-#include "../Middleware/OpenAl/samples/framework/Framework.h"
 #include <AL/al.h>
 
 #include <iostream>
@@ -14,6 +13,8 @@
 #include "StateGameOver.h"
 #include "StateMenu.h"
 #include "StatePause.h"
+
+#include "AudioEngine.h"
 
 #include "ResourceManager.h"
 #include "EntityManager.h"
@@ -29,12 +30,7 @@ int WinMain()
 	try
 	{
 		// Initalize Audio Engine
-		ALFWInit();
-		if (!ALFWInitOpenAL())
-		{
-			ALFWShutdown();
-			throw std::exception("Failed to initalize OpenAL");
-		}
+		AudioEngine audioEngine;
 
 		// Setup and Initalize Window
 		Graphics::Window window("Project MicroRes 2020", 600, 600, 1);
@@ -101,9 +97,6 @@ int WinMain()
 			window.processEvents();
 			ResourceManager::pollClock();
 		}
-
-		ALFWShutdownOpenAL();
-		ALFWShutdown();
 
 		return 0;
 	}

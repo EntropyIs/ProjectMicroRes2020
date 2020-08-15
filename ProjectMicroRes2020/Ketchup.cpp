@@ -42,6 +42,7 @@ void Ketchup::Update()
 			angle += 0.5f;
 			speed = 20.0f;
 			set = true;
+			ResourceManager::getAudio("sfx_bloop").play();
 		}
 		else if (animationRenderer.getFrame() == 2 && set) // frame 2, stop moving
 		{
