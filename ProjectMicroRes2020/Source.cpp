@@ -13,6 +13,7 @@
 #include "StateGameOver.h"
 #include "StateMenu.h"
 #include "StatePause.h"
+#include "StateIntro.h"
 
 //#include "AudioEngine.h"
 
@@ -33,7 +34,7 @@ int WinMain()
 		//AudioEngine audioEngine;
 
 		// Setup and Initalize Window
-		Graphics::Window window("Project MicroRes 2020", 600, 600, 1);
+		Graphics::Window window("I Just Wanna Grill!", 600, 600, 1);
 		window.setResolution(64, 64);
 		window.setClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -51,6 +52,7 @@ int WinMain()
 		StateGameOver gameOver = StateGameOver();
 		StateMenu menu = StateMenu();
 		StatePause pause = StatePause();
+		StateIntro intro = StateIntro();
 
 		// Connect Game States
 		credits.addConnection(0, &menu);
@@ -61,6 +63,7 @@ int WinMain()
 		menu.addConnection(1, &credits);
 		pause.addConnection(0, &game);
 		pause.addConnection(1, &menu);
+		intro.addConnection(0, &menu);
 
 		// Initialise States & State Engine
 		credits.init();
@@ -68,8 +71,9 @@ int WinMain()
 		gameOver.init();
 		menu.init();
 		pause.init();
+		intro.init();
 
-		GameState * gameState = &menu;
+		GameState * gameState = &intro;
 
 		// GameLoop
 		while (!window.getShouldClose())

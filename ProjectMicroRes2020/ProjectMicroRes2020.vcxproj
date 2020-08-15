@@ -167,6 +167,7 @@
     <ClCompile Include="StateCredits.cpp" />
     <ClCompile Include="StateGame.cpp" />
     <ClCompile Include="StateGameOver.cpp" />
+    <ClCompile Include="StateIntro.cpp" />
     <ClCompile Include="StateMenu.cpp" />
     <ClCompile Include="StatePause.cpp" />
     <ClCompile Include="Mustard.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="StateCredits.h" />
     <ClInclude Include="StateGame.h" />
     <ClInclude Include="StateGameOver.h" />
+    <ClInclude Include="StateIntro.h" />
     <ClInclude Include="StateMenu.h" />
     <ClInclude Include="StatePause.h" />
     <ClInclude Include="Mustard.h" />
