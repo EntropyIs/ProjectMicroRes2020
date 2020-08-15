@@ -208,6 +208,7 @@ void Player::Update()
 #ifdef _DEBUG
                     std::cout << this->id << ", hit by: " << object << std::endl;
 #endif // _DEBUG
+                    ResourceManager::playAudio("sfx_player_hurt");
                     undoMovement(); // Step Back
                     health--;
                     vulnerable = false;
@@ -265,9 +266,8 @@ void Player::Update()
 #ifdef _DEBUG
         std::cout << this->id << ", hit by: HotdogWeapon" << std::endl;
 #endif // _DEBUG
-
         EntityManager::getHotdogWeapon().kill();
-
+        ResourceManager::playAudio("sfx_player_hurt");
         undoMovement(); // Step Back
         health--;
         vulnerable = false;

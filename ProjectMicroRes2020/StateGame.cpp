@@ -146,8 +146,7 @@ void StateGame::input(Graphics::Window& window)
             EntityManager::getPlayer().setAttacking();
             break;
         }
-
-        ResourceManager::playAudio("sfx_woosh");
+        ResourceManager::playAudio("sfx_player_attack");
     }
 
     if (window.getKeyPressed(GLKeys::KEY_ESCAPE) || start)
