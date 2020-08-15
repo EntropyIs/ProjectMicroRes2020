@@ -23,14 +23,20 @@ void StateGameOver::input(Graphics::Window& window)
     if (axisCount >= 2 && buttonCount >= 10)
     {
         if ((window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down) || (buttonData[2] == GLFW_PRESS && !key_down))
+        {
+            ResourceManager::playAudio("sfx_menu_select");
             execute_selection = true;
+        }
         else if (!window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && buttonData[2] == GLFW_RELEASE && key_down)
             key_down = false;
     }
     else
     {
         if (window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down)
+        {
+            ResourceManager::playAudio("sfx_menu_select");
             execute_selection = true;
+        }
         else if (!window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && key_down)
             key_down = false;
     }

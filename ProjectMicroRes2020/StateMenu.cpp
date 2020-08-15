@@ -32,6 +32,7 @@ void StateMenu::input(Graphics::Window& window)
             (axisData[1] > (0.0f + threshold) && !key_down)
             )
         {
+            ResourceManager::playAudio("sfx_menu_move");
             key_down = true;
             selection++;
             if (selection > 2)
@@ -41,13 +42,17 @@ void StateMenu::input(Graphics::Window& window)
             (axisData[1] < (0.0f - threshold) && !key_down)
             )
         {
+            ResourceManager::playAudio("sfx_menu_move");
             key_down = true;
             selection--;
             if (selection < 0)
                 selection = 2;
         }
         else if ((window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down) || (buttonData[2] == GLFW_PRESS && !key_down))
+        {
+            ResourceManager::playAudio("sfx_menu_select");
             execute_selection = true;
+        }
         else if (!window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !window.getKeyPressed(Graphics::GLKeys::KEY_S) &&
             !window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !window.getKeyPressed(Graphics::GLKeys::KEY_W) &&
             !window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && buttonData[2] == GLFW_RELEASE &&
@@ -59,6 +64,7 @@ void StateMenu::input(Graphics::Window& window)
     {
         if ((window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_S) && !key_down))
         {
+            ResourceManager::playAudio("sfx_menu_move");
             key_down = true;
             selection++;
             if (selection > 2)
@@ -66,13 +72,17 @@ void StateMenu::input(Graphics::Window& window)
         }
         else if ((window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !key_down) || (window.getKeyPressed(Graphics::GLKeys::KEY_W) && !key_down))
         {
+            ResourceManager::playAudio("sfx_menu_move");
             key_down = true;
             selection--;
             if (selection < 0)
                 selection = 2;
         }
         else if (window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && !key_down)
+        {
+            ResourceManager::playAudio("sfx_menu_select");
             execute_selection = true;
+        }
         else if (!window.getKeyPressed(Graphics::GLKeys::KEY_DOWN) && !window.getKeyPressed(Graphics::GLKeys::KEY_S) &&
             !window.getKeyPressed(Graphics::GLKeys::KEY_UP) && !window.getKeyPressed(Graphics::GLKeys::KEY_W) &&
             !window.getKeyPressed(Graphics::GLKeys::KEY_ENTER) && key_down)
