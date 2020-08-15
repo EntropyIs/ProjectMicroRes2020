@@ -78,8 +78,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(projectdir)..\Middleware\EntropyLib\include;$(projectdir)..\Middleware\GLFW\include;$(projectdir)..\Middleware\GLEW\include;$(projectdir)..\Middleware\Assimp\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(projectdri)..\Middleware\EntropyLib\lib;$(projectdri)..\Middleware\GLFW\lib;$(projectdir)..\Middleware\GLEW\lib;$(projectdir)..\Middleware\Assimp\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(projectdir)..\Middleware\EntropyLib\include;$(projectdir)..\Middleware\GLFW\include;$(projectdir)..\Middleware\GLEW\include;$(projectdir)..\Middleware\Assimp\include;$(projectdir)..\Middleware\OpenAL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(projectdri)..\Middleware\EntropyLib\lib;$(projectdri)..\Middleware\GLFW\lib;$(projectdir)..\Middleware\GLEW\lib;$(projectdir)..\Middleware\Assimp\lib;$(projectdir)..\Middleware\OpenAL\libs\Win64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -124,7 +124,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>EntropyLib.lib;glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>EntropyLib.lib;glfw3.lib;glew32.lib;opengl32.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
@@ -147,8 +147,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Middleware\OpenAl\include\AL_FRAMEWORK\aldlist.cpp" />
+    <ClCompile Include="..\Middleware\OpenAl\include\AL_FRAMEWORK\CWaves.cpp" />
+    <ClCompile Include="..\Middleware\OpenAl\include\AL_FRAMEWORK\Framework.cpp" />
+    <ClCompile Include="..\Middleware\OpenAl\include\AL_FRAMEWORK\LoadOAL.cpp" />
     <ClCompile Include="AnimatedGameObject.cpp" />
     <ClCompile Include="AnimationRenderer.cpp" />
+    <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -181,6 +186,7 @@
   <ItemGroup>
     <ClInclude Include="AnimatedGameObject.h" />
     <ClInclude Include="AnimationRenderer.h" />
+    <ClInclude Include="Audio.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="EntityManager.h" />

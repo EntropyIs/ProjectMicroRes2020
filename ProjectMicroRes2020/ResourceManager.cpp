@@ -9,6 +9,7 @@ using namespace Entropy;
 std::map<std::string, Graphics::Shader> ResourceManager::Shaders;
 std::map<std::string, Graphics::Texture> ResourceManager::Textures;
 std::map<std::string, SpriteData> ResourceManager::SpriteSizeData;
+std::map<std::string, Audio> ResourceManager::AudioData;
 
 Entropy::Timing::Clock ResourceManager::MainClock;
 
@@ -65,6 +66,11 @@ bool ResourceManager::loadData(const char* path)
 			loadTexture((directory + "/" + lineComp[2]).c_str(), "sprite_sheet", lineComp[1]);
 			setSpriteSizeData(SpriteData(std::stoi(lineComp[3]), std::stoi(lineComp[4]), std::stoi(lineComp[5]), std::stoi(lineComp[6])), lineComp[1]);
 		}
+		else if (lineComp[0] == "audio")
+		{
+			// name, filepath
+			loadAudio((directory + "/" + lineComp[2]).c_str(), lineComp[1]);
+		}
 	}
 
 	// return status of clock.
@@ -102,6 +108,17 @@ SpriteData& ResourceManager::setSpriteSizeData(SpriteData data, std::string name
 SpriteData& ResourceManager::getSpriteSizeData(std::string name)
 {
     return SpriteSizeData[name];
+}
+
+Audio& ResourceManager::loadAudio(const char* path, std::string name)
+{
+	AudioData[name] = Audio(path);
+	return AudioData[name];
+}
+
+Audio& ResourceManager::getAudio(std::string name)
+{
+	return AudioData[name];
 }
 
 bool ResourceManager::initClock()

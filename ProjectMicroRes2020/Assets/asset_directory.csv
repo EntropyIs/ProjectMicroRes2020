@@ -18,3 +18,5 @@ sprite, heart_sprite, heart_sprite.png, 3, 1, 4, 4
 sprite, grass_world, grass_world.png, 10, 16, 8, 8
 
 sprite, marker, marker.png, 4, 1, 8, 8
+
+audio, sfx_bloop, Audio/DM-CGS-32.wav
