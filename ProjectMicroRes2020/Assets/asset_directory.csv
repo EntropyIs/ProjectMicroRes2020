@@ -20,3 +20,5 @@ sprite, grass_world, grass_world.png, 16, 16, 8, 8
 sprite, marker, marker.png, 4, 1, 8, 8
 
 audio, sfx_bloop, Audio/DM-CGS-32.wav
+audio, sfx_woosh, Audio/DM-CGS-47.wav
+audio, sfx_sploo, Audio/DM-CGS-40.wav

@@ -3,7 +3,7 @@
 #include <Entropy/Graphics/Shader.h>
 #include <Entropy/Graphics/Mesh.h>
 
-#include <AL/al.h>
+#include <irrKlang.h>
 
 #include <iostream>
 #include <exception>
@@ -14,7 +14,7 @@
 #include "StateMenu.h"
 #include "StatePause.h"
 
-#include "AudioEngine.h"
+//#include "AudioEngine.h"
 
 #include "ResourceManager.h"
 #include "EntityManager.h"
@@ -30,7 +30,7 @@ int WinMain()
 	try
 	{
 		// Initalize Audio Engine
-		AudioEngine audioEngine;
+		//AudioEngine audioEngine;
 
 		// Setup and Initalize Window
 		Graphics::Window window("Project MicroRes 2020", 600, 600, 1);

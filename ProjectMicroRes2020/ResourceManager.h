@@ -9,6 +9,8 @@
 
 #include "Audio.h"
 
+#include <irrKlang.h>
+
 struct SpriteData {
 	unsigned int num_rows;
 	unsigned int num_cols;
@@ -24,8 +26,11 @@ public:
 	static std::map<std::string, Entropy::Graphics::Shader> Shaders;
 	static std::map<std::string, Entropy::Graphics::Texture> Textures;
 	static std::map<std::string, SpriteData> SpriteSizeData;
-	static std::map<std::string, Audio> AudioData;
+	//static std::map<std::string, Audio> AudioData;
+	static std::map<std::string, std::string> AudioData;
 	
+	static irrklang::ISoundEngine* SoundEngine;
+
 	static Entropy::Timing::Clock MainClock;
 
 	static bool loadData(const char* path);
@@ -39,8 +44,11 @@ public:
 	static SpriteData& setSpriteSizeData(SpriteData data, std::string name);
 	static SpriteData& getSpriteSizeData(std::string name);
 
-	static Audio& loadAudio(const char* path, std::string name);
-	static Audio& getAudio(std::string name);
+	//static Audio& loadAudio(const char* path, std::string name);
+	//static Audio& getAudio(std::string name);
+
+	static void loadAudio(const char* path, std::string name);
+	static void playAudio(std::string name);
 
 	static bool initClock();
 	static void pollClock();

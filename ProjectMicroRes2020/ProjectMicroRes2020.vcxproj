@@ -78,13 +78,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(projectdir)..\Middleware\EntropyLib\include;$(projectdir)..\Middleware\GLFW\include;$(projectdir)..\Middleware\GLEW\include;$(projectdir)..\Middleware\Assimp\include;$(projectdir)..\Middleware\OpenAL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(projectdri)..\Middleware\EntropyLib\lib;$(projectdri)..\Middleware\GLFW\lib;$(projectdir)..\Middleware\GLEW\lib;$(projectdir)..\Middleware\Assimp\lib;$(projectdir)..\Middleware\OpenAL\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(projectdir)..\Middleware\EntropyLib\include;$(projectdir)..\Middleware\GLFW\include;$(projectdir)..\Middleware\GLEW\include;$(projectdir)..\Middleware\Assimp\include;$(projectdir)..\Middleware\OpenAL\include;$(projectdir)..\Middleware\irrKlang\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(projectdri)..\Middleware\EntropyLib\lib;$(projectdri)..\Middleware\GLFW\lib;$(projectdir)..\Middleware\GLEW\lib;$(projectdir)..\Middleware\Assimp\lib;$(projectdir)..\Middleware\OpenAL\lib;$(projectdir)..\Middleware\irrKlang\lib\Winx64-visualStudio;;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(projectdir)..\Middleware\EntropyLib\include;$(projectdir)..\Middleware\GLFW\include;$(projectdir)..\Middleware\GLEW\include;$(projectdir)..\Middleware\Assimp\include;$(projectdir)..\Middleware\OpenAL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(projectdri)..\Middleware\EntropyLib\lib;$(projectdri)..\Middleware\GLFW\lib;$(projectdir)..\Middleware\GLEW\lib;$(projectdir)..\Middleware\Assimp\lib;$(projectdir)..\Middleware\OpenAL\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(projectdir)..\Middleware\EntropyLib\include;$(projectdir)..\Middleware\GLFW\include;$(projectdir)..\Middleware\GLEW\include;$(projectdir)..\Middleware\Assimp\include;$(projectdir)..\Middleware\OpenAL\include;$(projectdir)..\Middleware\irrKlang\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(projectdri)..\Middleware\EntropyLib\lib;$(projectdri)..\Middleware\GLFW\lib;$(projectdir)..\Middleware\GLEW\lib;$(projectdir)..\Middleware\Assimp\lib;$(projectdir)..\Middleware\OpenAL\lib;$(projectdir)..\Middleware\irrKlang\lib\Winx64-visualStudio;;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -124,7 +124,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>EntropyLib.lib;glfw3.lib;glew32.lib;opengl32.lib;openal32.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>EntropyLib.lib;glfw3.lib;glew32.lib;opengl32.lib;openal32.lib;irrKlang.lib</AdditionalDependencies>
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
@@ -143,7 +143,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>EntropyLib.lib;glfw3.lib;glew32.lib;opengl32.lib;openal32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>EntropyLib.lib;glfw3.lib;glew32.lib;opengl32.lib;openal32.lib;irrKlang.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

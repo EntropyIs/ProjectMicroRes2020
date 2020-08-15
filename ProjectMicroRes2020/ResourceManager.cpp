@@ -9,12 +9,16 @@ using namespace Entropy;
 std::map<std::string, Graphics::Shader> ResourceManager::Shaders;
 std::map<std::string, Graphics::Texture> ResourceManager::Textures;
 std::map<std::string, SpriteData> ResourceManager::SpriteSizeData;
-std::map<std::string, Audio> ResourceManager::AudioData;
+//std::map<std::string, Audio> ResourceManager::AudioData;
+std::map<std::string, std::string> ResourceManager::AudioData;
+
+irrklang::ISoundEngine* ResourceManager::SoundEngine;
 
 Entropy::Timing::Clock ResourceManager::MainClock;
 
 bool ResourceManager::loadData(const char* path)
 {
+	SoundEngine = irrklang::createIrrKlangDevice();
 	std::string dataPath = path;
 	std::string directory = dataPath.substr(0, dataPath.find_last_of("/"));
 
@@ -110,6 +114,7 @@ SpriteData& ResourceManager::getSpriteSizeData(std::string name)
     return SpriteSizeData[name];
 }
 
+/*
 Audio& ResourceManager::loadAudio(const char* path, std::string name)
 {
 	AudioData[name] = Audio(path);
@@ -119,6 +124,17 @@ Audio& ResourceManager::loadAudio(const char* path, std::string name)
 Audio& ResourceManager::getAudio(std::string name)
 {
 	return AudioData[name];
+}
+*/
+
+void ResourceManager::loadAudio(const char* path, std::string name)
+{
+	AudioData[name] = path;
+}
+
+void ResourceManager::playAudio(std::string name)
+{
+	SoundEngine->play2D(AudioData[name].c_str(), false);
 }
 
 bool ResourceManager::initClock()
