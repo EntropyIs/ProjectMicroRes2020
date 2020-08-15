@@ -9,7 +9,7 @@ private:
 	bool vulnerable;
 	float timer;
 
-	float invulnerable_time = 30.0f;
+	float invulnerable_time = 2.0f;
 
 	Direction lastDirection;
 

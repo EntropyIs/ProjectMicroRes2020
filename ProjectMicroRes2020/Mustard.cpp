@@ -104,6 +104,7 @@ void Mustard::Update()
 
 	if (health == 0 && !hurting && !dieing)
 	{
+		ResourceManager::playAudio("sfx_enemy_dead");
 		dieing = true;
 		hurting = false;
 		animationRenderer.setRowNumber(4);

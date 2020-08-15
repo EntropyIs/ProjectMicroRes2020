@@ -103,6 +103,7 @@ void Ketchup::Update()
 
 	if (health == 0 && !hurting && !dieing)
 	{
+		ResourceManager::playAudio("sfx_enemy_dead");
 		dieing = true;
 		animationRenderer.setRowNumber(5);
 		animationRenderer.setNumFrames(7);

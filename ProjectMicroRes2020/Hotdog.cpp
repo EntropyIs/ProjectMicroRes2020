@@ -215,6 +215,7 @@ void Hotdog::Update()
 
 	if (health == 0 && !hurting && !dieing)
 	{
+		ResourceManager::playAudio("sfx_enemy_dead");
 		dieing = true;
 		animationRenderer.setRowNumber(11);
 		animationRenderer.setNumFrames(7);
