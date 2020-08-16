@@ -1,11 +1,11 @@
 tile,0,0,grass_world,6,12,0
-tile,1,0,grass_world,6,12,0
+tile,1,0,grass_world,7,12,0
 tile,2,0,grass_world,4,1,1,overworld_2_2,2,6
 tile,3,0,grass_world,4,1,1,overworld_2_2,3,6
 tile,4,0,grass_world,4,1,1,overworld_2_2,4,6
-tile,5,0,grass_world,6,12,0
-tile,6,0,grass_world,6,12,0
-tile,7,0,grass_world,6,12,0
+tile,5,0,grass_world,5,11,0
+tile,6,0,grass_world,6,11,0
+tile,7,0,grass_world,6,11,0
 tile,0,1,grass_world,11,1,1,overworld_1_1,6,1
 tile,1,1,grass_world,12,1,1
 tile,2,1,grass_world,4,1,1
@@ -29,7 +29,7 @@ tile,3,3,grass_world,13,0,1
 tile,4,3,grass_world,4,1,1
 tile,5,3,grass_world,4,1,1
 tile,6,3,grass_world,4,1,1
-tile,7,3,grass_world,6,12,0
+tile,7,3,grass_world,5,13,0
 tile,0,4,grass_world,11,1,1,overworld_1_1,6,4
 tile,1,4,grass_world,11,1,1
 tile,2,4,grass_world,11,1,1
@@ -37,7 +37,7 @@ tile,3,4,grass_world,11,1,1
 tile,4,4,grass_world,13,0,1
 tile,5,4,grass_world,4,1,1
 tile,6,4,grass_world,4,1,1
-tile,7,4,grass_world,6,12,0
+tile,7,4,grass_world,5,12,0
 tile,0,5,grass_world,11,1,1,overworld_1_1,6,5
 tile,1,5,grass_world,11,1,1
 tile,2,5,grass_world,11,1,1
