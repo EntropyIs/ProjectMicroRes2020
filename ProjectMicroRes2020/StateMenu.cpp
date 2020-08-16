@@ -9,6 +9,7 @@ bool StateMenu::init()
     selection = 0;
     key_down = true;
     execute_selection = false;
+    animRenderer = AnimationRenderer("title_screen", 5, 0, 5);
     return true;
 }
 
@@ -92,9 +93,6 @@ void StateMenu::input(Graphics::Window& window)
 
 void StateMenu::render()
 {
-    // Render Title
-    // TODO: Render Title
-
     // Render Menu Text
     Entropy::Math::Vec2 textPos[] =
     {
@@ -163,11 +161,13 @@ void StateMenu::render()
     }
 
     // Render Menu Background
-    // TODO: Render Menu Background
+    animRenderer.Draw(renderer, Math::Vec2(32, 32));
 }
 
 Entropy::GameState* StateMenu::update(GameState* gameState)
 {
+    animRenderer.Update();
+
     if (execute_selection)
     {
         switch (selection)

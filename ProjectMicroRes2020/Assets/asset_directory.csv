@@ -20,6 +20,7 @@ sprite, grass_world, grass_world.png, 16, 16, 8, 8
 sprite, marker, marker.png, 4, 1, 8, 8
 
 sprite, entropy_logo, entropy_logo.png, 12, 1, 64, 64
+sprite, title_screen, title_screen.png, 5, 1, 64, 64
 
 audio, sfx_enemy_hurt, Audio/enemy_hurt.wav
 audio, sfx_enemy_dead, Audio/enemy_dead.wav

@@ -5,11 +5,13 @@
 #include <Entropy/Math/Vec2.h>
 
 #include "SpriteRenderer.h"
+#include "AnimationRenderer.h"
 
 class StateMenu : public Entropy::GameState
 {
 private:
 	SpriteRenderer renderer;
+	AnimationRenderer animRenderer;
 
 	int selection;
 
