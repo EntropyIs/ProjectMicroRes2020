@@ -199,6 +199,7 @@ void Player::Update()
                     (tile.DX * spriteData.cel_width) + (spriteData.cel_width / 2.0f),
                     (tile.DY * spriteData.cel_height) + (spriteData.cel_height / 2.0f)));
                 EntityManager::setLevel(tile.LinkedLevel);
+                EntityManager::killHotdogWeapons(); // kill hotdog wepons on screen transition
                 break; // Found collision so stop checking others
             }
             else if (EntityManager::getLevel().isEntity(object) && vulnerable) // Entity (collectable or enemy)

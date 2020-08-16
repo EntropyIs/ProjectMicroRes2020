@@ -29,6 +29,7 @@ public:
 	static void updateHotdogWeapon();
 	static bool detectHotdogWeapon(BoxCollider& other, unsigned int& index);
 	static void drawHotdogWeapon(SpriteRenderer& renderer);
+	static void killHotdogWeapons();
 
 	static void setLevelManager(const char* levelList);
 };

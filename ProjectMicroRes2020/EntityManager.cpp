@@ -69,6 +69,12 @@ void EntityManager::drawHotdogWeapon(SpriteRenderer& renderer)
         hotdogWeapons[i].Draw(renderer);
 }
 
+void EntityManager::killHotdogWeapons()
+{
+    for (unsigned int i = 0; i < hotdogWeapons.size(); i++)
+        hotdogWeapons[i].kill();
+}
+
 void EntityManager::setLevelManager(const char* levelList)
 {
     levelManager = LevelManager(levelList);
