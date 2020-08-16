@@ -1,3 +1,6 @@
+entity,enemy,ketchup,2,5
+entity,enemy,hotdog,3,3
+entity,enemy,hotdog,5,4
 tile,0,0,grass_world,11,14,0
 tile,1,0,grass_world,11,14,0
 tile,2,0,grass_world,11,14,0

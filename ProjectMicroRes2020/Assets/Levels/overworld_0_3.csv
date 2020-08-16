@@ -1,3 +1,5 @@
+entity,enemy,mustard,1,5
+entity,enemy,ketchup,2,2
 tile,0,0,grass_world,6,12,0
 tile,1,0,grass_world,7,11,0
 tile,2,0,grass_world,4,1,1,overworld_1_3,2,6

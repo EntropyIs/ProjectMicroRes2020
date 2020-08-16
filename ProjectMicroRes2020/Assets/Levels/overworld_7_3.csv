@@ -1,3 +1,5 @@
+entity,enemy,mustard,2,3
+entity,enemy,mustard,4,5
 tile,0,0,grass_world,11,14,0
 tile,1,0,grass_world,11,14,0
 tile,2,0,grass_world,11,14,0

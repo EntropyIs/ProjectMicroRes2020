@@ -1,3 +1,7 @@
+entity,enemy,hotdog,2,2
+entity,enemy,hotdog,2,5
+entity,enemy,hotdog,5,2
+entity,enemy,hotdog,5,5
 tile,0,0,grass_world,3,4,0
 tile,1,0,grass_world,3,2,0
 tile,2,0,grass_world,4,1,1,overworld_2_6,2,6
