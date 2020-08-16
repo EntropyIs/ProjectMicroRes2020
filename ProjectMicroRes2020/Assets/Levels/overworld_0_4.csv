@@ -1,3 +1,4 @@
+entity,enemy,mustard,2,5
 tile,0,0,grass_world,2,1,0
 tile,1,0,grass_world,2,1,0
 tile,2,0,grass_world,4,1,1,overworld_1_4,2,6
@@ -62,4 +63,3 @@ tile,4,7,grass_world,2,1,0
 tile,5,7,grass_world,3,1,0
 tile,6,7,grass_world,3,1,0
 tile,7,7,grass_world,4,5,0
-entity,enemy,mustard,2,5

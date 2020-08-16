@@ -1,3 +1,4 @@
+entity,enemy,king_hotdog,4,4
 tile,0,0,grass_world,15,7,0
 tile,1,0,grass_world,11,1,1,overworld_1_0,1,6
 tile,2,0,grass_world,11,1,1,overworld_1_0,2,6
