@@ -7,6 +7,8 @@ sprite, char_player_weapon, sprite-player-weapon.png, 7, 8, 8, 8
 sprite, char_hotdog, sprite-hotdog.png, 7, 16, 10, 10
 sprite, char_hotdog_weapon, sprite-hotdog-projectile.png, 2, 4, 8, 8
 sprite, char_sauce, sprite-sauce.png, 7, 6, 10, 10
+sprite, char_hotdog_king, sprite-hotdog-king.png, 8,5,16,24
+sprite, char_hotdog_king_weapon, sprite-hotdog-king-projectile.png, 2, 4, 8, 8
 
 sprite, charset_black, charset_black.png, 16, 6, 5, 7
 sprite, charset_grey, charset_grey.png, 16, 6, 5, 7

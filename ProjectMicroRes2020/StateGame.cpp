@@ -180,6 +180,16 @@ GameState* StateGame::update(GameState* gameState)
     EntityManager::getLevel().Update();
     EntityManager::updateHotdogWeapon();
 
+    // Check if level has hotdog king
+    if (EntityManager::getLevel().isEntity("hotdog_king"))
+    {
+        if (!EntityManager::getLevel().getEntity("hotdog_king").isAlive())
+        {
+            connectedStates[0]->init();
+            return connectedStates[0];
+        }
+    }
+
     if (pause) // Pause Menu Called
     {
         pause = false;
