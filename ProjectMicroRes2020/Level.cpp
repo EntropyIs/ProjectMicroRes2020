@@ -4,6 +4,7 @@
 #include "Ketchup.h"
 #include "Mustard.h"
 #include "Hotdog.h"
+#include "HotdogKing.h"
 
 #include <fstream>
 #include <sstream>
@@ -93,6 +94,10 @@ Level::Level(const char* path, std::string name) : name(name)
 							Math::Vec2(std::stof(lineComp[3]) * 8.0f + 4.0f, std::stof(lineComp[4]) * 8.0f + 4.0f),
 							Math::Vec3(std::stof(lineComp[5]), std::stof(lineComp[6]), std::stof(lineComp[7]))));
 				}
+				if (lineComp[2] == "king_hotdog")
+					if (lineComp.size() == 5)
+						entities.push_back(new HotdogKing("hotdog_king",
+							Math::Vec2(std::stof(lineComp[3]) * 8.0f + 4.0f,std::stof(lineComp[4]) * 8.0f + 4.0f)));
 			}
 		}
 	}

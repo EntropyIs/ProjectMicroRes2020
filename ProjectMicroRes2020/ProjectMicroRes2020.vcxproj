@@ -155,6 +155,7 @@
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Hotdog.cpp" />
+    <ClCompile Include="HotdogKing.cpp" />
     <ClCompile Include="HotdogWeapon.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelManager.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="StateMenu.cpp" />
     <ClCompile Include="StatePause.cpp" />
     <ClCompile Include="Mustard.cpp" />
+    <ClCompile Include="StateVictory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\fBaseShader.glsl" />
@@ -191,6 +193,7 @@
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Hotdog.h" />
+    <ClInclude Include="HotdogKing.h" />
     <ClInclude Include="HotdogWeapon.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelManager.h" />
@@ -207,6 +210,7 @@
     <ClInclude Include="StateMenu.h" />
     <ClInclude Include="StatePause.h" />
     <ClInclude Include="Mustard.h" />
+    <ClInclude Include="StateVictory.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\icon.ico" />

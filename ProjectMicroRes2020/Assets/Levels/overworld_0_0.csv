@@ -63,3 +63,4 @@ tile,4,7,grass_world,14,9,0
 tile,5,7,grass_world,14,9,0
 tile,6,7,grass_world,6,12,0
 tile,7,7,grass_world,6,12,0
+entity,enemy,king_hotdog,4,5

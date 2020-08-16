@@ -14,7 +14,7 @@
 using namespace Entropy;
 using Entropy::Graphics::GLKeys;
 
-StateGame::StateGame() : GameState("Game", 2)
+StateGame::StateGame() : GameState("Game", 3)
 {
     Projection = Math::Ortho(0.0f, 64.0f, 64.0f, 0.0f, -1.0f, 1.0f);
     pause = false;
@@ -179,6 +179,16 @@ GameState* StateGame::update(GameState* gameState)
     // Update Level Data
     EntityManager::getLevel().Update();
     EntityManager::updateHotdogWeapon();
+
+    // Check if level has hotdog king
+    if (EntityManager::getLevel().isEntity("hotdog_king"))
+    {
+        if (!EntityManager::getLevel().getEntity("hotdog_king").isAlive()) //King has died, player wins
+        {
+            connectedStates[2]->init();
+            return connectedStates[2];
+        }
+    }
 
     if (pause) // Pause Menu Called
     {
