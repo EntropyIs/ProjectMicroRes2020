@@ -1,3 +1,4 @@
+entity,enemy,ketchup,5,4
 tile,0,0,grass_world,2,2,0
 tile,1,0,grass_world,3,2,0
 tile,2,0,grass_world,2,2,0
@@ -62,4 +63,3 @@ tile,4,7,grass_world,3,4,0
 tile,5,7,grass_world,2,4,0
 tile,6,7,grass_world,3,4,0
 tile,7,7,grass_world,2,4,0
-entity,enemy,ketchup,5,4

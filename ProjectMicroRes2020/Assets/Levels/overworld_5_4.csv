@@ -1,11 +1,13 @@
-tile,0,0,grass_world,0,1,0
-tile,1,0,grass_world,0,1,0
+entity,enemy,mustard,3,2
+entity,enemy,mustard,5,4
+tile,0,0,grass_world,1,11,0
+tile,1,0,grass_world,2,11,0
 tile,2,0,grass_world,4,0,1,overworld_6_4,2,6
 tile,3,0,grass_world,4,0,1,overworld_6_4,3,6
 tile,4,0,grass_world,4,0,1,overworld_6_4,4,6
-tile,5,0,grass_world,0,1,0
-tile,6,0,grass_world,0,1,0
-tile,7,0,grass_world,0,1,0
+tile,5,0,grass_world,0,11,0
+tile,6,0,grass_world,1,11,0
+tile,7,0,grass_world,1,11,0
 tile,0,1,grass_world,4,0,1,overworld_5_3,6,1
 tile,1,1,grass_world,4,0,1
 tile,2,1,grass_world,4,0,1
@@ -62,5 +64,3 @@ tile,4,7,grass_world,0,1,0
 tile,5,7,grass_world,0,1,0
 tile,6,7,grass_world,4,0,1,overworld_4_4,6,1
 tile,7,7,grass_world,0,1,0
-entity,enemy,mustard,3,2
-entity,enemy,mustard,5,4
