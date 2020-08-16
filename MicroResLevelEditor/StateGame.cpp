@@ -59,18 +59,18 @@ void StateGame::input(Graphics::Window& window)
     else if (window.getKeyPressed(GLKeys::KEY_LEFT) && !key_down)
     {
         key_down = true;
-        if (EntityManager::getLevel().getTile(tile).TX == spriteData.num_rows - 1)
-            EntityManager::getLevel().getTile(tile).TX = 0;
-        else
-            EntityManager::getLevel().getTile(tile).TX++;
-    }
-    else if (window.getKeyPressed(GLKeys::KEY_RIGHT) && !key_down)
-    {
-        key_down = true;
         if (EntityManager::getLevel().getTile(tile).TX == 0)
             EntityManager::getLevel().getTile(tile).TX = spriteData.num_rows - 1;
         else
             EntityManager::getLevel().getTile(tile).TX--;
+    }
+    else if (window.getKeyPressed(GLKeys::KEY_RIGHT) && !key_down)
+    {
+        key_down = true;
+        if (EntityManager::getLevel().getTile(tile).TX == spriteData.num_rows - 1)
+            EntityManager::getLevel().getTile(tile).TX = 0;
+        else
+            EntityManager::getLevel().getTile(tile).TX++;
     }
 
     else if (window.getKeyPressed(GLKeys::KEY_W) && !key_down)
