@@ -132,7 +132,7 @@ void HotdogKing::Update()
 		ResourceManager::playAudio("sfx_enemy_dead");
 		dieing = true;
 		animationRenderer.setRowNumber(4);
-		animationRenderer.setNumFrames(1);
+		animationRenderer.setNumFrames(30);
 		animationRenderer.setFPS(12);
 		animationRenderer.playAnimationOnce();
 	}
