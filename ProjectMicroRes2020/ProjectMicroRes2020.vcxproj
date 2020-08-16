@@ -171,6 +171,7 @@
     <ClCompile Include="StateMenu.cpp" />
     <ClCompile Include="StatePause.cpp" />
     <ClCompile Include="Mustard.cpp" />
+    <ClCompile Include="StateVictory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\fBaseShader.glsl" />
@@ -207,6 +208,7 @@
     <ClInclude Include="StateMenu.h" />
     <ClInclude Include="StatePause.h" />
     <ClInclude Include="Mustard.h" />
+    <ClInclude Include="StateVictory.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\icon.ico" />

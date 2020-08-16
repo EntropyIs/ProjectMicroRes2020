@@ -14,7 +14,7 @@
 using namespace Entropy;
 using Entropy::Graphics::GLKeys;
 
-StateGame::StateGame() : GameState("Game", 2)
+StateGame::StateGame() : GameState("Game", 3)
 {
     Projection = Math::Ortho(0.0f, 64.0f, 64.0f, 0.0f, -1.0f, 1.0f);
     pause = false;

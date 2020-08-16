@@ -14,6 +14,7 @@
 #include "StateMenu.h"
 #include "StatePause.h"
 #include "StateIntro.h"
+#include "StateVictory.h"
 
 //#include "AudioEngine.h"
 
@@ -55,17 +56,20 @@ int WinMain()
 		StateMenu menu = StateMenu();
 		StatePause pause = StatePause();
 		StateIntro intro = StateIntro();
+		StateVictory victory = StateVictory();
 
 		// Connect Game States
 		credits.addConnection(0, &menu);
 		game.addConnection(0, &pause);
 		game.addConnection(1, &gameOver);
+		game.addConnection(2, &victory);
 		gameOver.addConnection(0, &menu);
 		menu.addConnection(0, &game);
 		menu.addConnection(1, &credits);
 		pause.addConnection(0, &game);
 		pause.addConnection(1, &menu);
 		intro.addConnection(0, &menu);
+		victory.addConnection(0, &menu);
 
 		// Initialise States & State Engine
 		credits.init();
@@ -74,6 +78,7 @@ int WinMain()
 		menu.init();
 		pause.init();
 		intro.init();
+		victory.init();
 
 		GameState * gameState = &intro;
 
