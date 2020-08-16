@@ -38,6 +38,8 @@ int WinMain()
 		window.setResolution(64, 64);
 		window.setClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
+		window.setIcon(Graphics::LoadTexture::LoadImage("Assets/icon.png"));
+
 		// Setup framebuffer
 		Graphics::FrameBuffer frameBuffer(64, 64);
 		frameBuffer.setClearColor(0.1f, 0.1f, 0.1f, 0.1f); // Set to transparent clearing color

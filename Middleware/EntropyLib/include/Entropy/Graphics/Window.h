@@ -196,6 +196,8 @@ namespace Entropy
 			void enableStencilTest(bool value = true);
 			void enableFaceCulling(bool value = true);
 
+			void setIcon(const GLFWimage& icon);
+
 		private:
 			void initializeGLFW(unsigned int numSamples);
 			void initializeGLEW();

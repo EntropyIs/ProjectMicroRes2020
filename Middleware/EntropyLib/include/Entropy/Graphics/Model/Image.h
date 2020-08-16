@@ -3,6 +3,9 @@
 #include <vector>
 #include <string>
 
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
 namespace Entropy
 {
 	namespace Graphics
@@ -23,7 +26,7 @@ namespace Entropy
 			Texture() : ID(0), Type() {};
 		};
 
-		class LoadTexture
+		class __declspec(dllexport) LoadTexture
 		{
 		private:
 			static Image LoadBitmap(std::string path);
@@ -32,10 +35,12 @@ namespace Entropy
 			static Image LoadTiff(std::string path);
 			static Image LoadPNG(std::string path);
 		public:
-			static __declspec(dllexport) Texture LoadFromFile(std::string path, std::string type);
-			static __declspec(dllexport) Texture LoadFromImageFile(std::string path, std::string type, bool interpolate = true);
+			static GLFWimage LoadImage(std::string path);
 
-			static __declspec(dllexport) Texture LoadCubeMap(std::vector<std::string> paths);
+			static Texture LoadFromFile(std::string path, std::string type);
+			static Texture LoadFromImageFile(std::string path, std::string type, bool interpolate = true);
+			
+			static Texture LoadCubeMap(std::vector<std::string> paths);
 		};
 	}
 }
