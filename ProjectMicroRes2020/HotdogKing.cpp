@@ -102,7 +102,7 @@ void HotdogKing::Update()
 	#ifdef _DEBUG
 			std::cout << this->id << ", hit by: " << EntityManager::getPlayerWeapon().getID() << std::endl;
 	#endif // _DEBUG
-			ResourceManager::playAudio("sfx_enemy_hurt");
+			ResourceManager::playAudio("sfx_boss_hurt");
 			health--; // take away health if hits player wepon
 			animationRenderer.setRowNumber(3);
 			animationRenderer.setNumFrames(2);
@@ -129,7 +129,7 @@ void HotdogKing::Update()
 
 	if (health == 0 && !hurting && !dieing)
 	{
-		ResourceManager::playAudio("sfx_enemy_dead");
+		ResourceManager::playAudio("sfx_boss_dead");
 		dieing = true;
 		animationRenderer.setRowNumber(4);
 		animationRenderer.setNumFrames(30);

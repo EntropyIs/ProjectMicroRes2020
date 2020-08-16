@@ -31,3 +31,5 @@ audio, sfx_player_hurt, Audio/player_hurt.wav
 audio, sfx_player_attack, Audio/player_attack.wav
 audio, sfx_menu_select, Audio/menu_select.wav
 audio, sfx_menu_move, Audio/menu_move.wav
+audio, sfx_boss_hurt, Audio/boss_hurt.wav
+audio, sfx_boss_dead, Audio/boss_dead.wav
