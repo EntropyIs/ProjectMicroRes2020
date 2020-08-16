@@ -107,37 +107,34 @@ void Hotdog::Update()
 		// Attack
 		if (attackTimer <= 0)
 		{
-			if (!EntityManager::getHotdogWeapon().isAlive())
-			{
 #ifdef _DEBUG
-				std::cout << this->id << ", shooting" << std::endl;
+			std::cout << this->id << ", shooting" << std::endl;
 #endif // _DEBUG
-				ResourceManager::playAudio("sfx_enemy_shoot");
-				switch (lastDirection)
-				{
-				case RIGHT:
-					EntityManager::setHotdogWeapon(HotdogWeapon("char_hotdog_weapon", 2, position,
-						Math::Vec2(30.0f, 0.0f), Math::Vec2(4.0f, 0.0f),
-						Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f)));
-					break;
-				case DOWN:
-					EntityManager::setHotdogWeapon(HotdogWeapon("char_hotdog_weapon", 3, position,
-						Math::Vec2(0.0f, -30.0f), Math::Vec2(0.0f, -4.0f),
-						Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f)));
-					break;
-				case LEFT:
-					EntityManager::setHotdogWeapon(HotdogWeapon("char_hotdog_weapon", 0, position,
-						Math::Vec2(-30.0f, 0.0f), Math::Vec2(-4.0f, 0.0f),
-						Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f)));
-					break;
-				case UP:
-					EntityManager::setHotdogWeapon(HotdogWeapon("char_hotdog_weapon", 1, position,
-						Math::Vec2(0.0f, 30.0f), Math::Vec2(0.0f, 4.0f),
-						Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f)));
-					break;
-				}
-				attackTimer = (float)(rand() % 6);
+			ResourceManager::playAudio("sfx_enemy_shoot");
+			switch (lastDirection)
+			{
+			case RIGHT:
+				EntityManager::setHotdogWeapon(HotdogWeapon("char_hotdog_weapon", 2, position,
+					Math::Vec2(30.0f, 0.0f), Math::Vec2(4.0f, 0.0f),
+					Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f)));
+				break;
+			case DOWN:
+				EntityManager::setHotdogWeapon(HotdogWeapon("char_hotdog_weapon", 3, position,
+					Math::Vec2(0.0f, -30.0f), Math::Vec2(0.0f, -4.0f),
+					Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f)));
+				break;
+			case LEFT:
+				EntityManager::setHotdogWeapon(HotdogWeapon("char_hotdog_weapon", 0, position,
+					Math::Vec2(-30.0f, 0.0f), Math::Vec2(-4.0f, 0.0f),
+					Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f)));
+				break;
+			case UP:
+				EntityManager::setHotdogWeapon(HotdogWeapon("char_hotdog_weapon", 1, position,
+					Math::Vec2(0.0f, 30.0f), Math::Vec2(0.0f, 4.0f),
+					Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f)));
+				break;
 			}
+			attackTimer = (float)(rand() % 6);
 		}
 
 		if (detectCollion(EntityManager::getPlayerWeapon().getCollider()) && EntityManager::getPlayerWeapon().isAlive())

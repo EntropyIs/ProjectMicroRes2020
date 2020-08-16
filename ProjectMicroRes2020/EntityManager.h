@@ -5,13 +5,15 @@
 #include "PlayerWeapon.h"
 #include "HotdogWeapon.h"
 
+#include <vector>
+
 class EntityManager
 {
 public:
 	static LevelManager levelManager;
 	static Player player;
 	static PlayerWeapon playerWeapon;
-	static HotdogWeapon hotdogWeapon;
+	static std::vector<HotdogWeapon> hotdogWeapons;
 
 	static Level& getLevel();
 	static void setLevel(std::string levelName);
@@ -22,8 +24,11 @@ public:
 	static PlayerWeapon& getPlayerWeapon();
 	static void setPlayerWeapon(PlayerWeapon weapon);
 
-	static HotdogWeapon& getHotdogWeapon();
-	static void setHotdogWeapon(HotdogWeapon weapon);
+	static HotdogWeapon& getHotdogWeapon(unsigned int index);
+	static HotdogWeapon& setHotdogWeapon(HotdogWeapon weapon);
+	static void updateHotdogWeapon();
+	static bool detectHotdogWeapon(BoxCollider& other, unsigned int& index);
+	static void drawHotdogWeapon(SpriteRenderer& renderer);
 
 	static void setLevelManager(const char* levelList);
 };

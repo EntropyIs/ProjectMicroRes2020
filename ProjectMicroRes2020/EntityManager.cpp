@@ -3,7 +3,7 @@
 LevelManager EntityManager::levelManager;
 Player EntityManager::player;
 PlayerWeapon EntityManager::playerWeapon;
-HotdogWeapon EntityManager::hotdogWeapon;
+std::vector<HotdogWeapon> EntityManager::hotdogWeapons;
 
 Level& EntityManager::getLevel()
 {
@@ -35,14 +35,38 @@ void EntityManager::setPlayerWeapon(PlayerWeapon weapon)
     playerWeapon = weapon;
 }
 
-HotdogWeapon& EntityManager::getHotdogWeapon()
+HotdogWeapon& EntityManager::getHotdogWeapon(unsigned int index)
 {
-    return hotdogWeapon;
+    return hotdogWeapons[index];
 }
 
-void EntityManager::setHotdogWeapon(HotdogWeapon weapon)
+HotdogWeapon& EntityManager::setHotdogWeapon(HotdogWeapon weapon)
 {
-    hotdogWeapon = weapon;
+    for (int i = 0; i < hotdogWeapons.size(); i++)
+        if (!hotdogWeapons[i].isAlive())
+            return hotdogWeapons[i] = weapon;
+    hotdogWeapons.push_back(weapon);
+    return hotdogWeapons[hotdogWeapons.size() - 1];
+}
+
+void EntityManager::updateHotdogWeapon()
+{
+    for (int i = 0; i < hotdogWeapons.size(); i++)
+        hotdogWeapons[i].Update();
+}
+
+bool EntityManager::detectHotdogWeapon(BoxCollider& other, unsigned int& index)
+{
+    for (index = 0; index < hotdogWeapons.size(); index++)
+        if (hotdogWeapons[index].detectCollion(other))
+            return true;
+    return false;
+}
+
+void EntityManager::drawHotdogWeapon(SpriteRenderer& renderer)
+{
+    for (unsigned int i = 0; i < hotdogWeapons.size(); i++)
+        hotdogWeapons[i].Draw(renderer);
 }
 
 void EntityManager::setLevelManager(const char* levelList)

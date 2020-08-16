@@ -261,12 +261,13 @@ void Player::Update()
         }
     }
 
-    if (EntityManager::getHotdogWeapon().detectCollion(collider) && vulnerable)
+    unsigned int index;
+    if (EntityManager::detectHotdogWeapon(collider, index) && vulnerable)
     {
 #ifdef _DEBUG
         std::cout << this->id << ", hit by: HotdogWeapon" << std::endl;
 #endif // _DEBUG
-        EntityManager::getHotdogWeapon().kill();
+        EntityManager::getHotdogWeapon(index).kill();
         ResourceManager::playAudio("sfx_player_hurt");
         undoMovement(); // Step Back
         health--;
