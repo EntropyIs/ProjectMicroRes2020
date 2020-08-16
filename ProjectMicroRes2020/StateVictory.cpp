@@ -76,9 +76,9 @@ void StateVictory::render()
         Math::Vec2(5,  5), // u
     };
 
-    for (unsigned int i = 0; i < 8; i++)
+    for (unsigned int i = 0; i < 6; i++)
         renderer.Draw(textPos[i], ResourceManager::getTexture("charset_grey"), textChar[i], ResourceManager::getSpriteSizeData("charset_grey"));
-    for (unsigned int i = 8; i < 12; i++)
+    for (unsigned int i = 6; i < 10; i++)
         renderer.Draw(textPos[i], ResourceManager::getTexture("charset_black"), textChar[i], ResourceManager::getSpriteSizeData("charset_black"));
 }
 

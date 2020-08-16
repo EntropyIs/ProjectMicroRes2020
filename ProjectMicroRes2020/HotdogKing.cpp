@@ -88,10 +88,10 @@ void HotdogKing::Update()
 			EntityManager::setHotdogWeapon(HotdogWeapon("char_hotdog_king_weapon", 1, position,
 				Math::Vec2(0.0f, -30.0f), Math::Vec2(4.0f, 0.0f),
 				Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f)));
-			EntityManager::setHotdogWeapon(HotdogWeapon("char_hotdog_king_weapon", 0, position,
+			EntityManager::setHotdogWeapon(HotdogWeapon("char_hotdog_king_weapon", 2, position,
 				Math::Vec2(-25.0f, -25.0f), Math::Vec2(4.0f, 0.0f),
 				Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f)));
-			EntityManager::setHotdogWeapon(HotdogWeapon("char_hotdog_king_weapon", 2, position,
+			EntityManager::setHotdogWeapon(HotdogWeapon("char_hotdog_king_weapon", 0, position,
 				Math::Vec2(25.0f, -25.0f), Math::Vec2(4.0f, 0.0f),
 				Math::Vec2(8.0f, 8.0f), Math::Vec2(4.0f, 4.0f)));
 			attackTimer = (float)(rand() % 2);
