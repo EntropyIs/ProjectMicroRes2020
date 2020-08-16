@@ -61,10 +61,11 @@ void Hotdog::Update()
 				break;
 			}
 
+			animationRenderer.setNumFrames(6);
 			moveTimer = (float) (rand() % 4);
 		}
 
-		// Move Mustard
+		// Move Hotdog
 		performMovement();
 
 		// Handle Collsions
@@ -148,18 +149,16 @@ void Hotdog::Update()
 			switch (lastDirection)
 			{
 			case RIGHT:
-				animationRenderer.setRowNumber(6);
+				animationRenderer.setRowNumber(10);
 				break;
 			case DOWN:
-				animationRenderer.setRowNumber(7);
+				animationRenderer.setRowNumber(11);
 				break;
 			case LEFT:
-				animationRenderer.setRowNumber(4);
+				animationRenderer.setRowNumber(8);
 				break;
 			case UP:
-				animationRenderer.setRowNumber(5);
-				break;
-			default:
+				animationRenderer.setRowNumber(9);
 				break;
 			}
 			animationRenderer.setNumFrames(2);
@@ -214,7 +213,7 @@ void Hotdog::Update()
 	{
 		ResourceManager::playAudio("sfx_enemy_dead");
 		dieing = true;
-		animationRenderer.setRowNumber(11);
+		animationRenderer.setRowNumber(15);
 		animationRenderer.setNumFrames(7);
 		animationRenderer.setFPS(12);
 		animationRenderer.playAnimationOnce();
