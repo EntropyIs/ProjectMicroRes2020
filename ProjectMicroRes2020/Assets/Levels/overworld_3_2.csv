@@ -62,3 +62,6 @@ tile,4,7,grass_world,2,12,0
 tile,5,7,grass_world,4,0,1,overworld_2_2,5,1
 tile,6,7,grass_world,4,0,1,overworld_2_2,6,1
 tile,7,7,grass_world,1,1,0
+entity,enemy,hotdog,1,4
+entity,enemy,hotdog,2,2
+entity,enemy,mustard,5,5

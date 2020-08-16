@@ -62,3 +62,5 @@ tile,4,7,grass_world,4,0,1,overworld_2_7,4,1
 tile,5,7,grass_world,4,0,1,overworld_2_7,5,1
 tile,6,7,grass_world,0,2,0
 tile,7,7,grass_world,0,4,0
+entity,enemy,ketchup,2,4
+entity,enemy,ketchup,4,5

@@ -62,3 +62,5 @@ tile,4,7,grass_world,6,12,0
 tile,5,7,grass_world,6,12,0
 tile,6,7,grass_world,6,12,0
 tile,7,7,grass_world,6,13,0
+entity,enemy,mustard,1,4
+entity,enemy,mustard,3,1
