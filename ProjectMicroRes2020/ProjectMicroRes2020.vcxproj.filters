@@ -118,7 +118,7 @@
       <Filter>Source Files\GameStates</Filter>
     </ClCompile>
     <ClCompile Include="HotdogKing.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Model\Entity</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

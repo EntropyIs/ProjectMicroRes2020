@@ -183,10 +183,10 @@ GameState* StateGame::update(GameState* gameState)
     // Check if level has hotdog king
     if (EntityManager::getLevel().isEntity("hotdog_king"))
     {
-        if (!EntityManager::getLevel().getEntity("hotdog_king").isAlive())
+        if (!EntityManager::getLevel().getEntity("hotdog_king").isAlive()) //King has died, player wins
         {
-            connectedStates[0]->init();
-            return connectedStates[0];
+            connectedStates[2]->init();
+            return connectedStates[2];
         }
     }
 
